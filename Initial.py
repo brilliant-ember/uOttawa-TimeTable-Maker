@@ -12,4 +12,12 @@ soup=BeautifulSoup(client, "lxml")
 #for paragraph in soup.find_all("p"): 
  #   print (paragraph.text) # only prints paragraphs not all texts
     
-print(soup.get_text())#prints all text in the page even if it's not in paragraph tags
+    
+    
+#prints all text in the page even if it's not in paragraph tags
+print(soup.get_text())
+
+print("\n  //////////////URLS//////////    ")
+
+for url in soup.find_all("a"):
+    print(url.get('href'))
