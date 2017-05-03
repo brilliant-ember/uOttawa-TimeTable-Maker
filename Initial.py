@@ -9,5 +9,7 @@ soup=BeautifulSoup(client, "lxml")
 
 #print(soup.find_all("p")) #finds all object p tags in the page{paragraphs}
 
-for paragraph in soup.find_all("p"):
-    print (paragraph.text) 
+#for paragraph in soup.find_all("p"): 
+ #   print (paragraph.text) # only prints paragraphs not all texts
+    
+print(soup.get_text())#prints all text in the page even if it's not in paragraph tags
