@@ -10,4 +10,4 @@ soup=BeautifulSoup(client, "lxml")
 #print(soup.find_all("p")) #finds all object p tags in the page{paragraphs}
 
 for paragraph in soup.find_all("p"):
-    print (paragraph.string) 
+    print (paragraph.text) 
