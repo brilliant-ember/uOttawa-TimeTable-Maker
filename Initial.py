@@ -1,12 +1,10 @@
-##WebScraper 
+##WebScraper lxml
 from urllib.request import urlopen
 from bs4 import BeautifulSoup 
-wiki = "https://en.wikipedia.org/wiki/Shakespeare_Programming_Languagehttps://en.wikipedia.org/wiki/List_of_state_and_union_territory_capitals_in_India"
 
-uClient = urlopen(wiki)
-html=uClient.read()
-uClient.close()
-#html parsing
-soup=BeautifulSoup(html, "html.parser")
-#print (soup.prettify())
-soup.h1
+url="https://pythonprogramming.net/parsememcparseface/"
+client=urlopen(url).read()
+soup=BeautifulSoup(client, "lxml")
+
+print(soup)#if u r getting Unicode error use this cmmnd in windoews chcp 65001 to use an endong that will fix the issue of the terminal not recognaizing the charecters in conflict
+
