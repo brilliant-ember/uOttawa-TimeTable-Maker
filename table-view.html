@@ -1,0 +1,121 @@
+<html>
+  <head>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <style>
+    body {
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+      font-weight: 300;
+      color: #aaa;
+    }
+    .cell{
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background: #efefef;
+    }
+    .legend{
+      margin-top: 10px;
+    }
+    .legend-cell{
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background: #efefef;
+      display: inline-block;
+    }
+    .legend-text{
+      margin-left: 5px;
+      vertical-align: 25%;
+      display: inline-block;
+    }
+    .one{ background: #eacd7c; } /* #FF9CEE */
+    .two{ background: #d0654c; } /* #FFABAB */
+    .three{ background: #b63e4a; } /* #85E3FF */
+    .four{ background: #502938; } /* #AFF808 */
+    .five{ background: #587679; } /* #C5A3FF */
+  </style>  
+  </head>
+  <body>
+
+    <table id="timetable"></table>
+    <div class="legend">
+      <div class="legend-row">
+        <div class="legend-cell one"></div> 
+        <div class="legend-text">CEG 3185</div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-cell two"></div> 
+        <div class="legend-text">MAT 1348</div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-cell three"></div> 
+        <div class="legend-text">ITI 1100</div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-cell four"></div> 
+        <div class="legend-text">ITI 1121</div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-cell five"></div> 
+        <div class="legend-text">CSI 2911</div>
+      </div>
+    </div>
+
+<script>
+
+// build timetable 
+for(var i=0; i<9; i++){
+  var row = $("<tr>");
+  for(var j=0; j<5; j++){
+    var col = $("<td>");
+    row.append(col);
+    col.addClass("cell");  
+  }
+  $("#timetable").append(row);
+}
+
+// add background color to cell
+$(".cell").eq(2).addClass("one"); // red, orange, blue, green, purple
+$(".cell").eq(3).addClass("one");
+$(".cell").eq(6).addClass("one");
+$(".cell").eq(20).addClass("two");
+$(".cell").eq(21).addClass("three");
+$(".cell").eq(22).addClass("four");
+$(".cell").eq(24).addClass("one");
+$(".cell").eq(25).addClass("four");
+$(".cell").eq(27).addClass("five");
+$(".cell").eq(28).addClass("two");
+$(".cell").eq(29).addClass("three");
+$(".cell").eq(31).addClass("two");
+$(".cell").eq(32).addClass("five");
+$(".cell").eq(33).addClass("three");
+$(".cell").eq(36).addClass("three");
+$(".cell").eq(37).addClass("four");
+$(".cell").eq(41).addClass("three");
+$(".cell").eq(42).addClass("four");
+
+$(".legend-cell").mouseover(function(){
+  var name = this.className.split(" ")[1];
+  $(".cell").not("." + name).each(function(){
+    $(this).animate({
+      opacity: 0.3
+    }, 100, function() {
+      // Animation complete.
+    });
+  });
+});
+
+$(".legend-cell").mouseout(function(){
+  var name = this.className.split(" ")[1];
+  $(".cell").not("." + name).each(function(){
+    $(this).animate({
+      opacity: 1 
+    }, 100, function() {
+      // Animation complete.
+    });
+  });
+});
+
+</script>
+  </body>
+</html>
