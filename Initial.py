@@ -1,12 +1,6 @@
-##WebScraper 
-from urllib.request import urlopen
-from bs4 import BeautifulSoup 
-wiki = "https://en.wikipedia.org/wiki/Shakespeare_Programming_Languagehttps://en.wikipedia.org/wiki/List_of_state_and_union_territory_capitals_in_India"
+##WebScraper Selenium
+import selenium
 
-uClient = urlopen(wiki)
-html=uClient.read()
-uClient.close()
-#html parsing
-soup=BeautifulSoup(html, "html.parser")
-#print (soup.prettify())
-soup.h1
+path = "D:\chromedriver.exe"
+browser = webdriver.Chrome(path)
+browser.get("https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
