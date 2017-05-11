@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- meta information -->
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    
+    <!-- PlaceHolder to let the child pages set their own description in the meta -->
+    
+        <meta name="description" content="These tools allow you to perform a search for course timetables and exam schedules offered at the University of Ottawa as well search for cancelled or unavailable courses.">
+    
+    <meta name="author" content="Computing and Communications Services">
+    <meta name="copyright" content="© University of Ottawa">
+    
+    <!-- PlaceHolder to let the child pages set their own title -->
+    <title>
+        
+            Course Timetable
+        
+    </title>
+
+    <!-- Include the Header of Ottawa U -->
+    <link rel="SHORTCUT ICON" href="https://web5.uottawa.ca/assets-templates/3/favicon.ico">
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style.css?9ec00ec18c593c88acabd5b180e448e8">
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style-ie7.css?ccb7e83d6e004f3ce9931f22fd9f9af7"><![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style-ie.css?2ae0350734756014236c7cc622551142"><![endif]-->
+<!-- if handheld -->
+<meta name="viewport" content="width=Device-width">
+<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="https://web5.uottawa.ca/assets-templates/3/handheld-480px.css?d41d8cd98f00b204e9800998ecf8427e">
+<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="https://web5.uottawa.ca/assets-templates/3/handheld-1024px.css?d41d8cd98f00b204e9800998ecf8427e">
+<link rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" href="https://web5.uottawa.ca/assets-templates/3/handheld-doublepx.css?d41d8cd98f00b204e9800998ecf8427e">
+<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript" charset="utf-8" src="https://web5.uottawa.ca/assets-templates/3/script.js?773664f4851bb50cc10a3771eff2efaa"></script>
+
+
+    <!-- page variables -->
+    <script type="text/javascript">
+    <!--
+        //var expandNavSection = '';
+        var googleAnalyticsCode = 'UA-5576980-4';
+        var googleAnalyticsLanguage = 'en';
+        var googleAnalyticsEnabled = 'true';  
+    -->
+    </script><!-- /page variables -->
+    
+    <!-- site-specific style sheet and javascript -->
+    <link type="text/css" rel="Stylesheet" media="screen" href="./assets/css/site.css">
+    <link type="text/css" rel="Stylesheet" href="./styles/base.css">
+    <link type="text/css" href="styles/jquery-ui-1.8.5.custom.css" rel="stylesheet">	
+    <script type="text/javascript" src="./scripts/base.js"></script>
+
+    <!-- PlaceHolder to let the child pages to set things in the header -->
+    
+    <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup.css">
+    <!--[if gte IE 8]>
+        <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup-ie8.css" />
+    <![endif]-->
+    <!--[if IE 7]>
+        <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup-ie7.css" />
+    <![endif]-->
+    
+	<script type="text/javascript" src="./scripts/bubble_popup.js"></script>
+    <script type="text/javascript">
+        <!--
+        /*var currentTerm = '';
+        $(function() {
+
+            // set effect from select menu value
+            $("a.hidable").click(function() {
+                //If the script is changing something, ignore
+                if (changing == "changing") {
+                    return false;
+                }
+                changing = "changing";
+
+                var x = $(this).children("img");
+                if (x.attr("src") == "./images/plus.gif") {
+                    x.attr("src", "./images/minus.gif");
+                    x.attr("alt", "Minimize schedule");
+                    //Workaround the div inserted by code
+                    $(this).siblings("div").children("div").css('display', 'block');
+
+                    $(this).siblings("div").show("blind", 1000);
+                } else {
+                    x.attr("src", "./images/plus.gif");
+                    x.attr("alt", "Expand schedule");
+                    $(this).siblings("div").hide("blind", 1000);
+                }
+                setTimeout("changing = '';", 1100);
+                return false;
+            });
+
+        });*/
+	
+	</script>
+	
+
+
+    <!-- Include the bottom of the header -->
+    <!-- head-bottom: global include for eventually adding scripts at the bottom of the head on all pages of the University -->
+</head>
+
+<body class="en
+ light
+ theme-01">
+<form name="aspnetForm" method="post" action="Course.aspx?id=027159&amp;term=2171&amp;session=FS" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE4NDk1NTkwNDQPZBYCZg9kFgYCBQ8WAh4EVGV4dGRkAgoPFgIfAAUCZW5kAg0PZBYGAgMPDxYCHwAFCUZyYW7Dp2FpcxYGHgNyZWwFCWFsdGVybmF0ZR4EbGFuZwUFZnItQ0EeCGhyZWZsYW5nBQVmci1DQWQCCA8WAh8ABQdzcGFuLTE4ZAIJD2QWFAIBDxYCHwAFB1NlbWluYXJkAgMPFgIfAAXyAlByZXNlbnRhdGlvbiBvZiBvbmUgcG9zdGVyIGR1cmluZyB0aGUgUmVzZWFyY2ggRGF5IG9yZ2FuaXplZCBieSB0aGUgUGF0aG9sb2d5IGFuZCBFeHBlcmltZW50YWwgTWVkaWNpbmUgY29sbGFib3JhdGl2ZSBwcm9ncmFtLiBBY3RpdmUgcGFydGljaXBhdGlvbiBpbiB0aGUgYW5udWFsIFBhdGhvbG9neSBSZXNlYXJjaCBEYXkgb2YgdGhlIERlcGFydG1lbnQgb2YgUGF0aG9sb2d5IGFuZCBMYWJvcmF0b3J5IE1lZGljaW5lLiBQb3N0ZXIgZXZhbHVhdGVkIGJ5IFBhdGhvbG9neSBhbmQgRXhwZXJpbWVudGFsIE1lZGljaW5lIHByb2dyYW0gZmFjdWx0eSBtZW1iZXJzLiBHcmFkZWQgUyAoU2F0aXNmYWN0b3J5KSAvIE5TIChOb3Qgc2F0aXNmYWN0b3J5KS5kAgUPFgIfAGVkAgcPFgIfAGVkAgkPFgIfAGVkAgsPFgIfAGVkAg0PFgIfAAUTRmFjdWx0eSBvZiBNZWRpY2luZWQCEQ8WAh8ABS1EZXBhcnRtZW50IG9mIENlbGx1bGFyIGFuZCBNb2xlY3VsYXIgTWVkaWNpbmVkAhMPZBYCZg9kFggCAQ8WAh8ABQExZAIFDxYCHwAFEDIwMTcgV2ludGVyIFRlcm1kAgcPFgIfAAUBMWQCCQ9kFgJmDzwrAA0BAA8WAh4LXyFJdGVtQ291bnQCAWRkAhUPFgIfAGVkGAEFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMDAPPCsACgEIAgFkIrpaQW5Yh7jWb1wLGMunBBw9yGc=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/v3/SITS/timetable/WebResource.axd?d=gSi1rlt8wuY73eQQH5O4a9L7uj5hdp0OaB4acW8LahSC7MhU_ynIxCRwHKJNuKkDflX_sdPeD-9tZny9YuqZftpLTV81&amp;t=635588435086469712" type="text/javascript"></script>
+
+
+<script src="/v3/SITS/timetable/ScriptResource.axd?d=lTNRURqezq2jtPFCY9qi-9H81vXs5vcJkphYF_XzaBjsTwFbVgUQh_GqXMT3bAueNl0S6XM8-pUZ0HPOPVwM78RfDDKFmIK-8S3ZhtEPuV-SV8atAeiD-p4QOYGK_4YSLyprdg-LUKnMpv6SfS1arJKUbio1&amp;t=ffffffffd2bda0b2" type="text/javascript"></script>
+<script src="/v3/SITS/timetable/ScriptResource.axd?d=GPa50Jz4YFVXeMGpCAvUTOSa_831XeX1mnmO_pENAfdKm-nUB0KsDA4_aIoHe7AmUabVLq9SePlsuc5bDh3cDS5HkksRHWmo3dD1QfEqg9sDUOo97yz6kXkxEHZhkEPOywmEfCTcfNxrprg-Yy_LrETzJ1jai7IZQOPPO7BeM13ORJ4d0&amp;t=ffffffffd2bda0b2" type="text/javascript"></script>
+<script src="scripts/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DFF5F268">
+</div>
+     <!-- Initialize the script manager for the Language switchS -->
+     <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$JSScriptManager', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+    
+    <div id="main-container">
+        <!-- Page links -->
+        <ul id="page-links">
+	        <li>
+	            <a id="skip-to-content" href="#main-content">Skip to content</a>
+	        </li>
+	        <li>
+	            <a id="skip-to-leftnav" href="#left-nav">Skip to links</a>
+	        </li>
+	        <li>
+	            <a id="ch-lang-url" rel="alternate" lang="fr-CA" hreflang="fr-CA" href='javascript: WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$ChLangUrlLinkButton1", "fr-CA", false, "", "", false, true))'>Français</a>
+	        </li>
+        </ul><!-- /#page-links -->
+        
+        <!-- Include the Banner -->
+            <!-- header include -->
+    <div id="main-banner">
+      <!-- for "back to top" links -->
+      <a id="top" name="top"></a>
+
+      <!-- #main-branding -->
+      <div id="main-branding">
+        <div id="main-branding-logo">
+          <a rel="home" href="http://www.uottawa.ca/welcome.html" title="Home">
+          <img src="https://web5.uottawa.ca/assets-templates/img/uOttawa-logo.png" alt="University of Ottawa, Canada's University" height="53" width="130"></a>
+        </div>
+        <div id="main-branding-tagline"></div>
+      </div>
+      <!-- /#main-branding -->
+
+     <!-- #main-secondarynav -->
+    <ul id="main-secondarynav">
+      <li class="first"><a id="secondarynav-uozone" href="http://uozone.uottawa.ca/en/frontpage" title="uoZone: login to your secure information">uoZone</a></li>
+	<li><a id="secondarynav-biblio" href="http://www.biblio.uottawa.ca/index-e.php">Library</a></li>
+	<li><a id="secondarynav-programs" href="http://www.admission.uottawa.ca/Default.aspx?tabid=2566">Programs</a></li>
+	<li id="secondarynav-webmail"><a href="http://www.uottawa.ca/email">Webmail</a></li>
+    <li id="secondarynav-more"><h2>Quick Picks</h2>
+        <ul id="quickpick">
+        	<li><a href="http://www.uottawa.ca/search/">Employee Directory</a></li>
+			
+			<li class="new-group"><a href="https://web3.uottawa.ca/infoweb/logon/en.html">InfoWeb</a></li>
+			<li><a href="http://www.uottawa.ca/maps/">Maps</a></li>
+			<li><a href="https://maestro.uottawa.ca/index.asp?LANG=EN">Virtual Campus</a></li>
+			<li><a href="http://www.biblio.uottawa.ca/index-e.php">Library</a></li>
+			<li class="new-group"><a href="http://www.admission.uOttawa.ca/Default.aspx?tabid=2547&amp;source=qp">Campus Tours</a></li>
+			<li><a href="http://www.registrar.uOttawa.ca/Default.aspx?tabid=2681">Undergraduate Programs</a></li>
+			<li><a href="http://www.grad.uottawa.ca/Default.aspx?tabid=1727">Graduate Programs</a></li>
+	        <li><a href="http://www.uOttawa.ca/loansandawards/">Financial Aid</a></li>
+			<li><a href="http://www.financialresources.uottawa.ca/student/payment-university-fees-en.php">Payment of Fees</a></li>	
+	        <li><a href="http://www.admission.uottawa.ca/Default.aspx?tabid=2671">Sessional Dates</a></li>
+			
+			<li class="new-group"><a href="http://www.academiccareers.uottawa.ca/">Academic Careers</a></li>
+			<li><a href="http://www.emergencypreparedness.uottawa.ca/">Emergency Preparedness</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- /#main-secondarynav -->
+  </div>
+  <!-- /#main-banner -->
+
+  <!-- Emergency Banner  -->
+  <script type="text/javascript" src="https://web5.uottawa.ca/emergency/banner/banner-en.js" charset="utf-8"></script>
+  <!-- /header include -->
+       
+        <div id="section-container">
+            <div id="wrapper" class="container 24">
+                
+                <div id="section-header">
+                    <!-- PlaceHolder for the ParentOrg section -->
+                    
+                        <!-- Example of parent link -->
+                        
+                        <div style="background-color: #333;padding: 10px;outline: medium none;text-transform: uppercase;">
+                            <a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2613" style="text-decoration: none;color: #fff;">Strategic Enrollment Management (SEM)</a>
+                        </div>
+                        
+                       
+                    
+                    <a href="http://www.uottawa.ca/welcome.html">
+                        <div id="site-id">s</div>
+                    </a>
+   		        </div><!-- /#section-header-->
+            
+                <!-- Place holder for the Left Sidebar -->
+                
+                    <div id="sidebar-left" class="span-6">
+                        
+				        <ul id="left-nav">
+				             
+                                   
+                                    <li class=""><a href="http://www.uottawa.ca/academic/info/regist/annuaires/" target="_self" id="ProgramStudyLinkText">Undergraduate programs and courses</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4535" target="_self" id="UndergraduateFutureStudentsLinkText">Undergraduate admissions</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2767" target="_self" id="UndergraduateRegistrationLinkText">Undergraduate course enrolment</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4491" target="_self" id="UnderstandProgramLinkText">Understanding your undergraduate program</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2693" target="_self" id="ProgramChangeLinkText">Make changes to your undergraduate program</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=3619" target="_self" id="FeesLinkText">University fees</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2654" target="_self" id="FinancialAidLinkText">Financial aid and awards</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4219" target="_self" id="OrientationIntegrationLinkText">Undergraduate orientation and integration</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2671" target="_self" id="ImportantDatesLinkText">Important academic dates and deadlines</a></li>
+                                
+                                   
+                                    <li class="expand"><a href="/v3/SITS/timetable/Home.aspx" target="_self" id="HomeLinkText">Course and exam timetables</a><ul><li class="expand current"><a href="/v3/SITS/timetable/Search.aspx" target="_self" id="SearchLinkText">Search tool for available courses</a></li><li class="expand"><a href="/v3/SITS/timetable/ExamSearch.aspx" target="_self" id="ExamSearchLinkText">Search tool for exam schedule</a></li></ul></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2701" target="_self" id="AcademicDocumentsLinkText">Requesting academic documents</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2714" target="_self" id="FormLinkText">Academic forms and procedures</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.uottawa.ca/obtain-your-degree" target="_self" id="ConvocationLinkText">Obtain your degree</a></li>
+                                
+        	            </ul><!-- /#left-nav -->
+        	             
+        	            
+                        
+                        <br>
+                        
+                        <!-- Contact Information -->
+                        
+                        <div id="contact-info">
+                            <section>
+                                <h2>
+                                    Contact information
+                                </h2>
+                                <strong style="font-size:larger;">
+                                    <a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2616" target="_blank">InfoService</a>
+                                </strong>
+                                <br>
+                                Tabaret Hall
+                                <br>
+                                75 Laurier Avenue East
+                                <br>
+                                Ottawa, ON Canada
+                                <br>
+                                K1N 6N5
+                                <br>
+                                (<a href="http://www.uottawa.ca/maps" target="_blank">Campus Map</a>)
+                                <br>
+                                <br>
+                                Phone: 
+                                613-562-5630
+                                <br>
+                                Toll Free :
+                                1-877-868-8292
+                                <br>
+                                Fax:  
+                                613-562-5323
+                                <br>
+                                <a href="mailto:infoservice@uottawa.ca">Email InfoService</a>
+                            </section>
+                        </div><!-- /#contact-info -->
+                        
+			        </div><!-- /#sidebar-left -->
+                <!-- LeftSideBar -->
+                
+                <!-- Place holder for the Main Content-->
+                <div id="main-content" class="span-18">
+                    
+    <!-- Course information -->
+    <h1>Seminar</h1>
+    
+    <p>
+        Presentation of one poster during the Research Day organized by the Pathology and Experimental Medicine collaborative program. Active participation in the annual Pathology Research Day of the Department of Pathology and Laboratory Medicine. Poster evaluated by Pathology and Experimental Medicine program faculty members. Graded S (Satisfactory) / NS (Not satisfactory).
+    </p>
+    <p>
+        
+    </p>
+    <p>
+        
+    </p>
+    <p>
+        
+    </p>
+    <p> 
+        
+    </p>
+    <div id="faculty-links">
+        Faculty of Medicine
+        &gt;&gt;
+        Department of Cellular and Molecular Medicine
+    </div>
+    
+    <!-- Schedule data -->
+    <div id="schedule">
+       
+ <div class="1">
+    <!-- Element to hide the schedule -->
+    <!-- <a href="#" class="hidable">
+        <img src="./images/plus.gif" alt="Expand schedule"/> -->
+        Course schedule for the term: 
+        2017 Winter Term
+    <!-- </a> -->
+    
+    <!-- Schedule information -->
+    <div id="1" class="schedule">
+        <div>
+	<table class="display" cellspacing="0" summary="Schedule for PME8367 S00&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr>
+			<th id="hdr_section10" scope="col">Section</th><th id="hdr_activity10" scope="col">Activity</th><th id="hdr_day10" scope="col">Day</th><th id="hdr_place10" scope="col">Location</th><th id="hdr_professor10" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section10">PME8367 S00<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity10">LEC</td><td class="Day" headers="hdr_day10">Not available at this time.</td><td class="Place" headers="hdr_place10">Not available at this time.</td><td class="Professor" headers="hdr_professor10">Not available at this time.</td>
+		</tr>
+	</tbody></table>
+</div>
+    </div>
+</div>
+<br>
+    </div>
+    
+    <!-- secondary notes-->
+    <br>
+    <p class="note"> 
+        
+    </p>
+    
+    <p class="note"> 
+        
+    </p>
+    
+    <script type="text/javascript">
+        initializeBubblePopup();
+        /*$('div#schedule > div > div').hide();
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("src", "./images/plus.gif");
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("alt", "Expand schedule");
+        $('div#schedule  > div  > div#' + currentTerm).children("div").css('display', 'block');
+
+        $('div#schedule  > div >  div#' + currentTerm).show();
+        $("div#schedule  > div  > div#" + currentTerm).siblings("a").children("img").attr("src", "./images/minus.gif");
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("alt", "Minimize schedule");*/
+        $("table.display > tbody > tr:first-child").addClass("first-element");
+    </script>
+
+                </div><!-- /#main-content -->
+                
+                <!-- Place holder for the Right Sidebar -->
+                
+        
+                <!-- Include the Quickpicks -->
+                <!-- footer include -->
+<div id="main-siteinfo">
+
+<ul id="main-siteinfonav">
+	<li><a id="siteinfonav-requirements" href="http://www.uottawa.ca/require.html">System Requirements</a></li>
+	<li><a id="siteinfonav-feedback" target="_blank" href="https://web9.uottawa.ca/services/ccs/feedback/">Feedback<span class="hide"> on this Web site</span></a></li>
+	<li><a id="siteinfonav-privacy" href="http://web5.uottawa.ca/admingov/privacy.html">Privacy Policy</a></li>
+	<li class="last"><a id="siteinfonav-accessibility" href="http://www.uottawa.ca/accessibility/">Accessibility</a></li>
+	<li class="right last"><a id="siteinfonav-giving" href="http://www.giving.uottawa.ca/home.html?utm_source=uottawa&amp;utm_medium=templates-footer&amp;utm_term=Give%2Bto%2Bthe%2BUniversity&amp;utm_campaign=templates-footer">Give to the University</a></li>
+</ul><!-- /#main-siteinfonav -->
+<div id="main-statements">
+<span id="copyright">© University of Ottawa</span>
+</div><!-- /#main-statements -->
+</div><!-- /#main-siteinfo -->
+<!-- /footer include -->
+
+       
+                <!-- PlaceHolder for the Bottom Content-->
+                
+        
+            </div><!-- /#wrapper -->
+       </div><!-- /#section-container -->
+       
+       <!-- used in the templates to close border-->
+       <div id="section-closure"></div>
+   </div><!-- /#main-container-->
+
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+<script type="text/javascript">
+    if (googleAnalyticsEnabled) {
+        //Add language parameter to the uri of the page 
+        var uri = document.location.pathname + document.location.hash + document.location.search;
+        if (-1 != document.location.hash.indexOf('?') || "" != document.location.search)
+            uri += '&';
+        else
+            uri += '?';
+        uri += 'lang=' + googleAnalyticsLanguage;
+
+        //Initialize the google analytics code
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', googleAnalyticsCode]);
+        _gaq.push(['_trackPageview', uri]);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') 
+              + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+</script>
+
+
+</body></html>

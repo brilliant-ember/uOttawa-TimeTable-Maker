@@ -1,0 +1,951 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- meta information -->
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    
+    <!-- PlaceHolder to let the child pages set their own description in the meta -->
+    
+        <meta name="description" content="These tools allow you to perform a search for course timetables and exam schedules offered at the University of Ottawa as well search for cancelled or unavailable courses.">
+    
+    <meta name="author" content="Computing and Communications Services">
+    <meta name="copyright" content="© University of Ottawa">
+    
+    <!-- PlaceHolder to let the child pages set their own title -->
+    <title>
+        
+            Course Timetable
+        
+    </title>
+
+    <!-- Include the Header of Ottawa U -->
+    <link rel="SHORTCUT ICON" href="https://web5.uottawa.ca/assets-templates/3/favicon.ico">
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style.css?9ec00ec18c593c88acabd5b180e448e8">
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style-ie7.css?ccb7e83d6e004f3ce9931f22fd9f9af7"><![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://web5.uottawa.ca/assets-templates/3/style-ie.css?2ae0350734756014236c7cc622551142"><![endif]-->
+<!-- if handheld -->
+<meta name="viewport" content="width=Device-width">
+<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="https://web5.uottawa.ca/assets-templates/3/handheld-480px.css?d41d8cd98f00b204e9800998ecf8427e">
+<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="https://web5.uottawa.ca/assets-templates/3/handheld-1024px.css?d41d8cd98f00b204e9800998ecf8427e">
+<link rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" href="https://web5.uottawa.ca/assets-templates/3/handheld-doublepx.css?d41d8cd98f00b204e9800998ecf8427e">
+<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript" charset="utf-8" src="https://web5.uottawa.ca/assets-templates/3/script.js?773664f4851bb50cc10a3771eff2efaa"></script>
+
+
+    <!-- page variables -->
+    <script type="text/javascript">
+    <!--
+        //var expandNavSection = '';
+        var googleAnalyticsCode = 'UA-5576980-4';
+        var googleAnalyticsLanguage = 'en';
+        var googleAnalyticsEnabled = 'true';  
+    -->
+    </script><!-- /page variables -->
+    
+    <!-- site-specific style sheet and javascript -->
+    <link type="text/css" rel="Stylesheet" media="screen" href="./assets/css/site.css">
+    <link type="text/css" rel="Stylesheet" href="./styles/base.css">
+    <link type="text/css" href="styles/jquery-ui-1.8.5.custom.css" rel="stylesheet">	
+    <script type="text/javascript" src="./scripts/base.js"></script>
+
+    <!-- PlaceHolder to let the child pages to set things in the header -->
+    
+    <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup.css">
+    <!--[if gte IE 8]>
+        <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup-ie8.css" />
+    <![endif]-->
+    <!--[if IE 7]>
+        <link type="text/css" rel="Stylesheet" href="./styles/bubble_popup-ie7.css" />
+    <![endif]-->
+    
+	<script type="text/javascript" src="./scripts/bubble_popup.js"></script>
+    <script type="text/javascript">
+        <!--
+        /*var currentTerm = '';
+        $(function() {
+
+            // set effect from select menu value
+            $("a.hidable").click(function() {
+                //If the script is changing something, ignore
+                if (changing == "changing") {
+                    return false;
+                }
+                changing = "changing";
+
+                var x = $(this).children("img");
+                if (x.attr("src") == "./images/plus.gif") {
+                    x.attr("src", "./images/minus.gif");
+                    x.attr("alt", "Minimize schedule");
+                    //Workaround the div inserted by code
+                    $(this).siblings("div").children("div").css('display', 'block');
+
+                    $(this).siblings("div").show("blind", 1000);
+                } else {
+                    x.attr("src", "./images/plus.gif");
+                    x.attr("alt", "Expand schedule");
+                    $(this).siblings("div").hide("blind", 1000);
+                }
+                setTimeout("changing = '';", 1100);
+                return false;
+            });
+
+        });*/
+	
+	</script>
+	
+
+
+    <!-- Include the bottom of the header -->
+    <!-- head-bottom: global include for eventually adding scripts at the bottom of the head on all pages of the University -->
+</head>
+
+<body class="en
+ light
+ theme-01">
+<form name="aspnetForm" method="post" action="Course.aspx?id=002423&amp;term=2171&amp;session=FS" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE4NDk1NTkwNDQPZBYCZg9kFgYCBQ8WAh4EVGV4dGRkAgoPFgIfAAUCZW5kAg0PZBYGAgMPDxYCHwAFCUZyYW7Dp2FpcxYGHgNyZWwFCWFsdGVybmF0ZR4EbGFuZwUFZnItQ0EeCGhyZWZsYW5nBQVmci1DQWQCCA8WAh8ABQdzcGFuLTE4ZAIJD2QWFAIBDxYCHwAFHEludHJvZHVjdGlvbiB0byBCaW9jaGVtaXN0cnlkAgMPFgIfAAWLAlRoZSBjaGVtaXN0cnkgYW5kIGJpb2xvZ2ljYWwgcHJvcGVydGllcyBvZiBhbWlubyBhY2lkcywgcHJvdGVpbnMsIG51Y2xlaWMgYWNpZHMsIGxpcGlkcywgY2FyYm9oeWRyYXRlcywgYW5kIHZpdGFtaW5zLiBUaGUgY291cnNlIGluY2x1ZGVzIGxhYm9yYXRvcnkgYW5kIHR1dG9yaWFsIHNlc3Npb25zLiBQcmlvcml0eSBnaXZlbiB0byBzdHVkZW50cyBmb3Igd2hvbSB0aGlzIGNvdXJzZSBpcyBtYW5kYXRvcnkuIFByZXZpb3VzbHkgQkNIIDIxNDAgYW5kIEJDSCAyMzM2LmQCBQ8WAh8AZWQCBw8WAh8ABRdQcmVyZXF1aXNpdGVzOiBDSE0gMjEyMGQCCQ8WAh8AZWQCCw8WAh8AZWQCDQ8WAh8ABRJGYWN1bHR5IG9mIFNjaWVuY2VkAhEPFgIfAAUaRGVwYXJ0bWVudCBvZiBCaW9jaGVtaXN0cnlkAhMPZBYEZg9kFggCAQ8WAh8ABQExZAIFDxYCHwAFEDIwMTcgV2ludGVyIFRlcm1kAgcPFgIfAAUBMWQCCQ9kFjJmDzwrAA0BAA8WAh4LXyFJdGVtQ291bnQCAmRkAgEPPCsADQEADxYCHwQCAWRkAgIPPCsADQEADxYCHwQCAWRkAgMPPCsADQEADxYCHwQCAWRkAgQPPCsADQEADxYCHwQCAWRkAgUPPCsADQEADxYCHwQCAWRkAgYPPCsADQEADxYCHwQCAWRkAgcPPCsADQEADxYCHwQCAWRkAggPPCsADQEADxYCHwQCAWRkAgkPPCsADQEADxYCHwQCAWRkAgoPPCsADQEADxYCHwQCAWRkAgsPPCsADQEADxYCHwQCAWRkAgwPPCsADQEADxYCHwQCAWRkAg0PPCsADQEADxYCHwQCAWRkAg4PPCsADQEADxYCHwQCAWRkAg8PPCsADQEADxYCHwQCAWRkAhAPPCsADQEADxYCHwQCAWRkAhEPPCsADQEADxYCHwQCAWRkAhIPPCsADQEADxYCHwQCAWRkAhMPPCsADQEADxYCHwQCAWRkAhQPPCsADQEADxYCHwQCAWRkAhUPPCsADQEADxYCHwQCAWRkAhYPPCsADQEADxYCHwQCAWRkAhcPPCsADQEADxYCHwQCAWRkAhgPPCsADQEADxYCHwQCAWRkAgEPZBYIAgEPFgIfAAUBMmQCBQ8WAh8ABRAyMDE3IFdpbnRlciBUZXJtZAIHDxYCHwAFATJkAgkPZBYuZg88KwANAQAPFgIfBAICZGQCAQ88KwANAQAPFgIfBAIBZGQCAg88KwANAQAPFgIfBAIBZGQCAw88KwANAQAPFgIfBAIBZGQCBA88KwANAQAPFgIfBAIBZGQCBQ88KwANAQAPFgIfBAIBZGQCBg88KwANAQAPFgIfBAIBZGQCBw88KwANAQAPFgIfBAIBZGQCCA88KwANAQAPFgIfBAIBZGQCCQ88KwANAQAPFgIfBAIBZGQCCg88KwANAQAPFgIfBAIBZGQCCw88KwANAQAPFgIfBAIBZGQCDA88KwANAQAPFgIfBAIBZGQCDQ88KwANAQAPFgIfBAIBZGQCDg88KwANAQAPFgIfBAIBZGQCDw88KwANAQAPFgIfBAIBZGQCEA88KwANAQAPFgIfBAIBZGQCEQ88KwANAQAPFgIfBAIBZGQCEg88KwANAQAPFgIfBAIBZGQCEw88KwANAQAPFgIfBAIBZGQCFA88KwANAQAPFgIfBAIBZGQCFQ88KwANAQAPFgIfBAIBZGQCFg88KwANAQAPFgIfBAIBZGQCFQ8WAh8AZWQYMAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwxMQ88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMDgPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDIyDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwyMg88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTUPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDAzDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwxOQ88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMDYPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDAyDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwxMw88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMjAPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDA0DzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwxNA88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTAPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDIxDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwwNQ88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTcPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDA0DzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwwNw88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMDMPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDAxDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwxNg88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTIPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDIzDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwwNg88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMDIPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDEzDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwyMA88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTkPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDE4DzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwwNw88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMTUPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDExDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwwOA88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMTgPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDAxDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMSRjdGwxNg88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDEkY3RsMDkPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDE3DzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwwMA88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMjQPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDA5DzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwxMg88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMTQPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAwJGN0bDEwDzwrAAoBCAIBZAUoY3RsMDAkTWFpbkNvbnRlbnRQbGFjZUhvbGRlciRjdGwwMCRjdGwyMQ88KwAKAQgCAWQFKGN0bDAwJE1haW5Db250ZW50UGxhY2VIb2xkZXIkY3RsMDAkY3RsMDUPPCsACgEIAgFkBShjdGwwMCRNYWluQ29udGVudFBsYWNlSG9sZGVyJGN0bDAxJGN0bDAwDzwrAAoBCAIBZERgdkO8ANIJl9lE/Mt0u4wgFSZ+">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/v3/SITS/timetable/WebResource.axd?d=gSi1rlt8wuY73eQQH5O4a9L7uj5hdp0OaB4acW8LahSC7MhU_ynIxCRwHKJNuKkDflX_sdPeD-9tZny9YuqZftpLTV81&amp;t=635588435086469712" type="text/javascript"></script>
+
+
+<script src="/v3/SITS/timetable/ScriptResource.axd?d=lTNRURqezq2jtPFCY9qi-9H81vXs5vcJkphYF_XzaBjsTwFbVgUQh_GqXMT3bAueNl0S6XM8-pUZ0HPOPVwM78RfDDKFmIK-8S3ZhtEPuV-SV8atAeiD-p4QOYGK_4YSLyprdg-LUKnMpv6SfS1arJKUbio1&amp;t=ffffffffd2bda0b2" type="text/javascript"></script>
+<script src="/v3/SITS/timetable/ScriptResource.axd?d=GPa50Jz4YFVXeMGpCAvUTOSa_831XeX1mnmO_pENAfdKm-nUB0KsDA4_aIoHe7AmUabVLq9SePlsuc5bDh3cDS5HkksRHWmo3dD1QfEqg9sDUOo97yz6kXkxEHZhkEPOywmEfCTcfNxrprg-Yy_LrETzJ1jai7IZQOPPO7BeM13ORJ4d0&amp;t=ffffffffd2bda0b2" type="text/javascript"></script>
+<script src="scripts/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DFF5F268">
+</div>
+     <!-- Initialize the script manager for the Language switchS -->
+     <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$JSScriptManager', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+    
+    <div id="main-container">
+        <!-- Page links -->
+        <ul id="page-links">
+	        <li>
+	            <a id="skip-to-content" href="#main-content">Skip to content</a>
+	        </li>
+	        <li>
+	            <a id="skip-to-leftnav" href="#left-nav">Skip to links</a>
+	        </li>
+	        <li>
+	            <a id="ch-lang-url" rel="alternate" lang="fr-CA" hreflang="fr-CA" href='javascript: WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$ChLangUrlLinkButton1", "fr-CA", false, "", "", false, true))'>Français</a>
+	        </li>
+        </ul><!-- /#page-links -->
+        
+        <!-- Include the Banner -->
+            <!-- header include -->
+    <div id="main-banner">
+      <!-- for "back to top" links -->
+      <a id="top" name="top"></a>
+
+      <!-- #main-branding -->
+      <div id="main-branding">
+        <div id="main-branding-logo">
+          <a rel="home" href="http://www.uottawa.ca/welcome.html" title="Home">
+          <img src="https://web5.uottawa.ca/assets-templates/img/uOttawa-logo.png" alt="University of Ottawa, Canada's University" height="53" width="130"></a>
+        </div>
+        <div id="main-branding-tagline"></div>
+      </div>
+      <!-- /#main-branding -->
+
+     <!-- #main-secondarynav -->
+    <ul id="main-secondarynav">
+      <li class="first"><a id="secondarynav-uozone" href="http://uozone.uottawa.ca/en/frontpage" title="uoZone: login to your secure information">uoZone</a></li>
+	<li><a id="secondarynav-biblio" href="http://www.biblio.uottawa.ca/index-e.php">Library</a></li>
+	<li><a id="secondarynav-programs" href="http://www.admission.uottawa.ca/Default.aspx?tabid=2566">Programs</a></li>
+	<li id="secondarynav-webmail"><a href="http://www.uottawa.ca/email">Webmail</a></li>
+    <li id="secondarynav-more"><h2>Quick Picks</h2>
+        <ul id="quickpick">
+        	<li><a href="http://www.uottawa.ca/search/">Employee Directory</a></li>
+			
+			<li class="new-group"><a href="https://web3.uottawa.ca/infoweb/logon/en.html">InfoWeb</a></li>
+			<li><a href="http://www.uottawa.ca/maps/">Maps</a></li>
+			<li><a href="https://maestro.uottawa.ca/index.asp?LANG=EN">Virtual Campus</a></li>
+			<li><a href="http://www.biblio.uottawa.ca/index-e.php">Library</a></li>
+			<li class="new-group"><a href="http://www.admission.uOttawa.ca/Default.aspx?tabid=2547&amp;source=qp">Campus Tours</a></li>
+			<li><a href="http://www.registrar.uOttawa.ca/Default.aspx?tabid=2681">Undergraduate Programs</a></li>
+			<li><a href="http://www.grad.uottawa.ca/Default.aspx?tabid=1727">Graduate Programs</a></li>
+	        <li><a href="http://www.uOttawa.ca/loansandawards/">Financial Aid</a></li>
+			<li><a href="http://www.financialresources.uottawa.ca/student/payment-university-fees-en.php">Payment of Fees</a></li>	
+	        <li><a href="http://www.admission.uottawa.ca/Default.aspx?tabid=2671">Sessional Dates</a></li>
+			
+			<li class="new-group"><a href="http://www.academiccareers.uottawa.ca/">Academic Careers</a></li>
+			<li><a href="http://www.emergencypreparedness.uottawa.ca/">Emergency Preparedness</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- /#main-secondarynav -->
+  </div>
+  <!-- /#main-banner -->
+
+  <!-- Emergency Banner  -->
+  <script type="text/javascript" src="https://web5.uottawa.ca/emergency/banner/banner-en.js" charset="utf-8"></script>
+  <!-- /header include -->
+       
+        <div id="section-container">
+            <div id="wrapper" class="container 24">
+                
+                <div id="section-header">
+                    <!-- PlaceHolder for the ParentOrg section -->
+                    
+                        <!-- Example of parent link -->
+                        
+                        <div style="background-color: #333;padding: 10px;outline: medium none;text-transform: uppercase;">
+                            <a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2613" style="text-decoration: none;color: #fff;">Strategic Enrollment Management (SEM)</a>
+                        </div>
+                        
+                       
+                    
+                    <a href="http://www.uottawa.ca/welcome.html">
+                        <div id="site-id">s</div>
+                    </a>
+   		        </div><!-- /#section-header-->
+            
+                <!-- Place holder for the Left Sidebar -->
+                
+                    <div id="sidebar-left" class="span-6">
+                        
+				        <ul id="left-nav">
+				             
+                                   
+                                    <li class=""><a href="http://www.uottawa.ca/academic/info/regist/annuaires/" target="_self" id="ProgramStudyLinkText">Undergraduate programs and courses</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4535" target="_self" id="UndergraduateFutureStudentsLinkText">Undergraduate admissions</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2767" target="_self" id="UndergraduateRegistrationLinkText">Undergraduate course enrolment</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4491" target="_self" id="UnderstandProgramLinkText">Understanding your undergraduate program</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2693" target="_self" id="ProgramChangeLinkText">Make changes to your undergraduate program</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=3619" target="_self" id="FeesLinkText">University fees</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2654" target="_self" id="FinancialAidLinkText">Financial aid and awards</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=4219" target="_self" id="OrientationIntegrationLinkText">Undergraduate orientation and integration</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2671" target="_self" id="ImportantDatesLinkText">Important academic dates and deadlines</a></li>
+                                
+                                   
+                                    <li class="expand"><a href="/v3/SITS/timetable/Home.aspx" target="_self" id="HomeLinkText">Course and exam timetables</a><ul><li class="expand current"><a href="/v3/SITS/timetable/Search.aspx" target="_self" id="SearchLinkText">Search tool for available courses</a></li><li class="expand"><a href="/v3/SITS/timetable/ExamSearch.aspx" target="_self" id="ExamSearchLinkText">Search tool for exam schedule</a></li></ul></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2701" target="_self" id="AcademicDocumentsLinkText">Requesting academic documents</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2714" target="_self" id="FormLinkText">Academic forms and procedures</a></li>
+                                
+                                   
+                                    <li class=""><a href="http://www.uottawa.ca/obtain-your-degree" target="_self" id="ConvocationLinkText">Obtain your degree</a></li>
+                                
+        	            </ul><!-- /#left-nav -->
+        	             
+        	            
+                        
+                        <br>
+                        
+                        <!-- Contact Information -->
+                        
+                        <div id="contact-info">
+                            <section>
+                                <h2>
+                                    Contact information
+                                </h2>
+                                <strong style="font-size:larger;">
+                                    <a href="http://www.registrar.uottawa.ca/Default.aspx?tabid=2616" target="_blank">InfoService</a>
+                                </strong>
+                                <br>
+                                Tabaret Hall
+                                <br>
+                                75 Laurier Avenue East
+                                <br>
+                                Ottawa, ON Canada
+                                <br>
+                                K1N 6N5
+                                <br>
+                                (<a href="http://www.uottawa.ca/maps" target="_blank">Campus Map</a>)
+                                <br>
+                                <br>
+                                Phone: 
+                                613-562-5630
+                                <br>
+                                Toll Free :
+                                1-877-868-8292
+                                <br>
+                                Fax:  
+                                613-562-5323
+                                <br>
+                                <a href="mailto:infoservice@uottawa.ca">Email InfoService</a>
+                            </section>
+                        </div><!-- /#contact-info -->
+                        
+			        </div><!-- /#sidebar-left -->
+                <!-- LeftSideBar -->
+                
+                <!-- Place holder for the Main Content-->
+                <div id="main-content" class="span-18">
+                    
+    <!-- Course information -->
+    <h1>Introduction to Biochemistry</h1>
+    
+    <p>
+        The chemistry and biological properties of amino acids, proteins, nucleic acids, lipids, carbohydrates, and vitamins. The course includes laboratory and tutorial sessions. Priority given to students for whom this course is mandatory. Previously BCH 2140 and BCH 2336.
+    </p>
+    <p>
+        
+    </p>
+    <p>
+        Prerequisites: CHM 2120
+    </p>
+    <p>
+        
+    </p>
+    <p> 
+        
+    </p>
+    <div id="faculty-links">
+        Faculty of Science
+        &gt;&gt;
+        Department of Biochemistry
+    </div>
+    
+    <!-- Schedule data -->
+    <div id="schedule">
+       
+ <div class="1">
+    <!-- Element to hide the schedule -->
+    <!-- <a href="#" class="hidable">
+        <img src="./images/plus.gif" alt="Expand schedule"/> -->
+        Course schedule for the term: 
+        2017 Winter Term
+    <!-- </a> -->
+    
+    <!-- Schedule information -->
+    <div id="1" class="schedule">
+        <div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A00&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr>
+			<th id="hdr_section10" scope="col">Section</th><th id="hdr_activity10" scope="col">Activity</th><th id="hdr_day10" scope="col">Day</th><th id="hdr_place10" scope="col">Location</th><th id="hdr_professor10" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section10">BCH2333 A00<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity10">LEC</td><td class="Day" headers="hdr_day10">Thursday 11:30 - 13:00</td><td class="Place" headers="hdr_place10"><a href="http://maps.uottawa.ca/?building=MRN" target="maps">MRN</a> 150</td><td class="Professor" headers="hdr_professor10">Christopher N. Boddy</td>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section10">BCH2333 A00<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity10">LEC</td><td class="Day" headers="hdr_day10">Tuesday 13:00 - 14:30</td><td class="Place" headers="hdr_place10"><a href="http://maps.uottawa.ca/?building=MRN" target="maps">MRN</a> 150</td><td class="Professor" headers="hdr_professor10">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section10 hdr_activity10" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A19&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section11" scope="col">Section</th><th id="hdr_activity11" scope="col">Activity</th><th id="hdr_day11" scope="col">Day</th><th id="hdr_place11" scope="col">Location</th><th id="hdr_professor11" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section11">BCH2333 A19<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity11">DGD</td><td class="Day" headers="hdr_day11">Monday 10:00 - 11:30</td><td class="Place" headers="hdr_place11"><a href="http://maps.uottawa.ca/?building=LPR" target="maps">LPR</a> 155</td><td class="Professor" headers="hdr_professor11">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section11 hdr_activity11" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A20&lt;br/&gt;(January 09 - April 08)&lt;br/&gt;&lt;b&gt;BSC 140&lt;/b&gt;" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section12" scope="col">Section</th><th id="hdr_activity12" scope="col">Activity</th><th id="hdr_day12" scope="col">Day</th><th id="hdr_place12" scope="col">Location</th><th id="hdr_professor12" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section12">BCH2333 A20<br>(January 09 - April 08)<br><b>BSC 140</b></td><td class="Activity" headers="hdr_activity12">DGD</td><td class="Day" headers="hdr_day12">Monday 13:00 - 14:30</td><td class="Place" headers="hdr_place12">DEP DEPT</td><td class="Professor" headers="hdr_professor12">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section12 hdr_activity12" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A21&lt;br/&gt;(January 09 - April 08)&lt;br/&gt;&lt;b&gt;BSC140&lt;/b&gt;" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section13" scope="col">Section</th><th id="hdr_activity13" scope="col">Activity</th><th id="hdr_day13" scope="col">Day</th><th id="hdr_place13" scope="col">Location</th><th id="hdr_professor13" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section13">BCH2333 A21<br>(January 09 - April 08)<br><b>BSC140</b></td><td class="Activity" headers="hdr_activity13">DGD</td><td class="Day" headers="hdr_day13">Wednesday 10:00 - 11:30</td><td class="Place" headers="hdr_place13">DEP DEPT</td><td class="Professor" headers="hdr_professor13">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section13 hdr_activity13" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A22&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section14" scope="col">Section</th><th id="hdr_activity14" scope="col">Activity</th><th id="hdr_day14" scope="col">Day</th><th id="hdr_place14" scope="col">Location</th><th id="hdr_professor14" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section14">BCH2333 A22<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity14">DGD</td><td class="Day" headers="hdr_day14">Wednesday 13:00 - 14:30</td><td class="Place" headers="hdr_place14"><a href="http://maps.uottawa.ca/?building=MRT" target="maps">MRT</a> 250</td><td class="Professor" headers="hdr_professor14">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section14 hdr_activity14" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A23&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section15" scope="col">Section</th><th id="hdr_activity15" scope="col">Activity</th><th id="hdr_day15" scope="col">Day</th><th id="hdr_place15" scope="col">Location</th><th id="hdr_professor15" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section15">BCH2333 A23<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity15">DGD</td><td class="Day" headers="hdr_day15">Wednesday 16:00 - 17:30</td><td class="Place" headers="hdr_place15"><a href="http://maps.uottawa.ca/?building=FSS" target="maps">FSS</a> 1007</td><td class="Professor" headers="hdr_professor15">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section15 hdr_activity15" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A24&lt;br/&gt;(January 09 - April 08)&lt;br/&gt;&lt;b&gt;BSC 140&lt;/b&gt;" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section16" scope="col">Section</th><th id="hdr_activity16" scope="col">Activity</th><th id="hdr_day16" scope="col">Day</th><th id="hdr_place16" scope="col">Location</th><th id="hdr_professor16" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section16">BCH2333 A24<br>(January 09 - April 08)<br><b>BSC 140</b></td><td class="Activity" headers="hdr_activity16">DGD</td><td class="Day" headers="hdr_day16">Thursday 17:30 - 19:00</td><td class="Place" headers="hdr_place16">DEP DEPT</td><td class="Professor" headers="hdr_professor16">Christopher N. Boddy</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section16 hdr_activity16" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A01&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section17" scope="col">Section</th><th id="hdr_activity17" scope="col">Activity</th><th id="hdr_day17" scope="col">Day</th><th id="hdr_place17" scope="col">Location</th><th id="hdr_professor17" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section17">BCH2333 A01<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity17">LAB</td><td class="Day" headers="hdr_day17">Monday 8:30 - 11:30</td><td class="Place" headers="hdr_place17"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor17">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section17 hdr_activity17" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A02&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section18" scope="col">Section</th><th id="hdr_activity18" scope="col">Activity</th><th id="hdr_day18" scope="col">Day</th><th id="hdr_place18" scope="col">Location</th><th id="hdr_professor18" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section18">BCH2333 A02<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity18">LAB</td><td class="Day" headers="hdr_day18">Monday 8:30 - 11:30</td><td class="Place" headers="hdr_place18"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor18">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section18 hdr_activity18" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A03&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section19" scope="col">Section</th><th id="hdr_activity19" scope="col">Activity</th><th id="hdr_day19" scope="col">Day</th><th id="hdr_place19" scope="col">Location</th><th id="hdr_professor19" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section19">BCH2333 A03<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity19">LAB</td><td class="Day" headers="hdr_day19">Monday 13:00 - 16:00</td><td class="Place" headers="hdr_place19"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor19">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section19 hdr_activity19" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A04&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section110" scope="col">Section</th><th id="hdr_activity110" scope="col">Activity</th><th id="hdr_day110" scope="col">Day</th><th id="hdr_place110" scope="col">Location</th><th id="hdr_professor110" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section110">BCH2333 A04<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity110">LAB</td><td class="Day" headers="hdr_day110">Monday 13:00 - 16:00</td><td class="Place" headers="hdr_place110"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor110">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section110 hdr_activity110" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A05&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section111" scope="col">Section</th><th id="hdr_activity111" scope="col">Activity</th><th id="hdr_day111" scope="col">Day</th><th id="hdr_place111" scope="col">Location</th><th id="hdr_professor111" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section111">BCH2333 A05<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity111">LAB</td><td class="Day" headers="hdr_day111">Tuesday 8:30 - 11:30</td><td class="Place" headers="hdr_place111"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor111">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section111 hdr_activity111" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A06&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section112" scope="col">Section</th><th id="hdr_activity112" scope="col">Activity</th><th id="hdr_day112" scope="col">Day</th><th id="hdr_place112" scope="col">Location</th><th id="hdr_professor112" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section112">BCH2333 A06<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity112">LAB</td><td class="Day" headers="hdr_day112">Tuesday 8:30 - 11:30</td><td class="Place" headers="hdr_place112"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor112">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section112 hdr_activity112" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A07&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section113" scope="col">Section</th><th id="hdr_activity113" scope="col">Activity</th><th id="hdr_day113" scope="col">Day</th><th id="hdr_place113" scope="col">Location</th><th id="hdr_professor113" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section113">BCH2333 A07<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity113">LAB</td><td class="Day" headers="hdr_day113">Tuesday 14:30 - 17:30</td><td class="Place" headers="hdr_place113"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor113">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section113 hdr_activity113" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A08&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section114" scope="col">Section</th><th id="hdr_activity114" scope="col">Activity</th><th id="hdr_day114" scope="col">Day</th><th id="hdr_place114" scope="col">Location</th><th id="hdr_professor114" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section114">BCH2333 A08<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity114">LAB</td><td class="Day" headers="hdr_day114">Tuesday 14:30 - 17:30</td><td class="Place" headers="hdr_place114"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor114">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section114 hdr_activity114" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A09&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section115" scope="col">Section</th><th id="hdr_activity115" scope="col">Activity</th><th id="hdr_day115" scope="col">Day</th><th id="hdr_place115" scope="col">Location</th><th id="hdr_professor115" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section115">BCH2333 A09<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity115">LAB</td><td class="Day" headers="hdr_day115">Wednesday 8:30 - 11:30</td><td class="Place" headers="hdr_place115"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor115">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section115 hdr_activity115" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A10&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section116" scope="col">Section</th><th id="hdr_activity116" scope="col">Activity</th><th id="hdr_day116" scope="col">Day</th><th id="hdr_place116" scope="col">Location</th><th id="hdr_professor116" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section116">BCH2333 A10<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity116">LAB</td><td class="Day" headers="hdr_day116">Wednesday 8:30 - 11:30</td><td class="Place" headers="hdr_place116"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor116">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section116 hdr_activity116" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A11&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section117" scope="col">Section</th><th id="hdr_activity117" scope="col">Activity</th><th id="hdr_day117" scope="col">Day</th><th id="hdr_place117" scope="col">Location</th><th id="hdr_professor117" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section117">BCH2333 A11<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity117">LAB</td><td class="Day" headers="hdr_day117">Thursday 8:30 - 11:30</td><td class="Place" headers="hdr_place117"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor117">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section117 hdr_activity117" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A12&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section118" scope="col">Section</th><th id="hdr_activity118" scope="col">Activity</th><th id="hdr_day118" scope="col">Day</th><th id="hdr_place118" scope="col">Location</th><th id="hdr_professor118" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section118">BCH2333 A12<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity118">LAB</td><td class="Day" headers="hdr_day118">Thursday 8:30 - 11:30</td><td class="Place" headers="hdr_place118"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor118">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section118 hdr_activity118" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A13&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section119" scope="col">Section</th><th id="hdr_activity119" scope="col">Activity</th><th id="hdr_day119" scope="col">Day</th><th id="hdr_place119" scope="col">Location</th><th id="hdr_professor119" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section119">BCH2333 A13<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity119">LAB</td><td class="Day" headers="hdr_day119">Thursday 13:00 - 16:00</td><td class="Place" headers="hdr_place119"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor119">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section119 hdr_activity119" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A14&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section120" scope="col">Section</th><th id="hdr_activity120" scope="col">Activity</th><th id="hdr_day120" scope="col">Day</th><th id="hdr_place120" scope="col">Location</th><th id="hdr_professor120" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section120">BCH2333 A14<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity120">LAB</td><td class="Day" headers="hdr_day120">Thursday 13:00 - 16:00</td><td class="Place" headers="hdr_place120"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor120">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section120 hdr_activity120" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A15&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section121" scope="col">Section</th><th id="hdr_activity121" scope="col">Activity</th><th id="hdr_day121" scope="col">Day</th><th id="hdr_place121" scope="col">Location</th><th id="hdr_professor121" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section121">BCH2333 A15<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity121">LAB</td><td class="Day" headers="hdr_day121">Friday 13:00 - 16:00</td><td class="Place" headers="hdr_place121"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor121">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section121 hdr_activity121" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A16&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section122" scope="col">Section</th><th id="hdr_activity122" scope="col">Activity</th><th id="hdr_day122" scope="col">Day</th><th id="hdr_place122" scope="col">Location</th><th id="hdr_professor122" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section122">BCH2333 A16<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity122">LAB</td><td class="Day" headers="hdr_day122">Friday 13:00 - 16:00</td><td class="Place" headers="hdr_place122"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor122">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section122 hdr_activity122" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A17&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section123" scope="col">Section</th><th id="hdr_activity123" scope="col">Activity</th><th id="hdr_day123" scope="col">Day</th><th id="hdr_place123" scope="col">Location</th><th id="hdr_professor123" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section123">BCH2333 A17<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity123">LAB</td><td class="Day" headers="hdr_day123">Thursday 17:30 - 20:30</td><td class="Place" headers="hdr_place123"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor123">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section123 hdr_activity123" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 A18&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section124" scope="col">Section</th><th id="hdr_activity124" scope="col">Activity</th><th id="hdr_day124" scope="col">Day</th><th id="hdr_place124" scope="col">Location</th><th id="hdr_professor124" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section124">BCH2333 A18<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity124">LAB</td><td class="Day" headers="hdr_day124">Thursday 17:30 - 20:30</td><td class="Place" headers="hdr_place124"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor124">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section124 hdr_activity124" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div>
+    </div>
+</div>
+<br>
+ <div class="2">
+    <!-- Element to hide the schedule -->
+    <!-- <a href="#" class="hidable">
+        <img src="./images/plus.gif" alt="Expand schedule"/> -->
+        Course schedule for the term: 
+        2017 Winter Term
+    <!-- </a> -->
+    
+    <!-- Schedule information -->
+    <div id="2" class="schedule">
+        <div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B00&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr>
+			<th id="hdr_section20" scope="col">Section</th><th id="hdr_activity20" scope="col">Activity</th><th id="hdr_day20" scope="col">Day</th><th id="hdr_place20" scope="col">Location</th><th id="hdr_professor20" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section20">BCH2333 B00<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity20">LEC</td><td class="Day" headers="hdr_day20">Friday 14:30 - 16:00</td><td class="Place" headers="hdr_place20"><a href="http://maps.uottawa.ca/?building=MRN" target="maps">MRN</a> 150</td><td class="Professor" headers="hdr_professor20">Matthew A  Lafreniere</td>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section20">BCH2333 B00<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity20">LEC</td><td class="Day" headers="hdr_day20">Wednesday 16:00 - 17:30</td><td class="Place" headers="hdr_place20"><a href="http://maps.uottawa.ca/?building=MRN" target="maps">MRN</a> 150</td><td class="Professor" headers="hdr_professor20">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section20 hdr_activity20" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B17&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section21" scope="col">Section</th><th id="hdr_activity21" scope="col">Activity</th><th id="hdr_day21" scope="col">Day</th><th id="hdr_place21" scope="col">Location</th><th id="hdr_professor21" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section21">BCH2333 B17<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity21">DGD</td><td class="Day" headers="hdr_day21">Monday 11:30 - 13:00</td><td class="Place" headers="hdr_place21"><a href="http://maps.uottawa.ca/?building=FTX" target="maps">FTX</a> 135</td><td class="Professor" headers="hdr_professor21">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section21 hdr_activity21" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B18&lt;br/&gt;(January 09 - April 08)&lt;br/&gt;&lt;b&gt;BSC140&lt;/b&gt;" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section22" scope="col">Section</th><th id="hdr_activity22" scope="col">Activity</th><th id="hdr_day22" scope="col">Day</th><th id="hdr_place22" scope="col">Location</th><th id="hdr_professor22" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section22">BCH2333 B18<br>(January 09 - April 08)<br><b>BSC140</b></td><td class="Activity" headers="hdr_activity22">DGD</td><td class="Day" headers="hdr_day22">Monday 14:30 - 16:00</td><td class="Place" headers="hdr_place22">DEP DEPT</td><td class="Professor" headers="hdr_professor22">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section22 hdr_activity22" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B19&lt;br/&gt;(January 09 - April 08)&lt;br/&gt;&lt;b&gt;BSC140&lt;/b&gt;" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section23" scope="col">Section</th><th id="hdr_activity23" scope="col">Activity</th><th id="hdr_day23" scope="col">Day</th><th id="hdr_place23" scope="col">Location</th><th id="hdr_professor23" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section23">BCH2333 B19<br>(January 09 - April 08)<br><b>BSC140</b></td><td class="Activity" headers="hdr_activity23">DGD</td><td class="Day" headers="hdr_day23">Wednesday 11:30 - 13:00</td><td class="Place" headers="hdr_place23">DEP DEPT</td><td class="Professor" headers="hdr_professor23">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section23 hdr_activity23" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B20&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section24" scope="col">Section</th><th id="hdr_activity24" scope="col">Activity</th><th id="hdr_day24" scope="col">Day</th><th id="hdr_place24" scope="col">Location</th><th id="hdr_professor24" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section24">BCH2333 B20<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity24">DGD</td><td class="Day" headers="hdr_day24">Wednesday 14:30 - 16:00</td><td class="Place" headers="hdr_place24"><a href="http://maps.uottawa.ca/?building=FTX" target="maps">FTX</a> 302</td><td class="Professor" headers="hdr_professor24">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section24 hdr_activity24" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B21&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section25" scope="col">Section</th><th id="hdr_activity25" scope="col">Activity</th><th id="hdr_day25" scope="col">Day</th><th id="hdr_place25" scope="col">Location</th><th id="hdr_professor25" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section25">BCH2333 B21<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity25">DGD</td><td class="Day" headers="hdr_day25">Wednesday 17:30 - 19:00</td><td class="Place" headers="hdr_place25"><a href="http://maps.uottawa.ca/?building=FSS" target="maps">FSS</a> 1030</td><td class="Professor" headers="hdr_professor25">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section25 hdr_activity25" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B22&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section26" scope="col">Section</th><th id="hdr_activity26" scope="col">Activity</th><th id="hdr_day26" scope="col">Day</th><th id="hdr_place26" scope="col">Location</th><th id="hdr_professor26" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section26">BCH2333 B22<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity26">DGD</td><td class="Day" headers="hdr_day26">Thursday 16:00 - 17:30</td><td class="Place" headers="hdr_place26">Not available at this time.</td><td class="Professor" headers="hdr_professor26">Matthew A  Lafreniere</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section26 hdr_activity26" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B01&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section27" scope="col">Section</th><th id="hdr_activity27" scope="col">Activity</th><th id="hdr_day27" scope="col">Day</th><th id="hdr_place27" scope="col">Location</th><th id="hdr_professor27" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section27">BCH2333 B01<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity27">LAB</td><td class="Day" headers="hdr_day27">Monday 8:30 - 11:30</td><td class="Place" headers="hdr_place27"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor27">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section27 hdr_activity27" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B02&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section28" scope="col">Section</th><th id="hdr_activity28" scope="col">Activity</th><th id="hdr_day28" scope="col">Day</th><th id="hdr_place28" scope="col">Location</th><th id="hdr_professor28" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section28">BCH2333 B02<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity28">LAB</td><td class="Day" headers="hdr_day28">Monday 8:30 - 11:30</td><td class="Place" headers="hdr_place28"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor28">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section28 hdr_activity28" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B03&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section29" scope="col">Section</th><th id="hdr_activity29" scope="col">Activity</th><th id="hdr_day29" scope="col">Day</th><th id="hdr_place29" scope="col">Location</th><th id="hdr_professor29" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section29">BCH2333 B03<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity29">LAB</td><td class="Day" headers="hdr_day29">Monday 13:00 - 16:00</td><td class="Place" headers="hdr_place29"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor29">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section29 hdr_activity29" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B04&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section210" scope="col">Section</th><th id="hdr_activity210" scope="col">Activity</th><th id="hdr_day210" scope="col">Day</th><th id="hdr_place210" scope="col">Location</th><th id="hdr_professor210" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section210">BCH2333 B04<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity210">LAB</td><td class="Day" headers="hdr_day210">Monday 13:00 - 16:00</td><td class="Place" headers="hdr_place210"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor210">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section210 hdr_activity210" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B05&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section211" scope="col">Section</th><th id="hdr_activity211" scope="col">Activity</th><th id="hdr_day211" scope="col">Day</th><th id="hdr_place211" scope="col">Location</th><th id="hdr_professor211" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section211">BCH2333 B05<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity211">LAB</td><td class="Day" headers="hdr_day211">Tuesday 8:30 - 11:30</td><td class="Place" headers="hdr_place211"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor211">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section211 hdr_activity211" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B06&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section212" scope="col">Section</th><th id="hdr_activity212" scope="col">Activity</th><th id="hdr_day212" scope="col">Day</th><th id="hdr_place212" scope="col">Location</th><th id="hdr_professor212" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section212">BCH2333 B06<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity212">LAB</td><td class="Day" headers="hdr_day212">Tuesday 8:30 - 11:30</td><td class="Place" headers="hdr_place212"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor212">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section212 hdr_activity212" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B07&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section213" scope="col">Section</th><th id="hdr_activity213" scope="col">Activity</th><th id="hdr_day213" scope="col">Day</th><th id="hdr_place213" scope="col">Location</th><th id="hdr_professor213" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section213">BCH2333 B07<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity213">LAB</td><td class="Day" headers="hdr_day213">Tuesday 14:30 - 17:30</td><td class="Place" headers="hdr_place213"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor213">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section213 hdr_activity213" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B08&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section214" scope="col">Section</th><th id="hdr_activity214" scope="col">Activity</th><th id="hdr_day214" scope="col">Day</th><th id="hdr_place214" scope="col">Location</th><th id="hdr_professor214" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section214">BCH2333 B08<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity214">LAB</td><td class="Day" headers="hdr_day214">Tuesday 14:30 - 17:30</td><td class="Place" headers="hdr_place214"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor214">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section214 hdr_activity214" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B09&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section215" scope="col">Section</th><th id="hdr_activity215" scope="col">Activity</th><th id="hdr_day215" scope="col">Day</th><th id="hdr_place215" scope="col">Location</th><th id="hdr_professor215" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section215">BCH2333 B09<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity215">LAB</td><td class="Day" headers="hdr_day215">Wednesday 8:30 - 11:30</td><td class="Place" headers="hdr_place215"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor215">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section215 hdr_activity215" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B10&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section216" scope="col">Section</th><th id="hdr_activity216" scope="col">Activity</th><th id="hdr_day216" scope="col">Day</th><th id="hdr_place216" scope="col">Location</th><th id="hdr_professor216" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section216">BCH2333 B10<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity216">LAB</td><td class="Day" headers="hdr_day216">Wednesday 8:30 - 11:30</td><td class="Place" headers="hdr_place216"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor216">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section216 hdr_activity216" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B11&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section217" scope="col">Section</th><th id="hdr_activity217" scope="col">Activity</th><th id="hdr_day217" scope="col">Day</th><th id="hdr_place217" scope="col">Location</th><th id="hdr_professor217" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section217">BCH2333 B11<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity217">LAB</td><td class="Day" headers="hdr_day217">Thursday 8:30 - 11:30</td><td class="Place" headers="hdr_place217"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor217">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section217 hdr_activity217" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B12&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section218" scope="col">Section</th><th id="hdr_activity218" scope="col">Activity</th><th id="hdr_day218" scope="col">Day</th><th id="hdr_place218" scope="col">Location</th><th id="hdr_professor218" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section218">BCH2333 B12<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity218">LAB</td><td class="Day" headers="hdr_day218">Thursday 8:30 - 11:30</td><td class="Place" headers="hdr_place218"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor218">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section218 hdr_activity218" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B13&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section219" scope="col">Section</th><th id="hdr_activity219" scope="col">Activity</th><th id="hdr_day219" scope="col">Day</th><th id="hdr_place219" scope="col">Location</th><th id="hdr_professor219" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section219">BCH2333 B13<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity219">LAB</td><td class="Day" headers="hdr_day219">Thursday 13:00 - 16:00</td><td class="Place" headers="hdr_place219"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor219">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section219 hdr_activity219" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B14&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section220" scope="col">Section</th><th id="hdr_activity220" scope="col">Activity</th><th id="hdr_day220" scope="col">Day</th><th id="hdr_place220" scope="col">Location</th><th id="hdr_professor220" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section220">BCH2333 B14<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity220">LAB</td><td class="Day" headers="hdr_day220">Thursday 13:00 - 16:00</td><td class="Place" headers="hdr_place220"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor220">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section220 hdr_activity220" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B15&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section221" scope="col">Section</th><th id="hdr_activity221" scope="col">Activity</th><th id="hdr_day221" scope="col">Day</th><th id="hdr_place221" scope="col">Location</th><th id="hdr_professor221" scope="col">Professor</th>
+		</tr><tr>
+			<td class="Section" headers="hdr_section221">BCH2333 B15<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity221">LAB</td><td class="Day" headers="hdr_day221">Thursday 17:30 - 20:30</td><td class="Place" headers="hdr_place221"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor221">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section221 hdr_activity221" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div><div>
+	<table class="display" cellspacing="0" summary="Schedule for BCH2333 B16&lt;br/&gt;(January 09 - April 08)" border="0" style="border-collapse:collapse;">
+		<tbody><tr class="hidden-header">
+			<th id="hdr_section222" scope="col">Section</th><th id="hdr_activity222" scope="col">Activity</th><th id="hdr_day222" scope="col">Day</th><th id="hdr_place222" scope="col">Location</th><th id="hdr_professor222" scope="col">Professor</th>
+		</tr><tr class="odd">
+			<td class="Section" headers="hdr_section222">BCH2333 B16<br>(January 09 - April 08)</td><td class="Activity" headers="hdr_activity222">LAB</td><td class="Day" headers="hdr_day222">Thursday 17:30 - 20:30</td><td class="Place" headers="hdr_place222"><a href="http://maps.uottawa.ca/?building=BSC" target="maps">BSC</a> 211</td><td class="Professor" headers="hdr_professor222">Josée  Coutu,<br>Luc  Poitras</td>
+		</tr><tr class="footer">
+			<td headers="hdr_section222 hdr_activity222" colspan="5">Student will have lab every 2 weeks <br></td>
+		</tr>
+	</tbody></table>
+</div>
+    </div>
+</div>
+<br>
+    </div>
+    
+    <!-- secondary notes-->
+    <br>
+    <p class="note"> 
+        
+    </p>
+    
+    <p class="note"> 
+        
+    </p>
+    
+    <script type="text/javascript">
+        initializeBubblePopup();
+        /*$('div#schedule > div > div').hide();
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("src", "./images/plus.gif");
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("alt", "Expand schedule");
+        $('div#schedule  > div  > div#' + currentTerm).children("div").css('display', 'block');
+
+        $('div#schedule  > div >  div#' + currentTerm).show();
+        $("div#schedule  > div  > div#" + currentTerm).siblings("a").children("img").attr("src", "./images/minus.gif");
+        $("div#schedule  > div  > div").siblings("a").children("img").attr("alt", "Minimize schedule");*/
+        $("table.display > tbody > tr:first-child").addClass("first-element");
+    </script>
+
+                </div><!-- /#main-content -->
+                
+                <!-- Place holder for the Right Sidebar -->
+                
+        
+                <!-- Include the Quickpicks -->
+                <!-- footer include -->
+<div id="main-siteinfo">
+
+<ul id="main-siteinfonav">
+	<li><a id="siteinfonav-requirements" href="http://www.uottawa.ca/require.html">System Requirements</a></li>
+	<li><a id="siteinfonav-feedback" target="_blank" href="https://web9.uottawa.ca/services/ccs/feedback/">Feedback<span class="hide"> on this Web site</span></a></li>
+	<li><a id="siteinfonav-privacy" href="http://web5.uottawa.ca/admingov/privacy.html">Privacy Policy</a></li>
+	<li class="last"><a id="siteinfonav-accessibility" href="http://www.uottawa.ca/accessibility/">Accessibility</a></li>
+	<li class="right last"><a id="siteinfonav-giving" href="http://www.giving.uottawa.ca/home.html?utm_source=uottawa&amp;utm_medium=templates-footer&amp;utm_term=Give%2Bto%2Bthe%2BUniversity&amp;utm_campaign=templates-footer">Give to the University</a></li>
+</ul><!-- /#main-siteinfonav -->
+<div id="main-statements">
+<span id="copyright">© University of Ottawa</span>
+</div><!-- /#main-statements -->
+</div><!-- /#main-siteinfo -->
+<!-- /footer include -->
+
+       
+                <!-- PlaceHolder for the Bottom Content-->
+                
+        
+            </div><!-- /#wrapper -->
+       </div><!-- /#section-container -->
+       
+       <!-- used in the templates to close border-->
+       <div id="section-closure"></div>
+   </div><!-- /#main-container-->
+
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+<script type="text/javascript">
+    if (googleAnalyticsEnabled) {
+        //Add language parameter to the uri of the page 
+        var uri = document.location.pathname + document.location.hash + document.location.search;
+        if (-1 != document.location.hash.indexOf('?') || "" != document.location.search)
+            uri += '&';
+        else
+            uri += '?';
+        uri += 'lang=' + googleAnalyticsLanguage;
+
+        //Initialize the google analytics code
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', googleAnalyticsCode]);
+        _gaq.push(['_trackPageview', uri]);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') 
+              + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+</script>
+
+
+</body></html>
