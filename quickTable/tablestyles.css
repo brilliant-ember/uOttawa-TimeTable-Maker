@@ -1,0 +1,31 @@
+table{
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.cell{
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: #efefef;
+}
+.legend{
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.legend-cell{
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: #efefef;
+  display: inline-block;
+}
+.legend-text{
+  margin-left: 5px;
+  vertical-align: 25%;
+  display: inline-block;
+}
+.course-0{ background: #eacd7c; } /* #FF9CEE */
+.course-1{ background: #d0654c; } /* #FFABAB */
+.course-2{ background: #b63e4a; } /* #85E3FF */
+.course-3{ background: #502938; } /* #AFF808 */
+.course-4{ background: #587679; } /* #C5A3FF */

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- jQuery -->
+<!-- http://api.jquery.com/ -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<!-- https://bootswatch.com/ http://bootdey.com/bootstrap-snippets http://bootsnipp.com/-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<!-- Font Awesome -->
+<!-- http://fontawesome.io/icons/ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<!-- table building and rendering libs -->
+<script src="TableBuilder.js"></script>
+<script src="TableRenderer.js"></script>
+
+<!-- table styles -->
+<link rel="stylesheet" href="tablestyles.css">
+
+<style>
+  body{
+    /*background: "#333";*/
+  }
+  button{
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+  }
+  .btn-default{
+      display: inline-block;
+  }
+</style>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">QuickTime</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div id="coursePageInputArea"></div>
+
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" onclick="addCourseInput();">Add Another Course</button>
+                    <button type="button" class="btn btn-default" onclick="getCourseData(dataCallback, true);">run demo</button>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-info center-block calculate-btn" onclick="getCourseData(dataCallback, false);">Calculate</button>
+            </div>
+
+    </div>
+
+    <div class="row" id="legendArea"></div>
+    <div class="row" id="renderArea"></div>
+
+</div>
+<script>
+    'use strict';
+
+    //
+    // test url data
+    //
+    // id=019749&term=2175&session=A
+    // id=018041&term=2175&session=A
+    // id=018039&term=2175&session=A
+    // id=019810&term=2175&session=A
+
+    // globals
+    var inputArea = $("#coursePageInputArea");
+    var legendArea = $("#legendArea");
+    var renderArea = $("#renderArea");
+    var baseUrl = "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?";
+    var serverBaseUrl = "http://server.rhayes.me/parse?courseURL=";
+
+    //
+    // add input box to course page url area
+    //
+    var addCourseInput = function(){
+        var markup = '<div class="col-xs-8 col-xs-offset-2">' +
+                      '<form>' +
+                          '<label for="basic-url"></label>' +
+                          '<div class="input-group">' +
+                            '<span class="input-group-addon" +  id="basic-addon3">https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?</span>' +
+                            '<input type="text" class="form-control" id="basic-url" + aria-describedby="basic-addon3">'
+                          '</div>' +
+                      '</form>' +
+                  '</div>';
+
+        inputArea.append(markup);
+    };
+
+    // add first course
+    addCourseInput();
+
+    //
+    // callback after program gets data
+    //
+    var dataCallback = function(data){
+
+        legendArea.html("");
+        renderArea.html("");
+
+        var cssClassLookup = {};
+        var cssClassCount = 0;
+        data.forEach((item) => {
+            cssClassLookup[item[0]] = "course-" + cssClassCount;
+            cssClassCount += 1;
+        });
+
+        //
+        // build tables
+        //
+        var build = TableBuilder(data);
+
+        //
+        // render tables
+        //
+        var render = TableRenderer(build, cssClassLookup);
+
+        //
+        // place legend in view
+        //
+
+        var legend = $("<div>");
+        legend.addClass("legend");
+        for(let courseName in cssClassLookup){
+
+            var courseClass = cssClassLookup[courseName];
+
+            var legend_row = $("<div>");
+            legend_row.addClass("legend-row");
+
+            var legend_cell = $("<div>");
+            legend_cell.addClass("legend-cell");
+            legend_cell.addClass(courseClass);
+
+            var legend_text = $("<div>");
+            legend_text.addClass("legend-text");
+            legend_text.html(courseName);
+
+            legend_row.append(legend_cell);
+            legend_row.append(legend_text);
+
+            legend.append(legend_row);
+
+        }
+        var legendMarkup = '<div class="col-xs-12">' +
+                                '<div class="col-xs-12 col-sm-2">' +
+                                    '<div class="legend">' +
+                                        legend.html() +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+        legendArea.append(legendMarkup);
+
+        //
+        // place rendered tables in view
+        //
+        render.forEach((timetable, t) => {
+            var markUp = '<div class="col-sm-2 col-xs-4"><table>'+ timetable.html() +'</table></div>';
+            renderArea.append(markUp);
+        });
+
+        //
+        // activate popovers
+        //
+        $('.cell').popover({
+            container: 'body'
+        });
+    };
+
+    //
+    // hit server and get data for courses
+    //
+    var getCourseData = function(callback, demo){
+
+        if(demo){
+            var data = [];
+            $.get("fiveCourses.json", function(_data){
+                for(var courseName in _data){
+                    data.push( [courseName, _data[courseName]] );
+                }
+                callback(data);
+            });
+
+        }else{
+
+            var promises = [];
+            $(".form-control").each(function(index, elem){
+                var value = $(elem).val();
+                var url = serverBaseUrl + encodeURIComponent(baseUrl + value);
+                var p = $.get(url);
+                promises.push(p);
+            });
+
+            //
+            // fires after all get requests succeed or fail
+            //
+            Promise.all(promises).then(function(allData){
+
+                var data = [];
+                allData.forEach((v) => {
+                    var _data = JSON.parse(v);
+                    for(var courseName in _data){
+                        data.push( [courseName, _data[courseName]] );
+                    }
+                });
+
+                callback(data);
+
+            });
+        }
+    };
+</script>
+</body>
+</html>
