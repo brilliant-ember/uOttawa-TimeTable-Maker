@@ -7,12 +7,13 @@ browser.get("https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&te
 table = browser.find_element_by_xpath("""//*[@id="1"]""") 
 #ObjRows = table.find_elements_by_tag_name("div")
 
-
+#each list represents a column in the course table, execpt for Time[]; it's an extra list I made
 Section=[]
 Activity=[]
 Day=[]
 Location=[]
 Prof=[]
+Time=[]#the first time is start time the end time is end time
 
 
 act = table.find_elements_by_class_name("Activity")
@@ -23,8 +24,7 @@ prof = table.find_elements_by_class_name("Professor")
 
 
 
-
-
+#this loop fills the empty lists with there respective elements from the school's website
 for a, s, d, l, p  in zip(act, sec, day, loc, prof):
     
     #print(i.text, " Of Type= ",type(i.text))
@@ -34,7 +34,16 @@ for a, s, d, l, p  in zip(act, sec, day, loc, prof):
     Prof.append(p.text)
     Location.append(l.text)
     
+#loop to split the actual day from time in the Day list
+tmp=[]
 
+for x in Day:
+    y = x.split(" ")
+    Time = Time+[y[1]+","+y[-1]]
+    tmp = tmp+[y[0]]
+    
+Day = tmp[:] # copy tmp's elements
+tmp = [] #Set tmp to an empty list
 
     
 print("_______________________Day______________________________")
@@ -47,6 +56,8 @@ print("_______________________Loc______________________________\n")
 print(Location)
 print("________________________Prof_____________________________\n")
 print(Prof)
+print("________________________Time_____________________________\n")
+print(Time)
 
 
 
