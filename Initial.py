@@ -31,6 +31,8 @@ for a, s, d, l, p  in zip(act, sec, day, loc, prof):
     Activity.append(a.text)
     Section.append(s.text)
     Day.append(d.text)
+    Prof.append(p.text)
+    Location.append(l.text)
     
 
 
