@@ -16,6 +16,7 @@ class Course:
         self.Location=[]
         self.Prof=[]
         self.Time=[]#the first time is start time the end time is end time
+        self.Lister()
     
     
 
@@ -37,14 +38,11 @@ class Course:
         #ObjRows = table.find_elements_by_tag_name("div")
 
 
-
-
         act = table.find_elements_by_class_name("Activity")
         sec = table.find_elements_by_class_name("Section")
         day = table.find_elements_by_class_name("Day")
         loc = table.find_elements_by_class_name("Place")
         prof = table.find_elements_by_class_name("Professor")
-
 
 
         #this loop fills the empty lists with there respective elements from the school's website
@@ -83,8 +81,9 @@ class Course:
         print(Time)
 
     
-course1 = Course("D:\chromedriver.exe", "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
-course1.Lister()
+path = "D:\chromedriver.exe"
+course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
+#course1.Lister()
 
 
 
