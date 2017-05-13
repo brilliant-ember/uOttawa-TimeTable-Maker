@@ -2,9 +2,10 @@
 from selenium import webdriver
 
 class Course:
-    
+    ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
     def __init__(self, path, url):
+        '''The Constructor or initalizer'''
         self.url=url
         self.path=path
         
@@ -19,6 +20,8 @@ class Course:
     
 
     def Lister(self):
+        '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
+        self -> null'''
         path = self.path
         url = self.url
         Activity = self.Activity
