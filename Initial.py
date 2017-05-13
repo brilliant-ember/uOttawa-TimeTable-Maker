@@ -1,108 +1,112 @@
 ##WebScraper Selenium
 from selenium import webdriver
 
-class Course:
-    ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
-
-    def __init__(self, path, url):
-        '''The Constructor or initalizer'''
-        self.url=url
-        self.path=path
-        
-        #each list represents a column in the course table, execpt for Time[]; it's an extra list I made
-        self.Section=[]
-        self.Activity=[]
-        self.Day=[]
-        self.Location=[]
-        self.Prof=[]
-        self.Time=[]#the first time is start time the end time is end time
-        self.Lister()
-    
-    
-
-    def Lister(self):
-        '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
-        self -> null'''
-        path = self.path
-        url = self.url
-        Activity = self.Activity
-        Section= self.Section
-        Day=self.Day
-        Location=self.Location
-        Prof=self.Prof
-        Time=self.Time
-        tmp=[]
-
-        browser = webdriver.Chrome(path)
-        browser.get(url)
-        #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
-        tables = browser.find_elements_by_id("schedule")
-        
-        for table in tables:
-
-            act = table.find_elements_by_class_name("Activity")
-            sec = table.find_elements_by_class_name("Section")
-            day = table.find_elements_by_class_name("Day")
-            loc = table.find_elements_by_class_name("Place")
-            prof = table.find_elements_by_class_name("Professor")
-
-
-            #this loop fills the empty lists with there respective elements from the school's website
-            for a, s, d, l, p  in zip(act, sec, day, loc, prof):
-
-                #print(i.text, " Of Type= ",type(i.text))
-                Activity.append(a.text)
-                Section.append(s.text)
-                Day.append(d.text)
-                Prof.append(p.text)
-                Location.append(l.text)
-
-            #loop to split the actual day from time in the Day list
-
-
-            for x in Day:
-                y = x.split(" ")
-                Time.append(y[1]+","+y[-1])
-                tmp = tmp+[y[0]]
-
-            self.Day = tmp[:] # copy tmp's elements
-            #tmp = [] #Set tmp to an empty list
-        
-        '''
-       print("_______________________Day______________________________")
-        print(Day)
-        print("________________________Act_____________________________\n")
-        print(Activity)
-        print("_______________________Sec______________________________\n")
-        print(Section)
-        print("_______________________Loc______________________________\n")
-        print(Location)
-        print("________________________Prof_____________________________\n")
-        print(Prof)
-        print("________________________Time_____________________________\n")
-        print(Time)
-        '''
-
-        
-    def CourseName(self):
-        ''' Returns the name if the course with the section
-        null-> List[]'''
-        #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
-        sections =[]
-        for i in self.Section:
-            x = i[0:11]
-            sections.append(x)
-        return sections
-            
-        
- 
-
-    
+#class Course:
+#    ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
+#
+#    def __init__(self, path, url):
+#        '''The Constructor or initalizer'''
+#        self.url=url
+#        self.path=path
+#        
+#        #each list represents a column in the course table, execpt for Time[]; it's an extra list I made
+#        self.Section=[]
+#        self.Activity=[]
+#        self.Day=[]
+#        self.Location=[]
+#        self.Prof=[]
+#        self.Time=[]#the first time is start time the end time is end time
+#        self.Lister()
+#    
+#    
+#
+#    def Lister(self):
+#        '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
+#        self -> null'''
+#        path = self.path
+#        url = self.url
+#        Activity = self.Activity
+#        Section= self.Section
+#        Day=self.Day
+#        Location=self.Location
+#        Prof=self.Prof
+#        Time=self.Time
+#        tmp=[]
+#
+#        browser = webdriver.Chrome(path)
+#        browser.get(url)
+#        #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
+#        tables = browser.find_elements_by_id("schedule")
+#        
+#        for table in tables:
+#
+#            act = table.find_elements_by_class_name("Activity")
+#            sec = table.find_elements_by_class_name("Section")
+#            day = table.find_elements_by_class_name("Day")
+#            loc = table.find_elements_by_class_name("Place")
+#            prof = table.find_elements_by_class_name("Professor")
+#
+#
+#            #this loop fills the empty lists with there respective elements from the school's website
+#            for a, s, d, l, p  in zip(act, sec, day, loc, prof):
+#
+#                #print(i.text, " Of Type= ",type(i.text))
+#                Activity.append(a.text)
+#                Section.append(s.text)
+#                Day.append(d.text)
+#                Prof.append(p.text)
+#                Location.append(l.text)
+#
+#            #loop to split the actual day from time in the Day list
+#
+#
+#            for x in Day:
+#                y = x.split(" ")
+#                Time.append(y[1]+","+y[-1])
+#                tmp = tmp+[y[0]]
+#
+#            self.Day = tmp[:] # copy tmp's elements
+#            #tmp = [] #Set tmp to an empty list
+#        
+#        '''
+#       print("_______________________Day______________________________")
+#        print(Day)
+#        print("________________________Act_____________________________\n")
+#        print(Activity)
+#        print("_______________________Sec______________________________\n")
+#        print(Section)
+#        print("_______________________Loc______________________________\n")
+#        print(Location)
+#        print("________________________Prof_____________________________\n")
+#        print(Prof)
+#        print("________________________Time_____________________________\n")
+#        print(Time)
+#        '''
+#
+#        
+#    def CourseName(self):
+#        ''' Returns the name if the course with the section
+#        null-> List[]'''
+#        #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
+#        sections =[]
+#        for i in self.Section:
+#            x = i[0:11]
+#            sections.append(x)
+#        return sections
+#            
+#        
+# 
+#
+#    
 #path = "D:\chromedriver.exe"
-#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS&yearOfStudy=2")
+#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
 #print("_____________________________")
 #print(course1.CourseName())
 #print(course1.Activity)
+#print(course1.Time)
+#print(course1.Location)
+#print(course1.Prof)
+
 
 
 
@@ -124,15 +128,21 @@ class Time:
         self.slot = time
         self.Empty= False
         self.section=None
+        self.activity=None
+        self.location=None
+        self.prof=None
         
     def isOccupied(self):
         '''Null -> Boolean'''
         return self.Empty
     
-    def fill(self, sec):
+    def fill(self, sec, act, loc, pro):
         '''Null -> Null'''
+        self.secton = sec
+        self.activity=act
+        self.location=loc
+        self.prof=pro
         self.Empty = True
-        this.secton = sec
         
         
     def __repr__(self):
@@ -173,7 +183,29 @@ Fri=Day[:]
 
 Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
 
-        
+###Testing lists to test the class without the need for internet
+
+Section1 = ['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01', 'ELG2138 B02']
+Activity1=['LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB', 'LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB']
+Time1=['11:30,13:00', '13:00,14:30', '14:30,16:00', '14:30,16:00', '14:30,17:30', '19:00,22:00', '10:00,11:30', '8:30,10:00', '16:00,17:30', '16:00,17:30', '16:00,19:00', '10:00,13:00']
+Location1=['LPR 155', 'LPR 155', 'MRT 221', 'MNO C211', 'DEP DEPT', 'DEP DEPT', 'HGN 302', 'STE H0104', 'MRT 221', 'LMX 390', 'DEP DEPT', 'DEP DEPT']
+#--------------#-----------------------------------------------------
+Section2=['MCG1100 A00', 'MCG1100 A01', 'MCG1100 A01', 'MCG1100 B00', 'MCG1100 B01', 'MCG1100 B01', 'MCG1100 C00', 'MCG1100 C01', 'MCG1100 C01', 'MCG1100 D00', 'MCG1100 D01', 'MCG1100 D01']
+Activity2=['LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB']
+Time2=['11:30,13:00', '8:00,10:00', '14:30,17:30', '17:30,19:00', '12:00,14:00', '19:00,22:00', '14:30,16:00', '18:30,20:30', '13:00,16:00', '17:30,19:00', '8:00,10:00', '19:00,22:00']
+Location2=['STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT']
+#_________________________________________________________________
+Section3=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
+Activity3=['LEC', 'LEC', 'LAB', 'LAB', 'LAB']
+Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
+Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
+##_________________________________________________________________
+#
+#Section4=
+#Activity4=
+#Time4=
+#Location4=
+#        
 
     
         
