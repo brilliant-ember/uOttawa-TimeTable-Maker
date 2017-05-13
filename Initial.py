@@ -123,14 +123,17 @@ class Time:
     def __init__(self,time):
         self.slot = time
         self.Empty= False
+        self.section=null
         
     def isOccupied(self):
         '''Null -> Boolean'''
         return self.Empty
     
-    def fill(self):
+    def fill(self, sec):
         '''Null -> Null'''
         self.Empty = True
+        this.secton = sec
+        
         
     def __repr__(self):
         return str(self.slot)
@@ -138,7 +141,12 @@ class Time:
     def __str__(self):
         e = str(self.isOccupied())
         s=str(self.slot)
-        return s+ " "+e  
+        if self.section==null:
+            return s+ " "+e
+        else:
+            return return s+ " " + this.secton
+        
+          
 t=8.00
 Day= []
 for eine in range(0, 28):
@@ -148,7 +156,9 @@ for eine in range(0, 28):
         t = int(t)+1.00
     else:
         t = t+0.30
-# to account for hour 22 or 10pm        
+        
+     
+# to account for hour 22 or 10pm   
 s=Time(22.00)
 Day.append(s)
 
