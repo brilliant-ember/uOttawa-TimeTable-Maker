@@ -60,14 +60,14 @@ class Course:
 
         for x in Day:
             y = x.split(" ")
-            Time = Time+[y[1]+","+y[-1]]
+            Time.append(y[1]+","+y[-1])
             tmp = tmp+[y[0]]
 
-        Day = tmp[:] # copy tmp's elements
-        tmp = [] #Set tmp to an empty list
-
-
-        print("_______________________Day______________________________")
+        self.Day = tmp[:] # copy tmp's elements
+        #tmp = [] #Set tmp to an empty list
+        
+       '''
+       print("_______________________Day______________________________")
         print(Day)
         print("________________________Act_____________________________\n")
         print(Activity)
@@ -79,13 +79,38 @@ class Course:
         print(Prof)
         print("________________________Time_____________________________\n")
         print(Time)
+        '''
+
+        
+    def CourseName(self):
+        pass
+        ''' Returns the name if the course with the section'''
+        #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
+        
+
+#'''
+    
+        
 
     
 path = "D:\chromedriver.exe"
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
-#course1.Lister()
+print("_____________________________")
+print(course1.Time)
+print(course1.Prof)
+print(course1.Day)
 
 
+#-------------------------day of the week class------------------------------#
+#My approch to the problem
+'''
+Each day has 28 timeslots, each represents half an hour. each timeslot will be an object (class) and it will have a methode isOccupied which tells if that time slot has already been taken by returning a boolean.
+-The class will also have a method which fills that time table with a course, and will change the obj boolean once the slot is full.
+-The toString methode will print the time slot and the occuping course; maybe also section, and if the slot is empty it would print the time of the slot and empty
+Eg: "9:00, ITI110 Z00" or "8:30, Empty".
+-Each day is a list of timeslots.
+-I used the 24 hour format rather than AM and PM, at last for the sake of coding.
+'''
 
     
     
