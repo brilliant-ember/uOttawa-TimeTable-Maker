@@ -85,9 +85,15 @@ class Course:
 
         
     def CourseName(self):
-        pass
-        ''' Returns the name if the course with the section'''
+        ''' Returns the name if the course with the section
+        null-> List[]'''
         #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
+        sections =[]
+        for i in self.Section:
+            x = i[0:10]
+            sections.append(x)
+        return sections
+            
         
 
 #'''
@@ -98,9 +104,9 @@ class Course:
 path = "D:\chromedriver.exe"
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS&yearOfStudy=2")
 print("_____________________________")
-print(course1.Time)
+print(course1.CourseName())
 print(course1.Activity)
-print(course1.Day)
+#print(course1.Day)
 
 
 #-------------------------day of the week class------------------------------#
