@@ -119,14 +119,17 @@ Eg: "9:00, ITI110 Z00" or "8:30, Empty".
 
 
 class Time:
+    '''Represents a half an hour of the day'''
     def __init__(self,time):
         self.slot = time
         self.Empty= False
         
     def isOccupied(self):
+        '''Null -> Boolean'''
         return self.Empty
     
     def fill(self):
+        '''Null -> Null'''
         self.Empty = True
         
     def __repr__(self):
