@@ -1,111 +1,139 @@
 ###WebScraper Selenium
-#from selenium import webdriver
+from selenium import webdriver
 #######dont forget to orint an error mssg if the class instances r from diffrent semsters
-#class Course:
-#    ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
-#
-#    def __init__(self, path, url):
-#        '''The Constructor or initalizer'''
-#        self.url=url
-#        self.path=path
-#        
-#        #each list represents a column in the course table, execpt for Time[]; it's an extra list I made
-#        self.Section=[]
-#        self.Activity=[]
-#        self.Day=[]
-#        self.Location=[]
-#        self.Prof=[]
-#        self.Time=[]#the first time is start time the end time is end time
-#        self.Lister()
-#    
-#    
-#
-#    def Lister(self):
-#        '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
-#        self -> null'''
-#        path = self.path
-#        url = self.url
-#        Activity = self.Activity
-#        Section= self.Section
-#        Day=self.Day
-#        Location=self.Location
-#        Prof=self.Prof
-#        Time=self.Time
-#        tmp=[]
-#
-#        browser = webdriver.Chrome(path)
-#        browser.get(url)
-#        #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
-#        tables = browser.find_elements_by_id("schedule")
-#        
-#        for table in tables:
-#
-#            act = table.find_elements_by_class_name("Activity")
-#            sec = table.find_elements_by_class_name("Section")
-#            day = table.find_elements_by_class_name("Day")
-#            loc = table.find_elements_by_class_name("Place")
-#            prof = table.find_elements_by_class_name("Professor")
-#
-#
-#            #this loop fills the empty lists with there respective elements from the school's website
-#            for a, s, d, l, p  in zip(act, sec, day, loc, prof):
-#
-#                #print(i.text, " Of Type= ",type(i.text))
-#                Activity.append(a.text)
-#                Section.append(s.text)
-#                Day.append(d.text)
-#                Prof.append(p.text)
-#                Location.append(l.text)
-#
-#            #loop to split the actual day from time in the Day list
-#
-#
-#            for x in Day:
-#                y = x.split(" ")
-#                Time.append(y[1]+","+y[-1])
-#                tmp = tmp+[y[0]]
-#
-#            self.Day = tmp[:] # copy tmp's elements
-#            #tmp = [] #Set tmp to an empty list
-#        
-#        '''
-#       print("_______________________Day______________________________")
-#        print(Day)
-#        print("________________________Act_____________________________\n")
-#        print(Activity)
-#        print("_______________________Sec______________________________\n")
-#        print(Section)
-#        print("_______________________Loc______________________________\n")
-#        print(Location)
-#        print("________________________Prof_____________________________\n")
-#        print(Prof)
-#        print("________________________Time_____________________________\n")
-#        print(Time)
-#        '''
-#
-#        
-#    def CourseName(self):
-#        ''' Returns the name if the course with the section
-#        null-> List[]'''
-#        #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
-#        sections =[]
-#        for i in self.Section:
-#            x = i[0:11]
-#            sections.append(x)
-#        return sections
-#            
-#        
-# 
-#
-#    
-#    
-#   
-#    
-#path = "D:\chromedriver.exe"
-##course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
-##print("_____________________________")
-##print(course1.CourseName())
-##print(course1.Day)
+class Course:
+    ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
+
+    def __init__(self, path, url):
+        '''The Constructor or initalizer'''
+        self.url=url
+        self.path=path
+        
+        #each list represents a column in the course table, execpt for Time[]; it's an extra list I made
+        self.Section=[]
+        self.Activity=[]
+        self.Day=[]
+        self.Location=[]
+        self.Prof=[]
+        self.Time=[]#the first time is start time the end time is end time
+        self.Lister()
+        self.numberOfSections = self.SecNum()
+    
+    
+
+    def Lister(self):
+        '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
+        self -> null'''
+        path = self.path
+        url = self.url
+        Activity = self.Activity
+        Section= self.Section
+        Day=self.Day
+        Location=self.Location
+        Prof=self.Prof
+        Time=self.Time
+        tmp=[]
+
+        browser = webdriver.Chrome(path)
+        browser.get(url)
+        #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
+        tables = browser.find_elements_by_id("schedule")
+        
+        for table in tables:
+
+            act = table.find_elements_by_class_name("Activity")
+            sec = table.find_elements_by_class_name("Section")
+            day = table.find_elements_by_class_name("Day")
+            loc = table.find_elements_by_class_name("Place")
+            prof = table.find_elements_by_class_name("Professor")
+
+
+            #this loop fills the empty lists with there respective elements from the school's website
+            for a, s, d, l, p  in zip(act, sec, day, loc, prof):
+
+                #print(i.text, " Of Type= ",type(i.text))
+                Activity.append(a.text)
+                Section.append(s.text)
+                Day.append(d.text)
+                Prof.append(p.text)
+                Location.append(l.text)
+
+            #loop to split the actual day from time in the Day list
+
+
+            for x in Day:
+                y = x.split(" ")
+                Time.append(y[1]+","+y[-1])
+                tmp = tmp+[y[0]]
+
+            self.Day = tmp[:] # copy tmp's elements
+            #tmp = [] #Set tmp to an empty list
+        
+        '''
+       print("_______________________Day______________________________")
+        print(Day)
+        print("________________________Act_____________________________\n")
+        print(Activity)
+        print("_______________________Sec______________________________\n")
+        print(Section)
+        print("_______________________Loc______________________________\n")
+        print(Location)
+        print("________________________Prof_____________________________\n")
+        print(Prof)
+        print("________________________Time_____________________________\n")
+        print(Time)
+        '''
+
+        
+    def CourseName(self):
+        ''' Returns the name if the course with the section
+        null-> List[]'''
+        #problem im solving right now, each class has a section and each lab has a section, how will I know what to return
+        sections =[]
+        for i in self.Section:
+            x = i[0:11]
+            sections.append(x)
+        return sections
+    
+    
+    
+    def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0):
+        
+        '''A Recursive method. Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
+        the empty string and number zero are passed by the above declaration SecNum_param1="" and SecNum_param2=0
+        self.SecNum() --> Integer
+         Example usage:
+         -------------------------------------------------------------------------------------------------
+        #1  Lsec=['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01',            'ELG2138 B02']
+            SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->2
+            _____________________
+        #2  Lsec=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
+            SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->1
+        '''
+        Lsec = self.Section
+        L = len(Lsec)
+        if SecNum_param2+1 == L :
+                return len(SecNum_param1)
+        else:
+                x = Lsec[SecNum_param2]
+                if SecNum_param1.find(x[-3]) == -1 :
+                        SecNum_param1=SecNum_param1+x[-3]
+                        return self.SecNum( SecNum_param1, SecNum_param2+1)
+                else:
+                        return self.SecNum( SecNum_param1, SecNum_param2+1)
+
+        
+ 
+
+    
+    
+   
+    
+path = "D:\chromedriver.exe"
+course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
+print("_____________________________")
+print(course1.numberOfSections)
+#print(course1.Day)
 ##print("_____________________________")
 ##course2 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 ##print(course2.CourseName())
@@ -265,31 +293,7 @@
 #            
 
 
-SecNum_param1=""
-SecNum_param2=0
-def SecNum(Lsec, SecNum_param1, SecNum_param2):
-    '''Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
-    the empty string and number zero are passed by the above declaration SecNum_param1="" and SecNum_param2=0
-    SecNum([sections], "", 0) --> Integer
-     
-     Example usage:
-    #1  Lsec=['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01',            'ELG2138 B02']
 
-        SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->2
-    
-    #2  Lsec=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
-        SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->1
-    '''
-        L = len(Lsec)
-        if SecNum_param2+1 == L :
-                return len(SecNum_param1)
-        else:
-                x = Lsec[SecNum_param2]
-                if SecNum_param1.find(x[-3]) == -1 :
-                        SecNum_param1=SecNum_param1+x[-3]
-                        return SecNum(Lsec, SecNum_param1, SecNum_param2+1)
-                else:
-                        return SecNum(Lsec, SecNum_param1, SecNum_param2+1)
                         
                         
 
