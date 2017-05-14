@@ -173,15 +173,15 @@ s=Time(22.00)
 Day.append(s)
 
 
-Sat=Day[:]
-Sun=Day[:]
-Mon=Day[:]
-Tue=Day[:]
-Wed=Day[:]
-Thu=Day[:]
-Fri=Day[:]
-
-Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
+#Sat=Day[:]
+#Sun=Day[:]
+#Mon=Day[:]
+#Tue=Day[:]
+#Wed=Day[:]
+#Thu=Day[:]
+#Fri=Day[:]
+#
+#Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
 
 ###Testing lists to test the class without the need for internet
 
@@ -205,7 +205,55 @@ Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
 #Activity4=
 #Time4=
 #Location4=
-#        
+#------------------------------------------------------------------
+
+
+class Table:                                                                                          
+    def __init__(self):                                                                                  
+        self.Sat = Day[:]                                                                            
+        self.Sun = Day[:]                                                                            #
+        self.Mon = Day[:]                                                                            #
+        self.Tue = Day[:]                                                                            #
+        self.Wed = Day[:]                                                                            #
+        self.Thu = Day[:]                                                                            #
+        self.Fri = Day[:]                                                                            #
+        self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
+                                                                                                     #
+    def maker(self):
+        '''Makes a table with the approperiate course sessions'''
+        pass
+    def print(self):
+        '''Prints a Stirng representaion for the Table'''
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+        print('{Tme:  | 8.0 | 8.3 | 9.0 | 9.3 | 10.0| 10.3| 11.0| 11.3| 12.0| 12.3| 13.0| 13.3| 14.0| 14.3| 15.0| 15.3| 16.0| 16.3| 17.0| 17.3| 18.0| 18.3| 19.0| 19.3| 20.0| 20.3| 21.0| 21.3| 22.0}')
+        
+        
+        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
+        w=0
+        for day in self.Week:
+            Printed=[]
+            Printed.append(W[w]+": ")
+            w=w+1
+            for slot in day:
+                
+                if slot.isOccupied()==True:
+                    Printed.append("-F-")
+                else: Printed.append("_E_")
+            
+            Printed=str(Printed)
+            Printed=Printed.replace(","," |")
+            Printed=Printed.replace("'","")
+            print(Printed)
+            
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+                    
+        
+
+a=Table()
+a.print()
+
+
+
 
     
         
