@@ -99,30 +99,7 @@ class Course:
     
     
     
-    def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0): ####Abandoned!!! found a better alrentaive !!!! 
-        
-        '''A Recursive method. Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
-        the empty string and number zero are passed by the above declaration SecNum_param1="" and SecNum_param2=0
-        self.SecNum() --> Integer
-         Example usage:
-         -------------------------------------------------------------------------------------------------
-        #1  Lsec=['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01',            'ELG2138 B02']
-            SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->2
-            _____________________
-        #2  Lsec=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
-            SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->1
-        '''
-        Lsec = self.Section
-        L = len(Lsec)
-        if SecNum_param2+1 == L :
-                return len(SecNum_param1)
-        else:
-                x = Lsec[SecNum_param2]
-                if SecNum_param1.find(x[-3]) == -1 :
-                        SecNum_param1=SecNum_param1+x[-3]
-                        return self.SecNum( SecNum_param1, SecNum_param2+1)
-                else:
-                        return self.SecNum( SecNum_param1, SecNum_param2+1)
+    
 
         
  
