@@ -16,8 +16,9 @@ class Course:
         self.Location=[]
         self.Prof=[]
         self.Time=[]#the first time is start time the end time is end time
+        self.numberOfSections = None
         self.Lister()
-        self.numberOfSections = self.SecNum()
+        
     
     
 
@@ -37,7 +38,8 @@ class Course:
         browser = webdriver.Chrome(path)
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
-        tables = browser.find_elements_by_id("schedule")
+        tables = browser.find_elements_by_id("schedule") 
+        self.numberOfSections = len (tables)
         
         for table in tables:
 
@@ -97,7 +99,7 @@ class Course:
     
     
     
-    def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0):
+    def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0): ####Abandoned!!! found a better alrentaive !!!! 
         
         '''A Recursive method. Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
         the empty string and number zero are passed by the above declaration SecNum_param1="" and SecNum_param2=0
@@ -131,7 +133,7 @@ class Course:
     
 path = "D:\chromedriver.exe"
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
-print("_____________________________")
+#print("_____________________________")
 print(course1.numberOfSections)
 #print(course1.Day)
 ##print("_____________________________")
@@ -147,150 +149,150 @@ print(course1.numberOfSections)
 #
 #
 ##-------------------------day of the week class------------------------------#
-##My approch to the problem
-#'''
-#Each day has 29 timeslots, each represents half an hour. each timeslot will be an object (class) and it will have a methode isOccupied which tells if that time slot has already been taken by returning a boolean.
-#-The class will also have a method which fills that time table with a course, and will change the obj boolean once the slot is full.
-#-The toString methode will print the time slot and the occuping course; maybe also section, and if the slot is empty it would print the time of the slot and empty
-#Eg: "9:00, ITI110 Z00" or "8:30, Empty".
-#-Each day is a list of timeslots.
-#-I used the 24 hour format rather than AM and PM, at last for the sake of coding.
-#'''
+#My approch to the problem
+'''
+Each day has 29 timeslots, each represents half an hour. each timeslot will be an object (class) and it will have a methode isOccupied which tells if that time slot has already been taken by returning a boolean.
+-The class will also have a method which fills that time table with a course, and will change the obj boolean once the slot is full.
+-The toString methode will print the time slot and the occuping course; maybe also section, and if the slot is empty it would print the time of the slot and empty
+Eg: "9:00, ITI110 Z00" or "8:30, Empty".
+-Each day is a list of timeslots.
+-I used the 24 hour format rather than AM and PM, at last for the sake of coding.
+'''
+
+
+class Time:
+    '''Represents a half an hour of the day'''
+    def __init__(self,time):
+        self.slot = time
+        self.Empty= False
+        self.section=None
+        self.activity=None
+        self.location=None
+        self.prof=None
+        
+    def isOccupied(self):
+        '''Null -> Boolean'''
+        return self.Empty
+    
+    def fill(self, sec, act, loc, pro):
+        '''Null -> Null'''
+        self.secton = sec
+        self.activity=act
+        self.location=loc
+        self.prof=pro
+        self.Empty = True
+        
+        
+    def __repr__(self):
+        return str(self.slot)
+        
+    def __str__(self):
+        e = str(self.isOccupied())
+        s=str(self.slot)
+        if self.section==None:
+            return s+ " "+e
+        else:
+             return s+ " " + this.secton
+        
+          
+t=8.00
+Day= []
+for eine in range(0, 28):
+    s=eine=Time(t)
+    Day.append(s)
+    if (t+0.30) > int(t)+0.50:
+        t = int(t)+1.00
+    else:
+        t = t+0.30
+        
+     
+# to account for hour 22 or 10pm   
+s=Time(22.00)
+Day.append(s)
+
+
+#Sat=Day[:]
+#Sun=Day[:]
+#Mon=Day[:]
+#Tue=Day[:]
+#Wed=Day[:]
+#Thu=Day[:]
+#Fri=Day[:]
 #
-#
-#class Time:
-#    '''Represents a half an hour of the day'''
-#    def __init__(self,time):
-#        self.slot = time
-#        self.Empty= False
-#        self.section=None
-#        self.activity=None
-#        self.location=None
-#        self.prof=None
-#        
-#    def isOccupied(self):
-#        '''Null -> Boolean'''
-#        return self.Empty
-#    
-#    def fill(self, sec, act, loc, pro):
-#        '''Null -> Null'''
-#        self.secton = sec
-#        self.activity=act
-#        self.location=loc
-#        self.prof=pro
-#        self.Empty = True
-#        
-#        
-#    def __repr__(self):
-#        return str(self.slot)
-#        
-#    def __str__(self):
-#        e = str(self.isOccupied())
-#        s=str(self.slot)
-#        if self.section==None:
-#            return s+ " "+e
-#        else:
-#             return s+ " " + this.secton
-#        
-#          
-#t=8.00
-#Day= []
-#for eine in range(0, 28):
-#    s=eine=Time(t)
-#    Day.append(s)
-#    if (t+0.30) > int(t)+0.50:
-#        t = int(t)+1.00
-#    else:
-#        t = t+0.30
-#        
-#     
-## to account for hour 22 or 10pm   
-#s=Time(22.00)
-#Day.append(s)
-#
-#
-##Sat=Day[:]
-##Sun=Day[:]
-##Mon=Day[:]
-##Tue=Day[:]
-##Wed=Day[:]
-##Thu=Day[:]
-##Fri=Day[:]
-##
-##Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
-#
-####Testing lists to test the class without the need for internet
-#
-#Section1 = ['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01', 'ELG2138 B02']
-#Activity1=['LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB', 'LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB']
-#Time1=['11:30,13:00', '13:00,14:30', '14:30,16:00', '14:30,16:00', '14:30,17:30', '19:00,22:00', '10:00,11:30', '8:30,10:00', '16:00,17:30', '16:00,17:30', '16:00,19:00', '10:00,13:00']
-#Location1=['LPR 155', 'LPR 155', 'MRT 221', 'MNO C211', 'DEP DEPT', 'DEP DEPT', 'HGN 302', 'STE H0104', 'MRT 221', 'LMX 390', 'DEP DEPT', 'DEP DEPT']
-#Day1=['Wednesday', 'Monday', 'Thursday', 'Thursday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Wednesday', 'Wednesday', 'Friday', 'Tuesday']
-##--------------#-----------------------------------------------------
-#Section2=['MCG1100 A00', 'MCG1100 A01', 'MCG1100 A01', 'MCG1100 B00', 'MCG1100 B01', 'MCG1100 B01', 'MCG1100 C00', 'MCG1100 C01', 'MCG1100 C01', 'MCG1100 D00', 'MCG1100 D01', 'MCG1100 D01']
-#Activity2=['LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB']
-#Time2=['11:30,13:00', '8:00,10:00', '14:30,17:30', '17:30,19:00', '12:00,14:00', '19:00,22:00', '14:30,16:00', '18:30,20:30', '13:00,16:00', '17:30,19:00', '8:00,10:00', '19:00,22:00']
-#Location2=['STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT']
-#Day2=['Thursday', 'Friday', 'Friday', 'Thursday', 'Monday', 'Tuesday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Thursday', 'Monday']
+#Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
+
+###Testing lists to test the class without the need for internet
+
+Section1 = ['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01', 'ELG2138 B02']
+Activity1=['LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB', 'LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB']
+Time1=['11:30,13:00', '13:00,14:30', '14:30,16:00', '14:30,16:00', '14:30,17:30', '19:00,22:00', '10:00,11:30', '8:30,10:00', '16:00,17:30', '16:00,17:30', '16:00,19:00', '10:00,13:00']
+Location1=['LPR 155', 'LPR 155', 'MRT 221', 'MNO C211', 'DEP DEPT', 'DEP DEPT', 'HGN 302', 'STE H0104', 'MRT 221', 'LMX 390', 'DEP DEPT', 'DEP DEPT']
+Day1=['Wednesday', 'Monday', 'Thursday', 'Thursday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Wednesday', 'Wednesday', 'Friday', 'Tuesday']
+#--------------#-----------------------------------------------------
+Section2=['MCG1100 A00', 'MCG1100 A01', 'MCG1100 A01', 'MCG1100 B00', 'MCG1100 B01', 'MCG1100 B01', 'MCG1100 C00', 'MCG1100 C01', 'MCG1100 C01', 'MCG1100 D00', 'MCG1100 D01', 'MCG1100 D01']
+Activity2=['LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB']
+Time2=['11:30,13:00', '8:00,10:00', '14:30,17:30', '17:30,19:00', '12:00,14:00', '19:00,22:00', '14:30,16:00', '18:30,20:30', '13:00,16:00', '17:30,19:00', '8:00,10:00', '19:00,22:00']
+Location2=['STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT']
+Day2=['Thursday', 'Friday', 'Friday', 'Thursday', 'Monday', 'Tuesday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Thursday', 'Monday']
+#_________________________________________________________________
+Section3=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
+Activity3=['LEC', 'LEC', 'LAB', 'LAB', 'LAB']
+Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
+Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
+Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 ##_________________________________________________________________
-#Section3=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
-#Activity3=['LEC', 'LEC', 'LAB', 'LAB', 'LAB']
-#Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
-#Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
-#Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
-###_________________________________________________________________
-##
-##Section4=
-##Activity4=
-##Time4=
-##Location4=
-##------------------------------------------------------------------
 #
-#
-#class Table:
-#    def __init__(self):                                                                                  
-#        self.Sat = Day[:]                                                                            
-#        self.Sun = Day[:]                                                                            #
-#        self.Mon = Day[:]                                                                            #
-#        self.Tue = Day[:]                                                                            #
-#        self.Wed = Day[:]                                                                            #
-#        self.Thu = Day[:]                                                                            #
-#        self.Fri = Day[:]                                                                            #
-#        self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
-#                                                                                                     #
-#    def maker(self):
-#        '''Makes a table with the approperiate course sessions'''
-#        pass
-#    def print(self):
-#        '''Prints a Stirng representaion for the Table'''
-#        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
-#        print('{Tme:  | 8.0 | 8.3 | 9.0 | 9.3 | 10.0| 10.3| 11.0| 11.3| 12.0| 12.3| 13.0| 13.3| 14.0| 14.3| 15.0| 15.3| 16.0| 16.3| 17.0| 17.3| 18.0| 18.3| 19.0| 19.3| 20.0| 20.3| 21.0| 21.3| 22.0}')
-#        
-#        
-#        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
-#        w=0
-#        for day in self.Week:
-#            Printed=[]
-#            Printed.append(W[w]+": ")
-#            w=w+1
-#            for slot in day:
-#                
-#                if slot.isOccupied()==True:
-#                    Printed.append("-F-")
-#                else: Printed.append("_E_")
-#            
-#            Printed=str(Printed)
-#            Printed=Printed.replace(","," |")
-#            Printed=Printed.replace("'","")
-#            print(Printed)
-#            
-#        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
-#                    
-#            
-#
-#
-#            
-#            
+#Section4=
+#Activity4=
+#Time4=
+#Location4=
+#------------------------------------------------------------------
+
+
+class Table:
+    def __init__(self):                                                                                  
+        self.Sat = Day[:]                                                                            
+        self.Sun = Day[:]                                                                            #
+        self.Mon = Day[:]                                                                            #
+        self.Tue = Day[:]                                                                            #
+        self.Wed = Day[:]                                                                            #
+        self.Thu = Day[:]                                                                            #
+        self.Fri = Day[:]                                                                            #
+        self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
+                                                                                                     #
+    def maker(self):
+        '''Makes a table with the approperiate course sessions'''
+        pass
+    def print(self):
+        '''Prints a Stirng representaion for the Table'''
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+        print('{Tme:  | 8.0 | 8.3 | 9.0 | 9.3 | 10.0| 10.3| 11.0| 11.3| 12.0| 12.3| 13.0| 13.3| 14.0| 14.3| 15.0| 15.3| 16.0| 16.3| 17.0| 17.3| 18.0| 18.3| 19.0| 19.3| 20.0| 20.3| 21.0| 21.3| 22.0}')
+        
+        
+        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
+        w=0
+        for day in self.Week:
+            Printed=[]
+            Printed.append(W[w]+": ")
+            w=w+1
+            for slot in day:
+                
+                if slot.isOccupied()==True:
+                    Printed.append("-F-")
+                else: Printed.append("_E_")
+            
+            Printed=str(Printed)
+            Printed=Printed.replace(","," |")
+            Printed=Printed.replace("'","")
+            print(Printed)
+            
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+                    
+            
+
+
+            
+            
 
 
 
