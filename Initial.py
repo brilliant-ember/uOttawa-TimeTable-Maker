@@ -8,7 +8,6 @@ class Course:
         '''The Constructor or initalizer'''
         self.url=url
         self.path=path
-        
         #each list represents a column in the course table, execpt for Time[]; it's an extra list I made
         self.Section=[]
         self.Activity=[]
@@ -17,11 +16,11 @@ class Course:
         self.Prof=[]
         self.Time=[]#the first time is start time the end time is end time
         self.numberOfSections = None
+        self.seprateSections = []
         self.Lister()
+        self.Seprate()
         
-    
-    
-
+        
     def Lister(self):
         '''Takes no arguments execpt the class instance and prints the lists of the course which are Section, Activity, Day, Location, Prof and Time, returns nothing
         self -> null'''
@@ -39,8 +38,8 @@ class Course:
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
         tables = browser.find_elements_by_id("schedule") 
-        self.numberOfSections = len (tables)
-        
+        self.numberOfSections = len(tables)
+                
         for table in tables:
 
             act = table.find_elements_by_class_name("Activity")
@@ -48,28 +47,23 @@ class Course:
             day = table.find_elements_by_class_name("Day")
             loc = table.find_elements_by_class_name("Place")
             prof = table.find_elements_by_class_name("Professor")
-
-
+            Asec = []
             #this loop fills the empty lists with there respective elements from the school's website
             for a, s, d, l, p  in zip(act, sec, day, loc, prof):
-
                 #print(i.text, " Of Type= ",type(i.text))
                 Activity.append(a.text)
                 Section.append(s.text)
                 Day.append(d.text)
                 Prof.append(p.text)
                 Location.append(l.text)
-
             #loop to split the actual day from time in the Day list
-
-
             for x in Day:
                 y = x.split(" ")
                 Time.append(y[1]+","+y[-1])
                 tmp = tmp+[y[0]]
-
             self.Day = tmp[:] # copy tmp's elements
             #tmp = [] #Set tmp to an empty list
+            
         
         '''
        print("_______________________Day______________________________")
@@ -99,19 +93,50 @@ class Course:
     
     
     
-    
-
+    def Seprate(self):
+        '''Returns lists each list represents a section, and in each sectionlist there are lists represting all activities(a list per activity)
+        self.Seprate() --> [[[Lectures A], [DGDs A], [Labs A]], [[Lectures B], [DGDs B], [Labs B]]]
+        example output.
+    self.Seprate()-->[[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]
+    ______#@_______for preformance THERE IS NO OUT OUTPUT, THE FUNCTION TORES THE VALUE TO VARIABLE (self.seprateSections)-------------------@#--------------------
+    '''
         
- 
+        Lact = self.Activity
+        Lsec = self.CourseName()
+        Nsec = self.numberOfSections
+        Out=[]
+        act_per_sec = Lact[:int(len(Lact)/Nsec)]
+        D = 0
+        for j in range(Nsec):
+            act = Lact[D]
+            tmp = []
+            tmp2 = []
+            for i in act_per_sec:
+                if i == act:
+                    tmp2.append(Lsec[D])
+                    act = Lact[D]
+                    D = D+1
 
-    
-    
-   
+                else:
+                    tmp.append(tmp2)
+                    tmp2=[]
+                    tmp2.append(Lsec[D])
+                    act = Lact[D]
+                    D = D+1
+            tmp.append(tmp2)       
+            Out.append(tmp)
+        self.seprateSections = Out[:]
+        
+                    
+            
+                    
     
 path = "D:\chromedriver.exe"
-course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2175&session=A")
+course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 #print("_____________________________")
-print(course1.numberOfSections)
+#print(course1.seprateSections)
+#print(course1.Section)
+#print(course1.CourseName())
 #print(course1.Day)
 ##print("_____________________________")
 ##course2 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
@@ -188,16 +213,6 @@ s=Time(22.00)
 Day.append(s)
 
 
-#Sat=Day[:]
-#Sun=Day[:]
-#Mon=Day[:]
-#Tue=Day[:]
-#Wed=Day[:]
-#Thu=Day[:]
-#Fri=Day[:]
-#
-#Week=[Sat,Sun,Mon,Tue,Wed,Thu,Fri]
-
 ###Testing lists to test the class without the need for internet
 
 Section1 = ['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01', 'ELG2138 B02']
@@ -264,6 +279,12 @@ class Table:
             print(Printed)
             
         print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+        
+        
+def tableMaker():
+    '''Genetates a list of all possible Tables'''
+    pass
+    
                     
             
 
