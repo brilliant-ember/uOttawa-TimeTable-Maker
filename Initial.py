@@ -16,7 +16,13 @@ class Course:
         self.Prof=[]
         self.Time=[]#the first time is start time the end time is end time
         self.numberOfSections = None
-        self.seprateSections = []
+        self.seprateSections = []  #A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
+        self.secDays = [] #a list that contains lists, each sublist has the days of the week assciated with a section
+        self.secTimes = []
+        self.secLocs = []
+        self.secProfs =[]
+
+        self.dayCalander = [] # A list that contains dicttionaries, one for each sec. there're 7 keys for all dictionaries for the days of the week, the content in each dic is a list of days for all the possible ways a day can be made, if the dic has an empty list then that day isn't required at all for that section
         self.Lister()
         self.Seprate()
         
@@ -59,7 +65,7 @@ class Course:
             #loop to split the actual day from time in the Day list
             for x in Day:
                 y = x.split(" ")
-                Time.append(y[1]+","+y[-1])
+                Time.append(y[1].replace(":",".")+","+y[-1].replace(":","."))
                 tmp = tmp+[y[0]]
             self.Day = tmp[:] # copy tmp's elements
             #tmp = [] #Set tmp to an empty list
@@ -93,25 +99,40 @@ class Course:
     
     
     
-    def Seprate(self):
+    def Seprate(self): ####Has a Bug ###### puts everthing exept the section in a 3layered list
         '''Returns lists each list represents a section, and in each sectionlist there are lists represting all activities(a list per activity)
-        self.Seprate() --> [[[Lectures A], [DGDs A], [Labs A]], [[Lectures B], [DGDs B], [Labs B]]]
+        self.Seprate() --> [[[Lectures A], [DGDs A], [Labs A]], [[Lectures B], [DGDs B], [Labs B]]], And the same idea for the days and other info of each sec
         example output.
-    self.Seprate()-->[[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]
-    ______#@_______for preformance THERE IS NO OUT OUTPUT, THE FUNCTION TORES THE VALUE TO VARIABLE (self.seprateSections)-------------------@#--------------------
-    '''
-        
+        self.Seprate()-->[[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]
+        --                --    ---------------------------                     --
+        [['Wednesday', 'Monday', 'Thursday', 'Thursday', 'Wednesday', 'Tuesday'], ['Thursday', 'Monday', 'Wednesday', 'Wednesday', 'Friday', 'Tuesday']]
+        --                ----------------------------------                         --------
+        ______#@_______for preformance THERE IS NO OUT OUTPUT, THE FUNCTION TORES THE VALUE TO VARIABLE (self.seprateSections)-------------------@#-------------------- '''
         Lact = self.Activity
         Lsec = self.CourseName()
         Nsec = self.numberOfSections
         Out=[]
         act_per_sec = Lact[:int(len(Lact)/Nsec)]
         D = 0
-        for j in range(Nsec):
+        days = []
+        times = []
+        locs =[]
+        profs = []
+        x = 0
+        for j in range(Nsec): #number of sections
+            days_per_sec = []
+            times_per_day = []
+            profs_per_day = []
+            locs_per_day =[]
             act = Lact[D]
             tmp = []
             tmp2 = []
             for i in act_per_sec:
+                days_per_sec.append(self.Day[x])
+                times_per_day.append(self.Time[x])
+                profs_per_day.append(self.Prof[x])
+                locs_per_day.append(self.Location[x])
+                x = x+1
                 if i == act:
                     tmp2.append(Lsec[D])
                     act = Lact[D]
@@ -125,30 +146,90 @@ class Course:
                     D = D+1
             tmp.append(tmp2)       
             Out.append(tmp)
-        self.seprateSections = Out[:]
-        
-                    
+            days.append(days_per_sec)
+            times.append(times_per_day)
+            locs.append(locs_per_day)
+            profs.append(profs_per_day)
             
-                    
-    
+            
+            
+        self.secDays.append(days)
+        self.secTimes.append(times)
+        self.secLocs.append(locs)
+        self.secProfs.append(profs)
+            
+        self.seprateSections = Out[:]
+       
+        
+        
+        
+#    def Calander(self):
+#        '''Creates a list of Dictioaries, it fills self.dayCalander list whose description is: A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
+#        None --> None
+#        [[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]'''
+#        Out = []
+#        week = ["Saterday", "Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday"]
+#        Nsec = self.numberOfSections
+#        for i in range(Nsec):
+#            dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
+#            sec = self.seprateSections[i]
+#            days = self.secDays
+#            for j in sec: 
+#                activitie_set = sec[j]
+#                counter = 0
+#                tmp = activitie_set[0][-3:]
+#                mandatory_set= []
+#                #if len(activitie_set)%2 == 0: #to account for when the activies are even
+#                #elif len(activitie_set)%2 != 0: #Odd case
+#                
+#                for k in activitie_set: #when u have the same tail code (A00) that means that all those r madatory, if u hv diff then u chose on code or the other
+#                    session = activitie_set[k]
+#                    if tmp == session[-3:]:
+#                        mandatory_set.append([i,j,k, session])
+#                        tmp = mandatory_set[counter][-1][-3:] 
+#                        counter = counter +1
+#                    else:
+#                        for x in mandatory_set:
+#                            classDay = self.secDays[i][j][k]
+#                            dictDay= dictn[classDay]
+#                            classTime = secTimes[i][j][k]
+#                            if len(dictDay)==0 or t.isEmpty() for 
+#                            
+#                        
+                        
+                        
+                        
+                        
+                        
+                        
+#                        for day in week:# check if the days are the same
+#                            tmpDay=Day[:]
+#                            if self.secDays[i][j][k] == day:
+#                                
+#                                 # dont forget to add all possible day configs to the dictionary
+#                                    
+#                                for timesSlot in possibleDay:#all the time slots
+#                                    if timeSlot.isEmpty():
+#                                            
+                                        
+                                    
+                                
+                                
+        
+        
+        
 path = "D:\chromedriver.exe"
+
+        
+        
+
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 #print("_____________________________")
-#print(course1.seprateSections)
-#print(course1.Section)
-#print(course1.CourseName())
-#print(course1.Day)
-##print("_____________________________")
-##course2 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
-##print(course2.CourseName())
-##print(course2.Day)
-##print("_____________________________")
-##course3 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=020730&term=2181&session=FS")
-##print(course3.CourseName())
-##print(course3.Day)
-#
-#
-#
+print(course1.secLocs)
+print(course1.secDays)
+print(course1.seprateSections)
+
+
 #
 ##-------------------------day of the week class------------------------------#
 #My approch to the problem
@@ -166,14 +247,15 @@ class Time:
     '''Represents a half an hour of the day'''
     def __init__(self,time):
         self.slot = time
-        self.Empty= False
+        self.Empty= True
         self.section=None
         self.activity=None
         self.location=None
         self.prof=None
         
-    def isOccupied(self):
-        '''Null -> Boolean'''
+    def isEmpty(self):
+        ''' if its empty it will return True
+        Null -> Boolean'''
         return self.Empty
     
     def fill(self, sec, act, loc, pro):
@@ -182,14 +264,14 @@ class Time:
         self.activity=act
         self.location=loc
         self.prof=pro
-        self.Empty = True
+        self.Empty = False
         
         
     def __repr__(self):
         return str(self.slot)
         
     def __str__(self):
-        e = str(self.isOccupied())
+        e = str(self.isEmpty())
         s=str(self.slot)
         if self.section==None:
             return s+ " "+e
@@ -200,7 +282,7 @@ class Time:
 t=8.00
 Day= []
 for eine in range(0, 28):
-    s=eine=Time(t)
+    s = eine = Time(t)
     Day.append(s)
     if (t+0.30) > int(t)+0.50:
         t = int(t)+1.00
@@ -285,6 +367,31 @@ def tableMaker():
     '''Genetates a list of all possible Tables'''
     pass
     
+    
+def insert(time, day, secInfo):
+    '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
+    sec info is section, activity, location, prof in a list in that order'''
+    Time = time.split(",")
+    start = float(Time[0])
+    end =   float(Time[1])
+    if start/int(start) == 1:
+        indexStart = int(2*start -16)
+    else:
+        indexStart = int(2*start -15)
+        
+    if end/int(end) == 1:
+        end  = int(end)
+        indexEnd = int(2*end -16)
+    else:
+        end  = int(end)
+        indexEnd = int(2*end -15)
+    for slot in range(indexStart, indexEnd+1):
+        if day[slot].isEmpty():
+            day[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3],)
+        else:
+            print("Conflict in time "+ str(day[slot])[:5])
+            return False
+            
                     
             
 
