@@ -15,7 +15,7 @@ class Course:
         self.Location=[]
         self.Prof=[]
         self.Time=[]#the first time is start time the end time is end time
-        self.numberOfSections = None
+        
         self.seprateSections = []  #A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
         self.secDays = [] #a list that contains lists, each sublist has the days of the week assciated with a section
         self.secTimes = []
@@ -24,6 +24,7 @@ class Course:
 
         self.dayCalander = [] # A list that contains dicttionaries, one for each sec. there're 7 keys for all dictionaries for the days of the week, the content in each dic is a list of days for all the possible ways a day can be made, if the dic has an empty list then that day isn't required at all for that section
         self.Lister()
+        self.numberOfSections = self.SecNum()
         self.Seprate()
         
         
@@ -44,7 +45,7 @@ class Course:
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
         tables = browser.find_elements_by_id("schedule") 
-        self.numberOfSections = len(tables)
+        #self.numberOfSections = len(tables) Doesn't work cuz not allways r tables seprate based on secs, sometimes there re 3 sections but one table
                 
         for table in tables:
 
@@ -99,7 +100,7 @@ class Course:
     
     
     
-    def Seprate(self): ####Has a Bug ###### puts everthing exept the section in a 3layered list
+    def Seprate(self): 
         '''Returns lists each list represents a section, and in each sectionlist there are lists represting all activities(a list per activity)
         self.Seprate() --> [[[Lectures A], [DGDs A], [Labs A]], [[Lectures B], [DGDs B], [Labs B]]], And the same idea for the days and other info of each sec
         example output.
@@ -114,24 +115,26 @@ class Course:
         Out=[]
         act_per_sec = Lact[:int(len(Lact)/Nsec)]
         D = 0
-        days = []
-        times = []
-        locs =[]
-        profs = []
+        DaysL = []
+        ProfL = []
+        TimeL = []
+        LocL =  []
+        
         x = 0
         for j in range(Nsec): #number of sections
             days_per_sec = []
-            times_per_day = []
-            profs_per_day = []
-            locs_per_day =[]
+            prof = []
+            time =[]
+            locl= []
             act = Lact[D]
             tmp = []
             tmp2 = []
             for i in act_per_sec:
                 days_per_sec.append(self.Day[x])
-                times_per_day.append(self.Time[x])
-                profs_per_day.append(self.Prof[x])
-                locs_per_day.append(self.Location[x])
+                prof.append(self.Prof[x])
+                time.append(self.Time[x])
+                locl.append(self.Location[x])
+                #print(self.Day[x])
                 x = x+1
                 if i == act:
                     tmp2.append(Lsec[D])
@@ -144,26 +147,58 @@ class Course:
                     tmp2.append(Lsec[D])
                     act = Lact[D]
                     D = D+1
+            #print("Loop")
             tmp.append(tmp2)       
             Out.append(tmp)
-            days.append(days_per_sec)
-            times.append(times_per_day)
-            locs.append(locs_per_day)
-            profs.append(profs_per_day)
+            DaysL.append(days_per_sec)
+            ProfL.append(prof)
+            TimeL.append(time)
+            LocL.append(locl)
             
             
-            
-        self.secDays.append(days)
-        self.secTimes.append(times)
-        self.secLocs.append(locs)
-        self.secProfs.append(profs)
-            
+
         self.seprateSections = Out[:]
-       
+        self.secDays.append(DaysL)
+        
+        self.secProfs.append(ProfL)
+        self.secTimes.append(TimeL)
+        self.secLocs.append(LocL)
+               
+               
+             
+        
+    def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0):
+        
+         '''A Recursive method. Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
+     the empty string and number zero are passed by the above declaration SecNum_param1="" and SecNum_param2=0
+     self.SecNum() --> Integer
+-         Example usage:
+      -------------------------------------------------------------------------------------------------
+-        #1  Lsec=['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01',            'ELG2138 B02']
+         SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->2
+         _____________________
+     #2  Lsec=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
+         SecNum(Lsec,SecNum_param1,SecNum_param2) --returns-->1
+     '''
+         Lsec = self.CourseName()
+         L = len(Lsec)
+         if SecNum_param2+1 == L :
+                 return len(SecNum_param1)
+         else:
+                 x = Lsec[SecNum_param2]
+                 #print(x[-3])
+                 if SecNum_param1.find(x[-3]) == -1 :
+                         SecNum_param1=SecNum_param1+x[-3]
+                         return self.SecNum( SecNum_param1, SecNum_param2+1)
+                 else:
+                         return self.SecNum( SecNum_param1, SecNum_param2+1)
+
+            
+         
+    
         
         
-        
-#    def Calander(self):
+#    def Calander(self):# to work around the bug in Seprate methode, add i,j,k in anything except the section
 #        '''Creates a list of Dictioaries, it fills self.dayCalander list whose description is: A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
 #        None --> None
 #        [[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]'''
@@ -224,10 +259,13 @@ path = "D:\chromedriver.exe"
         
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
-#print("_____________________________")
-print(course1.secLocs)
-print(course1.secDays)
+print("____________Finalllll  ________________")
+
+print(course1.numberOfSections)
 print(course1.seprateSections)
+print(course1.secDays)
+print(course1.secTimes)
+
 
 
 #
