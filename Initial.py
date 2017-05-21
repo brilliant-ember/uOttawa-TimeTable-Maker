@@ -21,6 +21,7 @@ class Course:
         self.secTimes = []
         self.secLocs = []
         self.secProfs =[]
+        self.secActs=[]
 
         self.dayCalander = [] # A list that contains dicttionaries, one for each sec. there're 7 keys for all dictionaries for the days of the week, the content in each dic is a list of days for all the possible ways a day can be made, if the dic has an empty list then that day isn't required at all for that section
         self.Lister()
@@ -119,50 +120,90 @@ class Course:
         ProfL = []
         TimeL = []
         LocL =  []
+        Act =[]
         
-        x = 0
+        
         for j in range(Nsec): #number of sections
             days_per_sec = []
-            prof = []
-            time =[]
-            locl= []
+            daytmp= []
+            
+            prof_persec = []
+            proftmp=[]
+            
+            time_persec =[]
+            timetmp=[]
+            
+            locpersec= []
+            loctmp=[]
+            
+            act_persec=[]
+            acttmp=[]
+            
+            
+            
             act = Lact[D]
             tmp = []
             tmp2 = []
             for i in act_per_sec:
-                days_per_sec.append(self.Day[x])
-                prof.append(self.Prof[x])
-                time.append(self.Time[x])
-                locl.append(self.Location[x])
-                #print(self.Day[x])
-                x = x+1
+            
                 if i == act:
+                    daytmp.append(self.Day[D])
+                    proftmp.append(self.Prof[D])
+                    timetmp.append(self.Time[D])
+                    loctmp.append(self.Location[D])
+                    acttmp.append(self.Activity[D])
+                    
                     tmp2.append(Lsec[D])
                     act = Lact[D]
                     D = D+1
 
                 else:
                     tmp.append(tmp2)
+                    days_per_sec.append(daytmp)
+                    prof_persec.append(proftmp)
+                    time_persec.append(timetmp)
+                    locpersec.append(loctmp)
+                    act_persec.append(acttmp)
+                    proftmp=[]
+                    timetmp=[]
+                    loctmp=[]
+                    acttmp=[]
+                    
+                    daytmp=[]
                     tmp2=[]
                     tmp2.append(Lsec[D])
+                    daytmp.append(self.Day[D])
+                    proftmp.append(self.Prof[D])
+                    timetmp.append(self.Time[D])
+                    loctmp.append(self.Location[D])
+                    acttmp.append(self.Activity[D])
+                    
+                    
                     act = Lact[D]
                     D = D+1
             #print("Loop")
             tmp.append(tmp2)       
             Out.append(tmp)
+            days_per_sec.append(daytmp)
+            prof_persec.append(proftmp)
+            time_persec.append(timetmp)
+            locpersec.append(loctmp)
+            act_persec.append(acttmp)
             DaysL.append(days_per_sec)
-            ProfL.append(prof)
-            TimeL.append(time)
-            LocL.append(locl)
+            ProfL.append(prof_persec)
+            TimeL.append(time_persec)
+            LocL.append(locpersec)
+            Act.append(act_persec)
             
             
 
         self.seprateSections = Out[:]
-        self.secDays.append(DaysL)
+        self.secDays=DaysL[:]
         
-        self.secProfs.append(ProfL)
-        self.secTimes.append(TimeL)
-        self.secLocs.append(LocL)
+        self.secProfs = ProfL[:]
+        self.secTimes = TimeL[:]
+        self.secLocs = LocL[:]
+        self.secActs = Act[:]
                
                
              
@@ -205,33 +246,42 @@ class Course:
         Out = []
         week = ["Saterday", "Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday"]
         Nsec = self.numberOfSections
+        mandatory_set= []
         for i in range(Nsec):
             dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
             sec = self.seprateSections[i]
             days = self.secDays
+            
             for j in range(len(sec)): 
                 activitie_set = sec[j]
+              #  print("for J in sec "+str(activitie_set))
                 counter = 0
                 tmp = activitie_set[0][-3:]
-                mandatory_set= []
-                #if len(activitie_set)%2 == 0: #to account for when the activies are even
-                #elif len(activitie_set)%2 != 0: #Odd case
+                
                 
                 for k in range(len(activitie_set)): #when u have the same tail code (A00) that means that all those r madatory, if u hv diff then u chose on code or the other
-                    session = activitie_set[k]
+                    session = activitie_set[counter]
+                    print("for K in session "+session)
                     if tmp == session[-3:]:
-                        mandatory_set.append([i,j,k, session])
+                        mandatory_set.append([session])
                         tmp = mandatory_set[counter][-1][-3:] 
+                        #print(tmp)
                         counter = counter +1
                     else:
+                        counter = counter +1
                         for x in mandatory_set:
+                            print("for x in mandatory_set else "+str(x))
+                            print([i, j, k])
+                            print(self.secDays)
                             classDay = self.secDays[i][j][k]
                             dictDay= dictn[classDay]
                             classTime = secTimes[i][j][k]
+                            print(classDay)
                             
                             if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
                                 sessionDay = Day[:]
                                 insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
+                                print(sessionDay)
                                 dictDay.append(sessionDay)
                                 
                             elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
@@ -239,6 +289,7 @@ class Course:
                                    if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
                                     anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
                                     dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
+                        mandatory_set= []
                                     
                         dictDay.append(sessionDay)
                                     
@@ -274,6 +325,23 @@ class Course:
         
         
         
+        
+        
+        
+        
+        if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
+            sessionDay = Day[:]
+            insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
+            print(sessionDay)
+            dictDay.append(sessionDay)
+
+        elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
+            for dayy in dictDay:
+               if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
+                anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
+                dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
+    mandatory_set= []
+        
 path = "D:\chromedriver.exe"
 
         
@@ -281,11 +349,14 @@ path = "D:\chromedriver.exe"
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 print("____________Finalllll  ________________")
-course1.Calander()
-print(course1.dayCalander)
-#print(course1.seprateSections)
-#print(course1.secDays)
-#print(course1.secTimes)
+#course1.Calander()
+#print(course1.dayCalander)
+
+print(course1.seprateSections)
+print(course1.secDays)
+print(course1.secTimes)
+print(course1.secActs)
+print(course1.secProfs)
 #
 #print(course1.secLocs)
 #
