@@ -33,7 +33,7 @@ class Time:
         
         
     def __repr__(self):
-        return str(self.slot)+" "+str(self.section)+" "+str(self.Empty)
+        return str(self.slot)+" "+str(self.section)
         
     def __str__(self):
         e = str(self.isEmpty())
@@ -112,18 +112,27 @@ def switcher(time, day, secInfo):
 
     
     
-t=8.00
-Day= []
-for eine in range(0, 28):
-    s = eine = Time(t)
+def DayMaker():
+    t=8.00
+    Day= []
+    for eine in range(0, 28):
+        s = eine = Time(t)
+        Day.append(s)
+        if (t+0.30) > int(t)+0.50:
+            t = int(t)+1.00
+        else:
+            t = t+0.30
+    # to account for hour 22 or 10pm   
+    s=Time(22.00)
     Day.append(s)
-    if (t+0.30) > int(t)+0.50:
-        t = int(t)+1.00
-    else:
-        t = t+0.30
-# to account for hour 22 or 10pm   
-s=Time(22.00)
-Day.append(s)
+    return Day
+
+
+
+
+
+
+Day = DayMaker()
 
     
 class Course:
@@ -378,11 +387,13 @@ class Course:
             dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
             sec = self.seprateSections[i]
             days = self.secDays
+            print("\nLoop Number "+str(i))
+            
             
             
             for j in range(len(sec)): 
                 activitie_set = sec[j]
-                print(activitie_set)
+                #print(activitie_set)
                 mandatory_set= []
                 tmp = activitie_set[0][-3:]
                 
@@ -393,25 +404,30 @@ class Course:
                     if tmp == session[-3:]:
                         mandatory_set.append([session])
                         tmp = mandatory_set[k][-1][-3:] 
+                        print("This Man Set")
                         print(mandatory_set)
                         
+                   
+                for x in mandatory_set:
 
-                        
-                        
-                    for x in mandatory_set:
-                        
-                        classDay = self.secDays[i][j][k]
-                        dictDay= dictn[classDay]
-                       # print("THTis is the x for man_set"+ classDay)
-                        classTime = self.secTimes[i][j][k]
+                    classDay = self.secDays[i][j][k]
+                    dictDay= dictn[classDay]
+                   # print("THTis is the x for man_set"+ classDay)
+                    classTime = self.secTimes[i][j][k]
 
-                        if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
-                            sessionDay = Day[:]
-                            insert(self.secTimes[i][j][k], sessionDay,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])  
-                            dictDay.append(sessionDay)
-#                            print(classDay)
-#                            print(sessionDay)
-                            
+                    if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
+                        sessionDay = DayMaker()
+                        
+                        insert(self.secTimes[i][j][k], sessionDay,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])  
+                        dictDay.append(sessionDay)
+                        
+                        print("This is the classDay then session Day")
+                        print(classDay)
+                        print(sessionDay)
+                        
+            self.dayCalander.append(dictn) # PUT AFTER ELIF!!!!!!!!!!!!!!!!!
+            dictn.clear()
+
                             
 
    ###############                     ############## this doesnt work properly#################@@@!@@@!@
@@ -435,9 +451,12 @@ class Course:
 #                            dictDay = contain_new_day[:]
 #                            contain_new_day = []
             
-            self.dayCalander.append(dictn)                   
+                              
                                                    
      
+    
+    
+    
 ########################################################Abandoned#####################################################################################################3        
 #        if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
 #            sessionDay = Day[:]
