@@ -412,7 +412,6 @@ class Course:
 
                     classDay = self.secDays[i][j][k]
                     dictDay= dictn[classDay]
-                   # print("THTis is the x for man_set"+ classDay)
                     classTime = self.secTimes[i][j][k]
 
                     if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
@@ -420,38 +419,37 @@ class Course:
                         
                         insert(self.secTimes[i][j][k], sessionDay,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])  
                         dictDay.append(sessionDay)
-                        
-                        print("This is the classDay then session Day")
                         print(classDay)
                         print(sessionDay)
+
+
+                    elif len(dictDay) != 0: # when the time slot required is occuiped is skips it
+                        print("ELIF Statment \n")
+
+                        contain_new_day = []
+                        for dayy in dictDay:
+                           contain_new_day.append(dayy)
+                           #print("for dayy in dictDay+ lenDictDay is "+ str(len(dictDay)))
+                           if insert(self.secTimes[i][j][k], dayy, [self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) == False:
+                            N = dayy.copy() #creates a new entry in the list with another possible day
+                            toappend = switcher(self.secTimes[i][j][k], N, [self.seprateSections[i][j][k], self.secActs[i][j][k] ,self.secLocs[i][j][k], self.secProfs[i][j][k]])
+
+                            contain_new_day.append(toappend)
+
+                           else: # if the 2 activities share the same day but there's no conflict, then insert the time to that same day
+                            insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])
+                            #contain_new_day.append(dayy)
                         
-            self.dayCalander.append(dictn) # PUT AFTER ELIF!!!!!!!!!!!!!!!!!
+                        dictDay = contain_new_day.copy()
+                        print(classDay)
+                        print(contain_new_day)
+                        contain_new_day = []
+
+            self.dayCalander.append(dictn) 
             dictn.clear()
 
-                            
 
-   ###############                     ############## this doesnt work properly#################@@@!@@@!@
 
-#                        elif len(dictDay) != 0: # when the time slot required is occuiped is skips it
-#                            
-#                            contain_new_day = []
-#                            for dayy in dictDay:
-#                               contain_new_day.append(dayy)
-#                               #print("for dayy in dictDay+ lenDictDay is "+ str(len(dictDay)))
-#                               if insert(self.secTimes[i][j][k], dayy, [self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) == False:
-#                                N = dayy[:] #creates a new entry in the list with another possible day
-#                                toappend = switcher(self.secTimes[i][j][k], N, [self.seprateSections[i][j][k], self.secActs[i][j][k] ,self.secLocs[i][j][k], self.secProfs[i][j][k]])
-#                                
-#                                contain_new_day.append(toappend)
-#        
-#                               else: # if the 2 activities share the same day but there's no conflict, then insert the time to that same day
-#                                insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])
-#                                #contain_new_day.append(dayy)
-#     
-#                            dictDay = contain_new_day[:]
-#                            contain_new_day = []
-            
-                              
                                                    
      
     
