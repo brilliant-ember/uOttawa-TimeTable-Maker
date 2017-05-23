@@ -1,6 +1,131 @@
 ###WebScraper Selenium
 from selenium import webdriver
+
+class Time:
+    '''Represents a half an hour of the day'''
+    def __init__(self,time):
+        self.slot = time
+        self.Empty= True
+        self.section=None
+        self.activity=None
+        self.location=None
+        self.prof=None
+        
+    def isEmpty(self):
+        ''' if its empty it will return True
+        Null -> Boolean'''
+        return self.Empty
+    
+    def fill(self, sec, act, loc, pro):
+        '''Null -> Null'''
+        self.section = sec
+        self.activity=act
+        self.location=loc
+        self.prof=pro
+        self.Empty = False
+    
+    def clear(self):
+        self.Empty= True
+        self.section=None
+        self.activity=None
+        self.location=None
+        self.prof=None
+        
+        
+    def __repr__(self):
+        return str(self.slot)+" "+str(self.section)+" "+str(self.Empty)
+        
+    def __str__(self):
+        e = str(self.isEmpty())
+        s=str(self.slot)
+        if self.section==None:
+            return s+ " "+e
+        else:
+             return s+ " " + self.section
+
+
 #######dont forget to orint an error mssg if the class instances r from diffrent semsters
+    
+def insert(time, day, secInfo):
+    '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
+    sec info is section, activity, location, prof in a list in that order'''
+    Time = time.split(",")
+    start = float(Time[0])
+    end =   float(Time[1])
+    if start/int(start) == 1:
+        indexStart = int(2*start -16)
+    else:
+        indexStart = int(2*start -15)
+        
+    if end/int(end) == 1:
+        end  = int(end)
+        indexEnd = int(2*end -16)
+    else:
+        end  = int(end)
+        indexEnd = int(2*end -15)
+    tmp = day[:]
+    for slot in range(indexStart, indexEnd):
+        if tmp[slot].isEmpty():
+            tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
+        else:
+            return False
+    day = tmp[:]
+            
+            
+            
+
+            
+        
+def switcher(time, day, secInfo):
+    '''Takes a time and day and course info, and switches the given time with the time of the given day changing occupiance
+    assumes that the time given and the day given r in conflict'''
+  
+    Time = time.split(",")
+    start = float(Time[0])
+    end =   float(Time[1])
+    if start/int(start) == 1:
+        indexStart = int(2*start -16)
+    else:
+        indexStart = int(2*start -15)
+        
+    if end/int(end) == 1:
+        end  = int(end)
+        indexEnd = int(2*end -16)
+    else:
+        end  = int(end)
+        indexEnd = int(2*end -15)
+        #if they share the same code then thry're a group so remove them togather
+    x = day[indexStart].section
+    y = day[indexEnd].section
+#    print("\nTHIS IS THE SWITCHER METHODE \n")
+    
+    for slot in day:
+#        print("\nTHIS IS THE SWITCHER LOOP \n")
+        if slot.section == None:
+            pass
+        
+        elif slot.section[-3:] == x or slot.section[-3:] == y :
+            slot.clear()
+            slot.fill(fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3]))
+    return day
+            
+
+    
+    
+t=8.00
+Day= []
+for eine in range(0, 28):
+    s = eine = Time(t)
+    Day.append(s)
+    if (t+0.30) > int(t)+0.50:
+        t = int(t)+1.00
+    else:
+        t = t+0.30
+# to account for hour 22 or 10pm   
+s=Time(22.00)
+Day.append(s)
+
+    
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
@@ -242,130 +367,104 @@ class Course:
     def Calander(self):
         '''Creates a list of Dictioaries a dicinary for each section, it fills self.dayCalander list whose description is: A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
         None --> None
-        [[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]'''
+        there're 7 elements in each list, each represents a day. in each day list, there're lists that represents all possible ways to make that day
+        ###not actual output# [[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]'''
         Out = []
         week = ["Saterday", "Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday"]
         Nsec = self.numberOfSections
-        mandatory_set= []
+        sets =[] # a list of lists, each sublist is a section, each section has lists for all madatory sections, if th  
+        
         for i in range(Nsec):
             dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
             sec = self.seprateSections[i]
             days = self.secDays
             
+            
             for j in range(len(sec)): 
                 activitie_set = sec[j]
-              #  print("for J in sec "+str(activitie_set))
-                counter = 0
+                print(activitie_set)
+                mandatory_set= []
                 tmp = activitie_set[0][-3:]
                 
-                
                 for k in range(len(activitie_set)): #when u have the same tail code (A00) that means that all those r madatory, if u hv diff then u chose on code or the other
-                    session = activitie_set[counter]
-                    print("for K in session "+session)
+                    session = activitie_set[k]
+                    
+                    
                     if tmp == session[-3:]:
                         mandatory_set.append([session])
-                        tmp = mandatory_set[counter][-1][-3:] 
-                        #print(tmp)
-                        counter = counter +1
-                    else:
-                        counter = counter +1
-                        for x in mandatory_set:
-                            print("for x in mandatory_set else "+str(x))
-                            print([i, j, k])
-                            print(self.secDays)
-                            classDay = self.secDays[i][j][k]
-                            dictDay= dictn[classDay]
-                            classTime = secTimes[i][j][k]
-                            print(classDay)
-                            
-                            if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
-                                sessionDay = Day[:]
-                                insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
-                                print(sessionDay)
-                                dictDay.append(sessionDay)
-                                
-                            elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
-                                for dayy in dictDay:
-                                   if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
-                                    anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
-                                    dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
-                        mandatory_set= []
-                                    
-                        dictDay.append(sessionDay)
-                                    
-            self.dayCalander.append(dictn)                   
-                            
-                                    
-                                    
-                                
-                                
-                                
-                                
-                            
+                        tmp = mandatory_set[k][-1][-3:] 
+                        print(mandatory_set)
                         
-                        
-                        
-                        
-                        
-                        
-                        
-#                        for day in week:# check if the days are the same
-#                            tmpDay=Day[:]
-#                            if self.secDays[i][j][k] == day:
-#                                
-#                                 # dont forget to add all possible day configs to the dictionary
-#                                    
-#                                for timesSlot in possibleDay:#all the time slots
-#                                    if timeSlot.isEmpty():
-#                                            
-                                        
-                                    
-                                
-                                
-        
-        
-        
-        
-        
-        
-        
-        if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
-            sessionDay = Day[:]
-            insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
-            print(sessionDay)
-            dictDay.append(sessionDay)
 
-        elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
-            for dayy in dictDay:
-               if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
-                anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
-                dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
-    mandatory_set= []
-        
+                        
+                        
+                    for x in mandatory_set:
+                        
+                        classDay = self.secDays[i][j][k]
+                        dictDay= dictn[classDay]
+                       # print("THTis is the x for man_set"+ classDay)
+                        classTime = self.secTimes[i][j][k]
+
+                        if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
+                            sessionDay = Day[:]
+                            insert(self.secTimes[i][j][k], sessionDay,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])  
+                            dictDay.append(sessionDay)
+#                            print(classDay)
+#                            print(sessionDay)
+                            
+                            
+
+   ###############                     ############## this doesnt work properly#################@@@!@@@!@
+
+#                        elif len(dictDay) != 0: # when the time slot required is occuiped is skips it
+#                            
+#                            contain_new_day = []
+#                            for dayy in dictDay:
+#                               contain_new_day.append(dayy)
+#                               #print("for dayy in dictDay+ lenDictDay is "+ str(len(dictDay)))
+#                               if insert(self.secTimes[i][j][k], dayy, [self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) == False:
+#                                N = dayy[:] #creates a new entry in the list with another possible day
+#                                toappend = switcher(self.secTimes[i][j][k], N, [self.seprateSections[i][j][k], self.secActs[i][j][k] ,self.secLocs[i][j][k], self.secProfs[i][j][k]])
+#                                
+#                                contain_new_day.append(toappend)
+#        
+#                               else: # if the 2 activities share the same day but there's no conflict, then insert the time to that same day
+#                                insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])
+#                                #contain_new_day.append(dayy)
+#     
+#                            dictDay = contain_new_day[:]
+#                            contain_new_day = []
+            
+            self.dayCalander.append(dictn)                   
+                                                   
+     
+########################################################Abandoned#####################################################################################################3        
+#        if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
+#            sessionDay = Day[:]
+#            insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
+#            print(sessionDay)
+#            dictDay.append(sessionDay)
+#
+#        elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
+#            for dayy in dictDay:
+#               if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
+#                print("LINE 439")
+#                print(self.seprateSections[i][j][k])
+#                anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
+#                dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
+#    mandatory_set= []
+ ###########################################################################################################################################################################3       
 path = "D:\chromedriver.exe"
 
-        
-        
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 print("____________Finalllll  ________________")
-#course1.Calander()
-#print(course1.dayCalander)
-
-print(course1.seprateSections)
-print(course1.secDays)
-print(course1.secTimes)
-print(course1.secActs)
-print(course1.secProfs)
-#
-#print(course1.secLocs)
-#
-#print(course1.secProfs)
+course1.Calander()
+#print(course1.dayCalander[0])
+#print("COMING IS WED SONNY @#@#$#$%%^%")
+#print(course1.dayCalander[0]["Wednesday"])
 
 
-
-
-#
 ##-------------------------day of the week class------------------------------#
 #My approch to the problem
 '''
@@ -378,60 +477,6 @@ Eg: "9:00, ITI110 Z00" or "8:30, Empty".
 '''
 
 
-class Time:
-    '''Represents a half an hour of the day'''
-    def __init__(self,time):
-        self.slot = time
-        self.Empty= True
-        self.section=None
-        self.activity=None
-        self.location=None
-        self.prof=None
-        
-    def isEmpty(self):
-        ''' if its empty it will return True
-        Null -> Boolean'''
-        return self.Empty
-    
-    def fill(self, sec, act, loc, pro):
-        '''Null -> Null'''
-        self.secton = sec
-        self.activity=act
-        self.location=loc
-        self.prof=pro
-        self.Empty = False
-    
-    def clear(self):
-        self.Empty= True
-        self.section=None
-        self.activity=None
-        self.location=None
-        self.prof=None
-        
-        
-    def __repr__(self):
-        return str(self.slot)
-        
-    def __str__(self):
-        e = str(self.isEmpty())
-        s=str(self.slot)
-        if self.section==None:
-            return s+ " "+e
-        else:
-             return s+ " " + this.secton
-                 
-t=8.00
-Day= []
-for eine in range(0, 28):
-    s = eine = Time(t)
-    Day.append(s)
-    if (t+0.30) > int(t)+0.50:
-        t = int(t)+1.00
-    else:
-        t = t+0.30
-# to account for hour 22 or 10pm   
-s=Time(22.00)
-Day.append(s)
 
 
 ###Testing lists to test the class without the need for internet
@@ -506,61 +551,7 @@ def tableMaker():
     '''Genetates a list of all possible Tables'''
     pass
     
-    
-def insert(time, day, secInfo):
-    '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
-    sec info is section, activity, location, prof in a list in that order'''
-    Time = time.split(",")
-    start = float(Time[0])
-    end =   float(Time[1])
-    if start/int(start) == 1:
-        indexStart = int(2*start -16)
-    else:
-        indexStart = int(2*start -15)
-        
-    if end/int(end) == 1:
-        end  = int(end)
-        indexEnd = int(2*end -16)
-    else:
-        end  = int(end)
-        indexEnd = int(2*end -15)
-    for slot in range(indexStart, indexEnd+1):
-        if day[slot].isEmpty():
-            day[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
-        else:
-            print("Conflict in time "+ str(day[slot])[:5])
-            return False
-            
-            
-            
 
-def switcher(time, day, secInfo):
-    '''Takes a time and day and course info, and switches the given time with the time of the given day changing occupiance
-    assumes that the time given and the day given r in conflict'''
-  
-    Time = time.split(",")
-    start = float(Time[0])
-    end =   float(Time[1])
-    if start/int(start) == 1:
-        indexStart = int(2*start -16)
-    else:
-        indexStart = int(2*start -15)
-        
-    if end/int(end) == 1:
-        end  = int(end)
-        indexEnd = int(2*end -16)
-    else:
-        end  = int(end)
-        indexEnd = int(2*end -15)
-        #if they share the same code then thry're a group so remove them togather
-        x = day[indexStart].section[-3]
-        y = day[indexEnd].section[-3]
-    for slot in day:
-        if slot.section[-3] == x or slot.section[-3] == y :
-            slot.clear()
-            slot.fill(fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3]))
-    return day
-            
         
     
                     
