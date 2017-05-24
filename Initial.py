@@ -161,6 +161,7 @@ class Course:
         self.Lister()
         self.numberOfSections = self.SecNum()
         self.Seprate()
+        self.Calander()
         
         
     def Lister(self):
@@ -387,7 +388,7 @@ class Course:
             dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
             sec = self.seprateSections[i]
             days = self.secDays
-            print("\nLoop Number "+str(i))
+            #print("\nLoop Number "+str(i))
             
             
             
@@ -404,49 +405,57 @@ class Course:
                     if tmp == session[-3:]:
                         mandatory_set.append([session])
                         tmp = mandatory_set[k][-1][-3:] 
-                        print("This Man Set")
-                        print(mandatory_set)
+                print("This Man Set")
+                print(mandatory_set)
+                counter = 0
+                        
                         
                    
                 for x in mandatory_set:
 
-                    classDay = self.secDays[i][j][k]
+                    classDay = self.secDays[i][j][counter]
                     dictDay= dictn[classDay]
-                    classTime = self.secTimes[i][j][k]
+                    classTime = self.secTimes[i][j][counter]
 
                     if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
                         sessionDay = DayMaker()
                         
-                        insert(self.secTimes[i][j][k], sessionDay,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])  
+                        insert(self.secTimes[i][j][counter], sessionDay,[self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]])  
                         dictDay.append(sessionDay)
-                        print(classDay)
-                        print(sessionDay)
+#                        print("IF")
+#                        print(classDay)
+#                        print(dictDay)
 
 
                     elif len(dictDay) != 0: # when the time slot required is occuiped is skips it
-                        print("ELIF Statment \n")
+#                        print("ELIF Statment \n")
 
                         contain_new_day = []
                         for dayy in dictDay:
                            contain_new_day.append(dayy)
-                           #print("for dayy in dictDay+ lenDictDay is "+ str(len(dictDay)))
-                           if insert(self.secTimes[i][j][k], dayy, [self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) == False:
+                           if insert(self.secTimes[i][j][counter], dayy, [self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]]) == False:
                             N = dayy.copy() #creates a new entry in the list with another possible day
-                            toappend = switcher(self.secTimes[i][j][k], N, [self.seprateSections[i][j][k], self.secActs[i][j][k] ,self.secLocs[i][j][k], self.secProfs[i][j][k]])
+                            toappend = switcher(self.secTimes[i][j][counter], N, [self.seprateSections[i][j][counter], self.secActs[i][j][counter] ,self.secLocs[i][j][counter], self.secProfs[i][j][counter]])
+#                            print("HEY")
+#                            print(classDay)
+#                            
 
                             contain_new_day.append(toappend)
 
                            else: # if the 2 activities share the same day but there's no conflict, then insert the time to that same day
-                            insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secActs[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]])
+                            insert(self.secTimes[i][j][counter], dayy,[self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]])
                             #contain_new_day.append(dayy)
                         
                         dictDay = contain_new_day.copy()
-                        print(classDay)
-                        print(contain_new_day)
+                        
+#                        print(classDay)
+#                        print(contain_new_day)
                         contain_new_day = []
 
-            self.dayCalander.append(dictn) 
-            dictn.clear()
+                    counter = counter +1
+            self.dayCalander.append(dictn.copy()) 
+            
+            
 
 
 
@@ -476,7 +485,7 @@ path = "D:\chromedriver.exe"
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 print("____________Finalllll  ________________")
-course1.Calander()
+print(course1.dayCalander)
 #print(course1.dayCalander[0])
 #print("COMING IS WED SONNY @#@#$#$%%^%")
 #print(course1.dayCalander[0]["Wednesday"])
