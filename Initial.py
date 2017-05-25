@@ -33,8 +33,12 @@ class Time:
         
         
     def __repr__(self):
-        return str(self.slot)+" "+str(self.section)
-        
+        if self.section != None:
+            return str(self.slot)+" "+str(self.section)
+        elif self.section == None:
+            return "-"
+            
+            
     def __str__(self):
         e = str(self.isEmpty())
         s=str(self.slot)
@@ -69,7 +73,33 @@ def insert(time, day, secInfo):
             tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
         else:
             return False
-    day = tmp[:]
+    day = tmp.copy()
+    
+def is_insertble(time, day, secInfo):
+    '''returns a boolean'''
+    Time = time.split(",")
+    start = float(Time[0])
+    end =   float(Time[1])
+    if start/int(start) == 1:
+        indexStart = int(2*start -16)
+    else:
+        indexStart = int(2*start -15)
+        
+    if end/int(end) == 1:
+        end  = int(end)
+        indexEnd = int(2*end -16)
+    else:
+        end  = int(end)
+        indexEnd = int(2*end -15)
+    tmp = day[:]
+    for slot in range(indexStart, indexEnd):
+        if tmp[slot].isEmpty():
+            tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
+        else:
+            return False
+        
+        return True
+    
             
             
             
@@ -133,8 +163,7 @@ def DayMaker():
 
 
 Day = DayMaker()
-
-    
+ 
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
@@ -161,7 +190,7 @@ class Course:
         self.Lister()
         self.numberOfSections = self.SecNum()
         self.Seprate()
-        self.Calander()
+        #self.Calander()
         
         
     def Lister(self):
@@ -386,74 +415,84 @@ class Course:
         
         for i in range(Nsec):
             dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
-            sec = self.seprateSections[i]
+            secs = self.seprateSections[i]
             days = self.secDays
-            #print("\nLoop Number "+str(i))
+            print("\nLoop Number "+str(i))
             
-            
-            
-            for j in range(len(sec)): 
-                activitie_set = sec[j]
-                #print(activitie_set)
-                mandatory_set= []
-                tmp = activitie_set[0][-3:]
+            for j in range(len(secs)):
+                act_set = secs[j]
                 
-                for k in range(len(activitie_set)): #when u have the same tail code (A00) that means that all those r madatory, if u hv diff then u chose on code or the other
-                    session = activitie_set[k]
-                    
-                    
-                    if tmp == session[-3:]:
-                        mandatory_set.append([session])
-                        tmp = mandatory_set[k][-1][-3:] 
-                print("This Man Set")
-                print(mandatory_set)
-                counter = 0
+                tmpcode = act_set[0][-3:]
+                if all(code [-3:] == tmpcode for code in act_set):# the case where both sessions are mandatory , then I need to make a case where only one is mandtory
+                    for x in range(len(act_set)):
+         
+                        session = act_set[x]
+                        sessionDay = days[i][j][x]
+                        sessionTime = self.secTimes[i][j][x]
+                        sessionAct = self.secActs[i][j][x]
+                        sessionLoc = self.secLocs[i][j][x]
+                        sessionProf = self.secProfs[i][j][x]
+                        secInfo= [session, sessionAct, sessionLoc, sessionProf]
+
+                        Dday = dictn[sessionDay] #a day of the dictionary
+                        print(sessionDay)
                         
                         
-                   
-                for x in mandatory_set:
-
-                    classDay = self.secDays[i][j][counter]
-                    dictDay= dictn[classDay]
-                    classTime = self.secTimes[i][j][counter]
-
-                    if len(dictDay)== 0: #the case where theis is the first class of the day, aka no time slots r occupied
-                        sessionDay = DayMaker()
+                        to_append = []
                         
-                        insert(self.secTimes[i][j][counter], sessionDay,[self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]])  
-                        dictDay.append(sessionDay)
-#                        print("IF")
-#                        print(classDay)
-#                        print(dictDay)
-
-
-                    elif len(dictDay) != 0: # when the time slot required is occuiped is skips it
-#                        print("ELIF Statment \n")
-
-                        contain_new_day = []
-                        for dayy in dictDay:
-                           contain_new_day.append(dayy)
-                           if insert(self.secTimes[i][j][counter], dayy, [self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]]) == False:
-                            N = dayy.copy() #creates a new entry in the list with another possible day
-                            toappend = switcher(self.secTimes[i][j][counter], N, [self.seprateSections[i][j][counter], self.secActs[i][j][counter] ,self.secLocs[i][j][counter], self.secProfs[i][j][counter]])
-#                            print("HEY")
-#                            print(classDay)
-#                            
-
-                            contain_new_day.append(toappend)
-
-                           else: # if the 2 activities share the same day but there's no conflict, then insert the time to that same day
-                            insert(self.secTimes[i][j][counter], dayy,[self.seprateSections[i][j][counter], self.secActs[i][j][counter], self.secLocs[i][j][counter], self.secProfs[i][j][counter]])
-                            #contain_new_day.append(dayy)
+                        if len(Dday) != 0: #the case where there's a day already in the dictionary for that specific day
+                            for aday in Dday:
+                                appendCa = Dday.copy()
+                                dayEntry = DayMaker()
+                                print("before If insert")
+                                print(appendCa)
+                                if is_insertble(sessionTime, dayEntry, secInfo) == False:
+                                    appendCa.append(switcher(sessionTime, sessionDay, secInfo))
+                                    print("after if insert")
+                                    print(appendCa)
+                                else:
+                                    insert(sessionTime, dayEntry, secInfo)
+                                    appendCa.append(dayEntry) 
+                                    print("after elif insert")
+                                    to_append.append(x for x in appendCa)
+                                    print(appendCa)
                         
-                        dictDay = contain_new_day.copy()
+                        elif len(Dday) == 0:
+                            dayEntry = DayMaker()
+                            insert(sessionTime, dayEntry, secInfo)
+                            Dday.append(dayEntry)
+                            print("GEEEE")
+                            print(Dday)
+                            
+                            
+                            
                         
-#                        print(classDay)
-#                        print(contain_new_day)
-                        contain_new_day = []
 
-                    counter = counter +1
-            self.dayCalander.append(dictn.copy()) 
+
+#                        print(sessionDay)            
+#                        print (Dday)
+#                                        
+                                
+
+                                            
+                            
+                                    
+       
+                            
+                            
+                
+            
+            
+            
+          
+        
+            
+            
+#            print("\n THIS IS THE FINAL FOR WED \n")
+#            print(dictn["Wednesday"])
+            #self.dayCalander.append(dictn.copy()) 
+            
+            
             
             
 
@@ -483,12 +522,9 @@ class Course:
 path = "D:\chromedriver.exe"
 
 
-course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
+course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 print("____________Finalllll  ________________")
-print(course1.dayCalander)
-#print(course1.dayCalander[0])
-#print("COMING IS WED SONNY @#@#$#$%%^%")
-#print(course1.dayCalander[0]["Wednesday"])
+print(course1.Calander())
 
 
 ##-------------------------day of the week class------------------------------#
@@ -535,13 +571,13 @@ Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 
 class Table:
     def __init__(self):                                                                                  
-        self.Sat = Day[:]                                                                            
-        self.Sun = Day[:]                                                                            #
-        self.Mon = Day[:]                                                                            #
-        self.Tue = Day[:]                                                                            #
-        self.Wed = Day[:]                                                                            #
-        self.Thu = Day[:]                                                                            #
-        self.Fri = Day[:]                                                                            #
+        self.Sat = DayMaker()                                                                           
+        self.Sun = DayMaker()                                                                           #
+        self.Mon = DayMaker()                                                                           #
+        self.Tue = DayMaker()                                                                           #
+        self.Wed = DayMaker()                                                                           #
+        self.Thu = DayMaker()                                                                           #
+        self.Fri = DayMaker()                                                                           #
         self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
                                                                                                      #
     def maker(self):
