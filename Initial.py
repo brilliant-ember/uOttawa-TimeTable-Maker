@@ -1,5 +1,6 @@
 ###WebScraper Selenium
 from selenium import webdriver
+import copy
 
 class Time:
     '''Represents a half an hour of the day'''
@@ -423,9 +424,9 @@ class Course:
                 act_set = secs[j]
                 
                 tmpcode = act_set[0][-3:]
+                
                 if all(code [-3:] == tmpcode for code in act_set):# the case where both sessions are mandatory , then I need to make a case where only one is mandtory
                     for x in range(len(act_set)):
-         
                         session = act_set[x]
                         sessionDay = days[i][j][x]
                         sessionTime = self.secTimes[i][j][x]
@@ -435,96 +436,104 @@ class Course:
                         secInfo= [session, sessionAct, sessionLoc, sessionProf]
 
                         Dday = dictn[sessionDay] #a day of the dictionary
-                        print(sessionDay)
-                        
-                        
                         to_append = []
                         
                         if len(Dday) != 0: #the case where there's a day already in the dictionary for that specific day
                             for aday in Dday:
-                                appendCa = Dday.copy()
+                                appendCa = copy.deepcopy(dDay)
                                 dayEntry = DayMaker()
-                                print("before If insert")
-                                print(appendCa)
+                                
                                 if is_insertble(sessionTime, dayEntry, secInfo) == False:
                                     appendCa.append(switcher(sessionTime, sessionDay, secInfo))
-                                    print("after if insert")
-                                    print(appendCa)
                                 else:
                                     insert(sessionTime, dayEntry, secInfo)
                                     appendCa.append(dayEntry) 
-                                    print("after elif insert")
                                     to_append.append(x for x in appendCa)
-                                    print(appendCa)
+                            #################3NEW LINE
+                            Dday = copy.deepcopy(to_append)
+                            ###############################end on experimental line###############33
+                                    
                         
                         elif len(Dday) == 0:
                             dayEntry = DayMaker()
                             insert(sessionTime, dayEntry, secInfo)
                             Dday.append(dayEntry)
-                            print("GEEEE")
-                            print(Dday)
-                            
-                            
-                            
+                        #############The Above Works as it should###############3
                         
 
+                else: #the case where only on is mandatory
+                    if True:
+                         #this will represent the dic Day  for the case where a day entry already exists "the elif"
+                        for x in range(len(act_set)):#since u pick one or the other u always make an entry to the dict, and in case it's the same day as the lec u make 2 days one with it and one without
+                            session = act_set[x]
+                            sessionDay = days[i][j][x]
+                            sessionTime = self.secTimes[i][j][x]
+                            sessionAct = self.secActs[i][j][x]
+                            sessionLoc = self.secLocs[i][j][x]
+                            sessionProf = self.secProfs[i][j][x]
+                            secInfo= [session, sessionAct, sessionLoc, sessionProf]
+                            Dday = dictn[sessionDay] #a day of the dictionary
+                            if len(Dday) == 0:
+                                dayEntry = DayMaker()
+                                insert(sessionTime, dayEntry, secInfo)
+                                Dday.append(dayEntry)
 
-#                        print(sessionDay)            
-#                        print (Dday)
-#                                        
-                                
-
-                                            
-                            
+                            else:
+                                tmppp   = []
+                                tmppp2 = copy.deepcopy(Dday)
+                                print("before")
+                                print(Dday)
+                                for oneDay in Dday:
+                                    Timer = 0 #Cuz one lec is 3 time slots and I dont want 3 day entries per lecture
+                                    for slot in oneDay:# check if the day has more than one of the "only one mandatory" sessions
+                                        if sessionAct != slot.activity and slot.activity != None and Timer == 0:
+                                            Timer = Timer + 1
+                                            oneDayCopy = copy.deepcopy(oneDay)
+                                            print("\nbefore insert")
+                                            print(tmppp2)
+                                            insert(sessionTime, oneDayCopy, secInfo)
+                                            print("\nafter insert")
+                                            print(tmppp2)
+                                            tmppp.append(oneDayCopy)
+                                    print("\nthis tmppp2")
+                                    print(tmppp2)
+                                    print("\nNow this is tmppp")
+                                    print(tmppp)
+                                    for q in range(len(tmppp)):
+                                        tmppp2.append(tmppp[q])
+                                    print("EYES ON ME")   
+                                    Dday= copy.deepcopy(tmppp2)
+                                    print(Dday)
+                                    print(dictn[sessionDay])
+#                                    print("after")
+#                                    print(tmppp2)
+#                                    print(sessionDay)
                                     
-       
+                                
+                                
+                                
+#                    if len(act_set)%2 ==0:# the case where u pick a pair of mandatory elements, say u had 4 dgds and u hv to pick 2
+#                        pass
+#                        iterAct = iter(act_set)
+#                        next(iterAct)
+#                        for x in range(len(act_set)) if act_set[x-1][-3:] == act_set[x][-3:]:
+#                            #gotta sublist them based on the final course code
+#                            #then loop over it like the previous for loop "line 428 for x in range len act_sec"
+#                            #make a case where I only get to choose one rather then a pair
                             
                             
-                
-            
-            
-            
-          
-        
-            
-            
-#            print("\n THIS IS THE FINAL FOR WED \n")
-#            print(dictn["Wednesday"])
-            #self.dayCalander.append(dictn.copy()) 
-            
-            
-            
-            
 
-
-
-                                                   
-     
-    
-    
-    
-########################################################Abandoned#####################################################################################################3        
-#        if len(dictDay)==0: #the case where theis is the first class of the day, aka no time slots r occupied
-#            sessionDay = Day[:]
-#            insert(self.secTimes[i][j][k], sessionDay,["Activity", self.secLocs[i][j][k], self.secProfs[i][j][k]])
-#            print(sessionDay)
-#            dictDay.append(sessionDay)
-#
-#        elif len(dictDay) !=0: # when the time slot required is occuiped is skips it
-#            for dayy in dictDay:
-#               if insert(self.secTimes[i][j][k], dayy,[self.seprateSections[i][j][k], self.secLocs[i][j][k], self.secProfs[i][j][k]]) ==False:
-#                print("LINE 439")
-#                print(self.seprateSections[i][j][k])
-#                anotherPossiblity = dayy[:] #creates a new entry in the list with another possible day
-#                dictDay.append(switcher(self.secTimes[i][j][k], anotherPossiblity,[self.seprateSections[i][j][k],"Activity" ,self.secLocs[i][j][k], self.secProfs[i][j][k]]))
-#    mandatory_set= []
- ###########################################################################################################################################################################3       
+            print("\n THIS IS THE FINAL FOR WED \n")
+            print(dictn["Wednesday"])
+            self.dayCalander.append(copy.deepcopy(dictn))
+                                
 path = "D:\chromedriver.exe"
 
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 print("____________Finalllll  ________________")
 print(course1.Calander())
+print()
 
 
 ##-------------------------day of the week class------------------------------#
