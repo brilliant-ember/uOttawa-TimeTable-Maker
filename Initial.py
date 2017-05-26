@@ -481,33 +481,25 @@ class Course:
                             else:
                                 tmppp   = []
                                 tmppp2 = copy.deepcopy(Dday)
-                                print("before")
-                                print(Dday)
+#                                print("before")
+#                                print(Dday)
                                 for oneDay in Dday:
                                     Timer = 0 #Cuz one lec is 3 time slots and I dont want 3 day entries per lecture
                                     for slot in oneDay:# check if the day has more than one of the "only one mandatory" sessions
                                         if sessionAct != slot.activity and slot.activity != None and Timer == 0:
                                             Timer = Timer + 1
                                             oneDayCopy = copy.deepcopy(oneDay)
-                                            print("\nbefore insert")
-                                            print(tmppp2)
+                                           
                                             insert(sessionTime, oneDayCopy, secInfo)
-                                            print("\nafter insert")
-                                            print(tmppp2)
+        
                                             tmppp.append(oneDayCopy)
-                                    print("\nthis tmppp2")
-                                    print(tmppp2)
-                                    print("\nNow this is tmppp")
-                                    print(tmppp)
+                        
                                     for q in range(len(tmppp)):
                                         tmppp2.append(tmppp[q])
                                     print("EYES ON ME")   
-                                    Dday= copy.deepcopy(tmppp2)
+                                    dictn[sessionDay]= copy.deepcopy(tmppp2)
                                     print(Dday)
-                                    print(dictn[sessionDay])
-#                                    print("after")
-#                                    print(tmppp2)
-#                                    print(sessionDay)
+                                    print(dictn)
                                     
                                 
                                 
