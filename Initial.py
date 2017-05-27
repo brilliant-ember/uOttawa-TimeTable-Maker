@@ -191,7 +191,7 @@ class Course:
         self.Lister()
         self.numberOfSections = self.SecNum()
         self.Seprate()
-        #self.Calander()
+        self.Calander()
         
         
     def Lister(self):
@@ -496,10 +496,9 @@ class Course:
                         
                                     for q in range(len(tmppp)):
                                         tmppp2.append(tmppp[q])
-                                    print("EYES ON ME")   
+                                     
                                     dictn[sessionDay]= copy.deepcopy(tmppp2)
-                                    print(Dday)
-                                    print(dictn)
+                                   
                                     
                                 
                                 
@@ -524,8 +523,6 @@ path = "D:\chromedriver.exe"
 
 course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 print("____________Finalllll  ________________")
-print(course1.Calander())
-print()
 
 
 ##-------------------------day of the week class------------------------------#
@@ -581,8 +578,8 @@ class Table:
         self.Fri = DayMaker()                                                                           #
         self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
                                                                                                      #
-    def maker(self):
-        '''Makes a table with the approperiate course sessions'''
+    def filler(self, listOfCourses):
+        '''Makes a table with the approperiate course sessions assumes that there is no conflict'''
         pass
     def print(self):
         '''Prints a Stirng representaion for the Table'''
@@ -598,7 +595,7 @@ class Table:
             w=w+1
             for slot in day:
                 
-                if slot.isOccupied()==True:
+                if slot.isEmpty()==False:
                     Printed.append("-F-")
                 else: Printed.append("_E_")
             
@@ -610,10 +607,29 @@ class Table:
         print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
         
         
+        
+    def inserter(self, time, Day, secInfo):
+        '''Takes a day and a session info and inserts that into the time table'''
+        if Day =="Saterday":
+            day = self.Sat
+        elif Day == "Sunday":
+            day = self.Sun
+        elif Day == "Monday":
+            day = self.Mon
+        elif Day == "Tuesday":
+            day = self.Tue
+        elif Day == "Wednesday":
+            day = self.Wed
+        elif Day == "Thursday":
+            day = self.Thu
+        elif Day == "Friday":
+            day = self.Fri
+            
+        insert(time, day, secInfo)
 def tableMaker():
     '''Genetates a list of all possible Tables'''
     pass
-    
+
 
         
     
