@@ -1,5 +1,6 @@
 ###WebScraper Selenium
 from selenium import webdriver
+import copy
 
 class Time:
     '''Represents a half an hour of the day'''
@@ -190,6 +191,20 @@ class Table:
             day = self.Fri
             
         insert(time, day, secInfo)
+        
+    def __str__(self):
+        pass
+#        a = ""
+#        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
+#        w = 0
+#        for day in self.Week:
+#            for slot in day:
+#                if slot.isEmpty() == False:
+#                    a = a+W[w]+" "+str(slot.slot)+": "+slot.activity+ "---_---"
+#                    w=w+1
+#            a = a+"\n"
+#        return a
+                    
 
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
@@ -446,8 +461,11 @@ class Course:
                 act_set = secs[j]
                 
                 tmpcode = act_set[0][-3:]
-                
-                if all(code [-3:] == tmpcode for code in act_set):# the case where both sessions are mandatory , then I need to make a case where only one is mandtory
+                if len(act_set) == 1:
+                    codeChecker = False
+                else:
+                     codeChecker=all(tmpcode == code [-3:] for code in act_set)
+                if codeChecker:# the case where both sessions are mandatory , then I need to make a case where only one is mandtory
                     T = Table()
                     for x in range(len(act_set)):
                         session = act_set[x]
@@ -460,17 +478,22 @@ class Course:
                         
                         T.inserter(sessionTime, sessionDay, secInfo)
                     self.tables[i].append(T)
-                    print("The Mandatory lecs Only")
-                    for w in self.tables[i]:
-                        w.print()  
-
+#                    print("The Mandatory lecs Only")
+#                    for w in self.tables[i]:
+#                        w.print()  
+               # print("IM GERE")
+                
+#                print(print (code)for code in act_set)
                 else: #the case where only on is mandatory
-                    if len(self.tables) == 0:
+                    print("I got into the else")
+                    if len(self.tables[i]) == 0:
                         T= Table()
                         self.tables[i].append(T)
+                        print("I got into the first IF  ")
                     
                     tmp = []
                     for x in range(len(act_set)):
+                        print("I got into the loop")
                         session = act_set[x]
                         sessionDay = days[i][j][x]
                         sessionTime = self.secTimes[i][j][x]
@@ -478,11 +501,25 @@ class Course:
                         sessionLoc = self.secLocs[i][j][x]
                         sessionProf = self.secProfs[i][j][x]
                         
-                        tblCopy = copy.deepcopy(self.tables[i])
+                        tblCopyList = copy.deepcopy(self.tables[i])
                         
-                        tblCopy.inserter(sessionTime, sessionDay, secInfo)
-                        tmp.append(tblCopy)
+                        for N in range(len(self.tables[i])):
+                            print("\nB4")
+                            oneTbl = tblCopyList[N]
+                            #oneTbl.print()
+                            oneTbl.inserter(sessionTime, sessionDay, secInfo)
+                            print("\nAfter")
+                            #oneTbl.print()
+                            tmp.append(oneTbl)
+                            
                     self.tables[i] = copy.deepcopy(tmp)
+                    for x in self.tables[i]:
+                        x.print()
+                    
+                    
+                           
+
+                        
                 
 
                
