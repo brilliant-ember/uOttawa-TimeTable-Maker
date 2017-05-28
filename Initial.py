@@ -1,6 +1,5 @@
 ###WebScraper Selenium
 from selenium import webdriver
-import copy
 
 class Time:
     '''Represents a half an hour of the day'''
@@ -34,12 +33,8 @@ class Time:
         
         
     def __repr__(self):
-        if self.section != None:
-            return str(self.slot)+" "+str(self.section)
-        elif self.section == None:
-            return "-"
-            
-            
+        return str(self.slot)+" "+str(self.section)
+        
     def __str__(self):
         e = str(self.isEmpty())
         s=str(self.slot)
@@ -74,33 +69,7 @@ def insert(time, day, secInfo):
             tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
         else:
             return False
-    day = tmp.copy()
-    
-def is_insertble(time, day, secInfo):
-    '''returns a boolean'''
-    Time = time.split(",")
-    start = float(Time[0])
-    end =   float(Time[1])
-    if start/int(start) == 1:
-        indexStart = int(2*start -16)
-    else:
-        indexStart = int(2*start -15)
-        
-    if end/int(end) == 1:
-        end  = int(end)
-        indexEnd = int(2*end -16)
-    else:
-        end  = int(end)
-        indexEnd = int(2*end -15)
-    tmp = day[:]
-    for slot in range(indexStart, indexEnd):
-        if tmp[slot].isEmpty():
-            tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
-        else:
-            return False
-        
-        return True
-    
+    day = tmp[:]
             
             
             
@@ -164,7 +133,64 @@ def DayMaker():
 
 
 Day = DayMaker()
- 
+class Table:
+    def __init__(self):                                                                                  
+        self.Sat = DayMaker()                                                                           
+        self.Sun = DayMaker()                                                                           #
+        self.Mon = DayMaker()                                                                           #
+        self.Tue = DayMaker()                                                                           #
+        self.Wed = DayMaker()                                                                           #
+        self.Thu = DayMaker()                                                                           #
+        self.Fri = DayMaker()                                                                           #
+        self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
+                                                                                                     #
+    def filler(self, listOfCourses):
+        '''Makes a table with the approperiate course sessions assumes that there is no conflict'''
+        pass
+    def print(self):
+        '''Prints a Stirng representaion for the Table'''
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+        print('{Tme:  | 8.0 | 8.3 | 9.0 | 9.3 | 10.0| 10.3| 11.0| 11.3| 12.0| 12.3| 13.0| 13.3| 14.0| 14.3| 15.0| 15.3| 16.0| 16.3| 17.0| 17.3| 18.0| 18.3| 19.0| 19.3| 20.0| 20.3| 21.0| 21.3| 22.0}')
+        
+        
+        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
+        w=0
+        for day in self.Week:
+            Printed=[]
+            Printed.append(W[w]+": ")
+            w=w+1
+            for slot in day:
+                
+                if slot.isEmpty()==False:
+                    Printed.append("-F-")
+                else: Printed.append("_E_")
+            
+            Printed=str(Printed)
+            Printed=Printed.replace(","," |")
+            Printed=Printed.replace("'","")
+            print(Printed)
+            
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+
+    def inserter(self, time, Day, secInfo):
+        '''Takes a day and a session info and inserts that into the time table'''
+        if Day =="Saterday":
+            day = self.Sat
+        elif Day == "Sunday":
+            day = self.Sun
+        elif Day == "Monday":
+            day = self.Mon
+        elif Day == "Tuesday":
+            day = self.Tue
+        elif Day == "Wednesday":
+            day = self.Wed
+        elif Day == "Thursday":
+            day = self.Thu
+        elif Day == "Friday":
+            day = self.Fri
+            
+        insert(time, day, secInfo)
+
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
@@ -186,12 +212,12 @@ class Course:
         self.secLocs = []
         self.secProfs =[]
         self.secActs=[]
-
-        self.dayCalander = [] # A list that contains dicttionaries, one for each sec. there're 7 keys for all dictionaries for the days of the week, the content in each dic is a list of days for all the possible ways a day can be made, if the dic has an empty list then that day isn't required at all for that section
+        self.tables = []
         self.Lister()
         self.numberOfSections = self.SecNum()
         self.Seprate()
-        self.Calander()
+        self.tabler()
+        
         
         
     def Lister(self):
@@ -404,21 +430,17 @@ class Course:
     
         
         
-    def Calander(self):
-        '''Creates a list of Dictioaries a dicinary for each section, it fills self.dayCalander list whose description is: A list whose elements r lists where each list represents all activities for one section, and those activities are grouped in lists based on the activity type
-        None --> None
-        there're 7 elements in each list, each represents a day. in each day list, there're lists that represents all possible ways to make that day
+    def tabler(self):
+        '''Creates a list of all possible tables for this course
         ###not actual output# [[['ELG2138 A00', 'ELG2138 A00'], ['ELG2138 A03', 'ELG2138 A04'], ['ELG2138 A01', 'ELG2138 A02']], [['ELG2138 B00', 'ELG2138 B00'], ['ELG2138 B03', 'ELG2138 B04'], ['ELG2138 B01', 'ELG2138 B02']]]'''
-        Out = []
-        week = ["Saterday", "Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday"]
+        #week = ["Saterday", "Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday"]
         Nsec = self.numberOfSections
-        sets =[] # a list of lists, each sublist is a section, each section has lists for all madatory sections, if th  
         
         for i in range(Nsec):
-            dictn = {"Saterday":[], "Sunday":[], "Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}
             secs = self.seprateSections[i]
             days = self.secDays
             print("\nLoop Number "+str(i))
+            self.tables.append([])
             
             for j in range(len(secs)):
                 act_set = secs[j]
@@ -426,6 +448,7 @@ class Course:
                 tmpcode = act_set[0][-3:]
                 
                 if all(code [-3:] == tmpcode for code in act_set):# the case where both sessions are mandatory , then I need to make a case where only one is mandtory
+                    T = Table()
                     for x in range(len(act_set)):
                         session = act_set[x]
                         sessionDay = days[i][j][x]
@@ -434,95 +457,42 @@ class Course:
                         sessionLoc = self.secLocs[i][j][x]
                         sessionProf = self.secProfs[i][j][x]
                         secInfo= [session, sessionAct, sessionLoc, sessionProf]
-
-                        Dday = dictn[sessionDay] #a day of the dictionary
-                        to_append = []
                         
-                        if len(Dday) != 0: #the case where there's a day already in the dictionary for that specific day
-                            for aday in Dday:
-                                appendCa = copy.deepcopy(dDay)
-                                dayEntry = DayMaker()
-                                
-                                if is_insertble(sessionTime, dayEntry, secInfo) == False:
-                                    appendCa.append(switcher(sessionTime, sessionDay, secInfo))
-                                else:
-                                    insert(sessionTime, dayEntry, secInfo)
-                                    appendCa.append(dayEntry) 
-                                    to_append.append(x for x in appendCa)
-                            #################3NEW LINE
-                            Dday = copy.deepcopy(to_append)
-                            ###############################end on experimental line###############33
-                                    
-                        
-                        elif len(Dday) == 0:
-                            dayEntry = DayMaker()
-                            insert(sessionTime, dayEntry, secInfo)
-                            Dday.append(dayEntry)
-                        #############The Above Works as it should###############3
-                        
+                        T.inserter(sessionTime, sessionDay, secInfo)
+                    self.tables[i].append(T)
+                    print("The Mandatory lecs Only")
+                    for w in self.tables[i]:
+                        w.print()  
 
                 else: #the case where only on is mandatory
-                    if True:
-                         #this will represent the dic Day  for the case where a day entry already exists "the elif"
-                        for x in range(len(act_set)):#since u pick one or the other u always make an entry to the dict, and in case it's the same day as the lec u make 2 days one with it and one without
-                            session = act_set[x]
-                            sessionDay = days[i][j][x]
-                            sessionTime = self.secTimes[i][j][x]
-                            sessionAct = self.secActs[i][j][x]
-                            sessionLoc = self.secLocs[i][j][x]
-                            sessionProf = self.secProfs[i][j][x]
-                            secInfo= [session, sessionAct, sessionLoc, sessionProf]
-                            Dday = dictn[sessionDay] #a day of the dictionary
-                            if len(Dday) == 0:
-                                dayEntry = DayMaker()
-                                insert(sessionTime, dayEntry, secInfo)
-                                Dday.append(dayEntry)
-
-                            else:
-                                tmppp   = []
-                                tmppp2 = copy.deepcopy(Dday)
-#                                print("before")
-#                                print(Dday)
-                                for oneDay in Dday:
-                                    Timer = 0 #Cuz one lec is 3 time slots and I dont want 3 day entries per lecture
-                                    for slot in oneDay:# check if the day has more than one of the "only one mandatory" sessions
-                                        if sessionAct != slot.activity and slot.activity != None and Timer == 0:
-                                            Timer = Timer + 1
-                                            oneDayCopy = copy.deepcopy(oneDay)
-                                           
-                                            insert(sessionTime, oneDayCopy, secInfo)
-        
-                                            tmppp.append(oneDayCopy)
+                    if len(self.tables) == 0:
+                        T= Table()
+                        self.tables[i].append(T)
+                    
+                    tmp = []
+                    for x in range(len(act_set)):
+                        session = act_set[x]
+                        sessionDay = days[i][j][x]
+                        sessionTime = self.secTimes[i][j][x]
+                        sessionAct = self.secActs[i][j][x]
+                        sessionLoc = self.secLocs[i][j][x]
+                        sessionProf = self.secProfs[i][j][x]
                         
-                                    for q in range(len(tmppp)):
-                                        tmppp2.append(tmppp[q])
-                                     
-                                    dictn[sessionDay]= copy.deepcopy(tmppp2)
-                                   
-                                    
-                                
-                                
-                                
-#                    if len(act_set)%2 ==0:# the case where u pick a pair of mandatory elements, say u had 4 dgds and u hv to pick 2
-#                        pass
-#                        iterAct = iter(act_set)
-#                        next(iterAct)
-#                        for x in range(len(act_set)) if act_set[x-1][-3:] == act_set[x][-3:]:
-#                            #gotta sublist them based on the final course code
-#                            #then loop over it like the previous for loop "line 428 for x in range len act_sec"
-#                            #make a case where I only get to choose one rather then a pair
-                            
-                            
+                        tblCopy = copy.deepcopy(self.tables[i])
+                        
+                        tblCopy.inserter(sessionTime, sessionDay, secInfo)
+                        tmp.append(tblCopy)
+                    self.tables[i] = copy.deepcopy(tmp)
+                
 
-            print("\n THIS IS THE FINAL FOR WED \n")
-            print(dictn["Wednesday"])
-            self.dayCalander.append(copy.deepcopy(dictn))
-                                
+               
+                
 path = "D:\chromedriver.exe"
 
 
-course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
+course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
 print("____________Finalllll  ________________")
+
 
 
 ##-------------------------day of the week class------------------------------#
@@ -567,69 +537,12 @@ Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 #------------------------------------------------------------------
 
 
-class Table:
-    def __init__(self):                                                                                  
-        self.Sat = DayMaker()                                                                           
-        self.Sun = DayMaker()                                                                           #
-        self.Mon = DayMaker()                                                                           #
-        self.Tue = DayMaker()                                                                           #
-        self.Wed = DayMaker()                                                                           #
-        self.Thu = DayMaker()                                                                           #
-        self.Fri = DayMaker()                                                                           #
-        self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
-                                                                                                     #
-    def filler(self, listOfCourses):
-        '''Makes a table with the approperiate course sessions assumes that there is no conflict'''
-        pass
-    def print(self):
-        '''Prints a Stirng representaion for the Table'''
-        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
-        print('{Tme:  | 8.0 | 8.3 | 9.0 | 9.3 | 10.0| 10.3| 11.0| 11.3| 12.0| 12.3| 13.0| 13.3| 14.0| 14.3| 15.0| 15.3| 16.0| 16.3| 17.0| 17.3| 18.0| 18.3| 19.0| 19.3| 20.0| 20.3| 21.0| 21.3| 22.0}')
+
         
-        
-        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
-        w=0
-        for day in self.Week:
-            Printed=[]
-            Printed.append(W[w]+": ")
-            w=w+1
-            for slot in day:
-                
-                if slot.isEmpty()==False:
-                    Printed.append("-F-")
-                else: Printed.append("_E_")
-            
-            Printed=str(Printed)
-            Printed=Printed.replace(","," |")
-            Printed=Printed.replace("'","")
-            print(Printed)
-            
-        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
-        
-        
-        
-    def inserter(self, time, Day, secInfo):
-        '''Takes a day and a session info and inserts that into the time table'''
-        if Day =="Saterday":
-            day = self.Sat
-        elif Day == "Sunday":
-            day = self.Sun
-        elif Day == "Monday":
-            day = self.Mon
-        elif Day == "Tuesday":
-            day = self.Tue
-        elif Day == "Wednesday":
-            day = self.Wed
-        elif Day == "Thursday":
-            day = self.Thu
-        elif Day == "Friday":
-            day = self.Fri
-            
-        insert(time, day, secInfo)
 def tableMaker():
     '''Genetates a list of all possible Tables'''
     pass
-
+    
 
         
     
