@@ -45,7 +45,7 @@ class Time:
              return s+ " " + self.section
 
 
-#######dont forget to orint an error mssg if the class instances r from diffrent semsters
+#######dont forget to print an error mssg if the class instances r from diffrent semsters
     
 def insert(time, day, secInfo):
     '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
@@ -72,10 +72,7 @@ def insert(time, day, secInfo):
             return False
     day = tmp[:]
             
-            
-            
 
-            
         
 def switcher(time, day, secInfo):
     '''Takes a time and day and course info, and switches the given time with the time of the given day changing occupiance
@@ -332,26 +329,18 @@ class Course:
         for j in range(Nsec): #number of sections
             days_per_sec = []
             daytmp= []
-            
             prof_persec = []
             proftmp=[]
-            
             time_persec =[]
             timetmp=[]
-            
             locpersec= []
             loctmp=[]
-            
             act_persec=[]
             acttmp=[]
-            
-            
-            
             act = Lact[D]
             tmp = []
             tmp2 = []
             for i in act_per_sec:
-            
                 if i == act:
                     daytmp.append(self.Day[D])
                     proftmp.append(self.Prof[D])
@@ -362,7 +351,6 @@ class Course:
                     tmp2.append(Lsec[D])
                     act = Lact[D]
                     D = D+1
-
                 else:
                     tmp.append(tmp2)
                     days_per_sec.append(daytmp)
@@ -384,10 +372,8 @@ class Course:
                     loctmp.append(self.Location[D])
                     acttmp.append(self.Activity[D])
                     
-                    
                     act = Lact[D]
                     D = D+1
-            #print("Loop")
             tmp.append(tmp2)       
             Out.append(tmp)
             days_per_sec.append(daytmp)
@@ -401,8 +387,6 @@ class Course:
             LocL.append(locpersec)
             Act.append(act_persec)
             
-            
-
         self.seprateSections = Out[:]
         self.secDays=DaysL[:]
         
@@ -411,9 +395,6 @@ class Course:
         self.secLocs = LocL[:]
         self.secActs = Act[:]
                
-               
-             
-        
     def SecNum(self, SecNum_param1 = "", SecNum_param2 = 0):
         
          '''A Recursive method. Takes a list of sections,an empty string and number 0, to retuen the number of sections in the list.
@@ -440,10 +421,7 @@ class Course:
                  else:
                          return self.SecNum( SecNum_param1, SecNum_param2+1)
 
-            
-         
-    
-        
+
         
     def tabler(self):
         '''Creates a list of all possible tables for this course
@@ -454,7 +432,7 @@ class Course:
         for i in range(Nsec):
             secs = self.seprateSections[i]
             days = self.secDays
-            print("\nLoop Number "+str(i))
+            #print("\nLoop Number "+str(i))
             self.tables.append([])
             
             for j in range(len(secs)):
@@ -485,15 +463,13 @@ class Course:
                 
 #                print(print (code)for code in act_set)
                 else: #the case where only on is mandatory
-                    print("I got into the else")
                     if len(self.tables[i]) == 0:
                         T= Table()
                         self.tables[i].append(T)
-                        print("I got into the first IF  ")
+                        #print("I got into the first IF  ")
                     
                     tmp = []
                     for x in range(len(act_set)):
-                        print("I got into the loop")
                         session = act_set[x]
                         sessionDay = days[i][j][x]
                         sessionTime = self.secTimes[i][j][x]
@@ -504,36 +480,29 @@ class Course:
                         tblCopyList = copy.deepcopy(self.tables[i])
                         
                         for N in range(len(self.tables[i])):
-                            print("\nB4")
+                            #print("\nB4")
                             oneTbl = tblCopyList[N]
                             #oneTbl.print()
                             oneTbl.inserter(sessionTime, sessionDay, secInfo)
-                            print("\nAfter")
+                            #print("\nAfter")
                             #oneTbl.print()
                             tmp.append(oneTbl)
                             
                     self.tables[i] = copy.deepcopy(tmp)
-                    for x in self.tables[i]:
-                        x.print()
+#                    for x in self.tables[i]:
+#                        x.print()
                     
                     
-                           
-
-                        
-                
 
                
                 
-path = "D:\chromedriver.exe"
+#path = "D:\chromedriver.exe"
+#
+#
+#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
+#print("____________Finalllll  ________________")
 
-
-course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2181&session=FS")
-print("____________Finalllll  ________________")
-
-
-
-##-------------------------day of the week class------------------------------#
-#My approch to the problem
+####################My approch to the problem -----------------------------------------------------------------------------------------------------------------
 '''
 Each day has 29 timeslots, each represents half an hour. each timeslot will be an object (class) and it will have a methode isOccupied which tells if that time slot has already been taken by returning a boolean.
 -The class will also have a method which fills that time table with a course, and will change the obj boolean once the slot is full.
@@ -542,8 +511,7 @@ Eg: "9:00, ITI110 Z00" or "8:30, Empty".
 -Each day is a list of timeslots.
 -I used the 24 hour format rather than AM and PM, at last for the sake of coding.
 '''
-
-
+##################-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ###Testing lists to test the class without the need for internet
@@ -566,20 +534,6 @@ Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
 Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
 Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 ##_________________________________________________________________
-#
-#Section4=
-#Activity4=
-#Time4=
-#Location4=
-#------------------------------------------------------------------
-
-
-
-        
-def tableMaker():
-    '''Genetates a list of all possible Tables'''
-    pass
-    
 
         
     
