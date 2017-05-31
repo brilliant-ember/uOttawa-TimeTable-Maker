@@ -126,10 +126,6 @@ def DayMaker():
     return Day
 
 
-
-
-
-
 Day = DayMaker()
 class Table:
     def __init__(self):                                                                                  
@@ -142,9 +138,10 @@ class Table:
         self.Fri = DayMaker()                                                                           #
         self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
                                                                                                      #
-    def filler(self, listOfCourses):
-        '''Makes a table with the approperiate course sessions assumes that there is no conflict'''
-        pass
+    def __reper__(self):
+        return "Im a table lol"
+    def __str__(self):
+        return "Use the self.print()"
     def print(self):
         '''Prints a Stirng representaion for the Table'''
         print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
@@ -167,8 +164,7 @@ class Table:
             Printed=Printed.replace(","," |")
             Printed=Printed.replace("'","")
             print(Printed)
-            
-        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
+            print("_________________________________________________________________________________________________________________________________________________________________________________")
 
     def inserter(self, time, Day, secInfo):
         '''Takes a day and a session info and inserts that into the time table'''
@@ -203,6 +199,48 @@ class Table:
 #        return a
                     
 
+    
+    
+    
+def tableMixer(tbl1, tbl2):
+    '''Takes two tables and mixes them togather if it is possible, a similar (isMixable) function will return a boolean if they are not mixable'''
+    output = Table()
+    for i in range(len(tbl1.Week)):
+        day1 = tbl1.Week[i]
+        day2 = tbl2.Week[i]
+        outDay = output.Week[i]
+        for j in day1:
+            slot1 = day1[j]
+            slot2 = day2[j]
+            
+            if slot1.Empty == True and slot2.Empty == False:
+                secInfo = [slot2.section, slot2.activity, slot2.locaion, slot2.prof]
+                inserter(slot2.slot, outDay, secInfo)
+
+            elif slot1.Empty == False and slot2.Empty == True:
+                secInfo = [slot1.section, slot1.activity, slot1.locaion, slot1.prof]
+                inserter(slot1.slot, outDay, secInfo)
+                
+    return output
+    
+def isMixable(tbl1, tbl2):
+    '''tells if the 2 tables can be mixed, returns True if they can and falses otherwise'''
+    for i in range(len(tbl1.Week)):
+        day1 = tbl1.Week[i]
+        day2 = tbl2.Week[i]
+        outDay = output.Week[i]
+        for j in day1:
+            slot1 = day1[j]
+            slot2 = day2[j]
+            if slot1.Empty == False and slot2.Empty == False:
+                return False
+    return True
+    
+
+    
+    
+    
+    
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
@@ -437,6 +475,10 @@ class Course:
             
             for j in range(len(secs)):
                 act_set = secs[j]
+                #print(act_set)
+                #print(Nsec)
+#                print("IM acr set")
+#                print(print (code)for code in act_set)
                 
                 tmpcode = act_set[0][-3:]
                 if len(act_set) == 1:
@@ -459,9 +501,7 @@ class Course:
 #                    print("The Mandatory lecs Only")
 #                    for w in self.tables[i]:
 #                        w.print()  
-               # print("IM GERE")
                 
-#                print(print (code)for code in act_set)
                 else: #the case where only on is mandatory
                     if len(self.tables[i]) == 0:
                         T= Table()
@@ -479,28 +519,25 @@ class Course:
                         
                         tblCopyList = copy.deepcopy(self.tables[i])
                         
-                        for N in range(len(self.tables[i])):
-                            #print("\nB4")
-                            oneTbl = tblCopyList[N]
-                            #oneTbl.print()
-                            oneTbl.inserter(sessionTime, sessionDay, secInfo)
-                            #print("\nAfter")
-                            #oneTbl.print()
-                            tmp.append(oneTbl)
+#                        for N in range(len(self.tables[i])):
+##                            print("\nB4")
+#                            oneTbl = tblCopyList[N]
+##                            oneTbl.print()
+#                            oneTbl.inserter(sessionTime, sessionDay, secInfo)
+##                            print("\nAfter")
+#                            oneTbl.print()
+#                            tmp.append(oneTbl)
                             
                     self.tables[i] = copy.deepcopy(tmp)
 #                    for x in self.tables[i]:
 #                        x.print()
                     
-                    
-
-               
+         
                 
 #path = "D:\chromedriver.exe"
-#
-#
-#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
+#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2179&session=FS")
 #print("____________Finalllll  ________________")
+
 
 ####################My approch to the problem -----------------------------------------------------------------------------------------------------------------
 '''
@@ -534,6 +571,9 @@ Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
 Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
 Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 ##_________________________________________________________________
+
+
+
 
         
     
