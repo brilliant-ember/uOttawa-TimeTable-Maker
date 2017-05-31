@@ -282,8 +282,9 @@ class Course:
         Prof=self.Prof
         Time=self.Time
         tmp=[]
-
-        browser = webdriver.Chrome(path)
+        
+#        browser = webdriver.Chrome(path)
+        browser = webdriver.PhantomJS(path)
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
         tables = browser.find_elements_by_id("schedule") 
@@ -537,6 +538,13 @@ class Course:
 #path = "D:\chromedriver.exe"
 #course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2179&session=FS")
 #print("____________Finalllll  ________________")
+#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS") #circuit theory
+#print(len(course1.tables))
+#for i in course1.tables:
+#    for j  in i:
+#        j.print()
+
 
 
 ####################My approch to the problem -----------------------------------------------------------------------------------------------------------------
