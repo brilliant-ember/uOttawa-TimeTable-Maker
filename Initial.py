@@ -50,27 +50,39 @@ class Time:
 def insert(time, day, secInfo):
     '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
     sec info is section, activity, location, prof in a list in that order'''
-    Time = time.split(",")
-    start = float(Time[0])
-    end =   float(Time[1])
-    if start/int(start) == 1:
-        indexStart = int(2*start -16)
-    else:
-        indexStart = int(2*start -15)
-        
-    if end/int(end) == 1:
-        end  = int(end)
-        indexEnd = int(2*end -16)
-    else:
-        end  = int(end)
-        indexEnd = int(2*end -15)
-    tmp = day[:]
-    for slot in range(indexStart, indexEnd):
-        if tmp[slot].isEmpty():
-            tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
+    if type(time)==float:
+        if time/int(time) == 1:
+            index = int(2*time -16)
+        else:
+            index = int(2*time -15)
+        tmp = day[:]
+        if tmp[index].isEmpty():
+            tmp[index].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
         else:
             return False
-    day = tmp[:]
+        day = tmp[:]
+    else:
+        Time = time.split(",")
+        start = float(Time[0])
+        end =   float(Time[1])
+        if start/int(start) == 1:
+            indexStart = int(2*start -16)
+        else:
+            indexStart = int(2*start -15)
+
+        if end/int(end) == 1:
+            end  = int(end)
+            indexEnd = int(2*end -16)
+        else:
+            end  = int(end)
+            indexEnd = int(2*end -15)
+        tmp = day[:]
+        for slot in range(indexStart, indexEnd):
+            if tmp[slot].isEmpty():
+                tmp[slot].fill(secInfo[0], secInfo[1],secInfo[2],secInfo[3])
+            else:
+                return False
+        day = tmp[:]
             
 
         
@@ -184,6 +196,8 @@ class Table:
             day = self.Thu
         elif Day == "Friday":
             day = self.Fri
+        else:
+            day = Day
             
         insert(time, day, secInfo)
         
@@ -469,17 +483,21 @@ def tableMixer(tbl1, tbl2):
         day1 = tbl1.Week[i]
         day2 = tbl2.Week[i]
         outDay = output.Week[i]
-        for j in day1:
+        for j in range(len(day1)):
             slot1 = day1[j]
             slot2 = day2[j]
             
+#            print("HEYYYYYYYYYYYYYYY!")
+#            print(slot2.slot)
+#            print(slot1.slot)
+#            
             if slot1.Empty == True and slot2.Empty == False:
-                secInfo = [slot2.section, slot2.activity, slot2.locaion, slot2.prof]
-                inserter(slot2.slot, outDay, secInfo)
+                secInfo = [slot2.section, slot2.activity, slot2.location, slot2.prof]
+                output.inserter(slot2.slot, outDay, secInfo)
 
             elif slot1.Empty == False and slot2.Empty == True:
-                secInfo = [slot1.section, slot1.activity, slot1.locaion, slot1.prof]
-                inserter(slot1.slot, outDay, secInfo)
+                secInfo = [slot1.section, slot1.activity, slot1.location, slot1.prof]
+                output.inserter(slot1.slot, outDay, secInfo)
                 
     return output
     
@@ -488,8 +506,7 @@ def isMixable(tbl1, tbl2):
     for i in range(len(tbl1.Week)):
         day1 = tbl1.Week[i]
         day2 = tbl2.Week[i]
-        outDay = output.Week[i]
-        for j in day1:
+        for j in range(len(day1)):
             slot1 = day1[j]
             slot2 = day2[j]
             if slot1.Empty == False and slot2.Empty == False:
