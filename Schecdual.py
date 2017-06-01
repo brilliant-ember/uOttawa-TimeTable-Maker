@@ -4,18 +4,18 @@ import itertools
 # -if u will add the feature of getting course info by giving the course code rather than url, make sure to throw an error if the corses are in diffrent semsters
 
 
-#path = "D:\chromedriver.exe"
-path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
-course1 = I.Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS") #circuit theory
-#course2 = I.Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=019810&term=2179&session=FS")#Calc 3
+path = "D:\chromedriver.exe"
+#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+course1 = I.Course(path, "http://127.0.0.1:8000/html/ELG2138.html") #circuit theory
+course2 = I.Course(path, "http://127.0.0.1:8000/html/MAT2322.html")#Calc 3
 #course3 = I.Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2179&session=FS")#engineering mech
 #course4 = I.Course(path, "")
 
-print(len(course1.tables))
-for i in course1.tables:
-    for j  in i:
-        j.print()
-        
+#print(len(course1.tables))
+#for i in course1.tables:
+#    for j  in i:
+#        j.print()
+#        
         
 def PossibleTables(one, two):
     '''takes 2 course objs then makes and outputs all possible tables with it, Cartisian product of the tables
@@ -47,10 +47,10 @@ def PossibleTables(one, two):
     return output
 
 
-#ooo = PossibleTables(course1, course2)
-#print(len(ooo))
-#for tbl in ooo:
-#    tbl.print()
+ooo = PossibleTables(course1, course2)
+print(len(ooo))
+for tbl in ooo:
+    tbl.print()
         
         
         

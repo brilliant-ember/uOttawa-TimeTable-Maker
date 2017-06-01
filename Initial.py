@@ -126,6 +126,10 @@ def DayMaker():
     return Day
 
 
+
+
+
+
 Day = DayMaker()
 class Table:
     def __init__(self):                                                                                  
@@ -138,10 +142,7 @@ class Table:
         self.Fri = DayMaker()                                                                           #
         self.Week = [self.Sat, self.Sun, self.Mon, self.Tue, self.Wed, self.Thu, self.Fri]           #
                                                                                                      #
-    def __reper__(self):
-        return "Im a table lol"
-    def __str__(self):
-        return "Use the self.print()"
+
     def print(self):
         '''Prints a Stirng representaion for the Table'''
         print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
@@ -164,7 +165,8 @@ class Table:
             Printed=Printed.replace(","," |")
             Printed=Printed.replace("'","")
             print(Printed)
-            print("_________________________________________________________________________________________________________________________________________________________________________________")
+            
+        print("_______________________________________________________________________________________________________________________________________________________________________________________________________")
 
     def inserter(self, time, Day, secInfo):
         '''Takes a day and a session info and inserts that into the time table'''
@@ -187,60 +189,9 @@ class Table:
         
     def __str__(self):
         pass
-#        a = ""
-#        W=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
-#        w = 0
-#        for day in self.Week:
-#            for slot in day:
-#                if slot.isEmpty() == False:
-#                    a = a+W[w]+" "+str(slot.slot)+": "+slot.activity+ "---_---"
-#                    w=w+1
-#            a = a+"\n"
-#        return a
+
                     
 
-    
-    
-    
-def tableMixer(tbl1, tbl2):
-    '''Takes two tables and mixes them togather if it is possible, a similar (isMixable) function will return a boolean if they are not mixable'''
-    output = Table()
-    for i in range(len(tbl1.Week)):
-        day1 = tbl1.Week[i]
-        day2 = tbl2.Week[i]
-        outDay = output.Week[i]
-        for j in day1:
-            slot1 = day1[j]
-            slot2 = day2[j]
-            
-            if slot1.Empty == True and slot2.Empty == False:
-                secInfo = [slot2.section, slot2.activity, slot2.locaion, slot2.prof]
-                inserter(slot2.slot, outDay, secInfo)
-
-            elif slot1.Empty == False and slot2.Empty == True:
-                secInfo = [slot1.section, slot1.activity, slot1.locaion, slot1.prof]
-                inserter(slot1.slot, outDay, secInfo)
-                
-    return output
-    
-def isMixable(tbl1, tbl2):
-    '''tells if the 2 tables can be mixed, returns True if they can and falses otherwise'''
-    for i in range(len(tbl1.Week)):
-        day1 = tbl1.Week[i]
-        day2 = tbl2.Week[i]
-        outDay = output.Week[i]
-        for j in day1:
-            slot1 = day1[j]
-            slot2 = day2[j]
-            if slot1.Empty == False and slot2.Empty == False:
-                return False
-    return True
-    
-
-    
-    
-    
-    
 class Course:
     ''' A class that represents each indivisual course, it has 6 lists which contain information about the course including the time, day and other information'''
 
@@ -282,9 +233,9 @@ class Course:
         Prof=self.Prof
         Time=self.Time
         tmp=[]
-        
-#        browser = webdriver.Chrome(path)
-        browser = webdriver.PhantomJS(path)
+        #browser = webdriver.PhantomJS(path)
+
+        browser = webdriver.Chrome(path)
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
         tables = browser.find_elements_by_id("schedule") 
@@ -314,21 +265,6 @@ class Course:
             self.Day = tmp[:] # copy tmp's elements
             #tmp = [] #Set tmp to an empty list
             
-        
-        '''
-       print("_______________________Day______________________________")
-        print(Day)
-        print("________________________Act_____________________________\n")
-        print(Activity)
-        print("_______________________Sec______________________________\n")
-        print(Section)
-        print("_______________________Loc______________________________\n")
-        print(Location)
-        print("________________________Prof_____________________________\n")
-        print(Prof)
-        print("________________________Time_____________________________\n")
-        print(Time)
-        '''
 
         
     def CourseName(self):
@@ -476,10 +412,6 @@ class Course:
             
             for j in range(len(secs)):
                 act_set = secs[j]
-                #print(act_set)
-                #print(Nsec)
-#                print("IM acr set")
-#                print(print (code)for code in act_set)
                 
                 tmpcode = act_set[0][-3:]
                 if len(act_set) == 1:
@@ -499,10 +431,7 @@ class Course:
                         
                         T.inserter(sessionTime, sessionDay, secInfo)
                     self.tables[i].append(T)
-#                    print("The Mandatory lecs Only")
-#                    for w in self.tables[i]:
-#                        w.print()  
-                
+
                 else: #the case where only on is mandatory
                     if len(self.tables[i]) == 0:
                         T= Table()
@@ -520,32 +449,66 @@ class Course:
                         
                         tblCopyList = copy.deepcopy(self.tables[i])
                         
-#                        for N in range(len(self.tables[i])):
-##                            print("\nB4")
-#                            oneTbl = tblCopyList[N]
-##                            oneTbl.print()
-#                            oneTbl.inserter(sessionTime, sessionDay, secInfo)
-##                            print("\nAfter")
-#                            oneTbl.print()
-#                            tmp.append(oneTbl)
+                        for N in range(len(self.tables[i])):
+                            #print("\nB4")
+                            oneTbl = tblCopyList[N]
+                            #oneTbl.print()
+                            oneTbl.inserter(sessionTime, sessionDay, secInfo)
+                            #print("\nAfter")
+                            #oneTbl.print()
+                            tmp.append(oneTbl)
                             
                     self.tables[i] = copy.deepcopy(tmp)
-#                    for x in self.tables[i]:
-#                        x.print()
+
                     
-         
+                    
+def tableMixer(tbl1, tbl2):
+    '''Takes two tables and mixes them togather if it is possible, a similar (isMixable) function will return a boolean if they are not mixable'''
+    output = Table()
+    for i in range(len(tbl1.Week)):
+        day1 = tbl1.Week[i]
+        day2 = tbl2.Week[i]
+        outDay = output.Week[i]
+        for j in day1:
+            slot1 = day1[j]
+            slot2 = day2[j]
+            
+            if slot1.Empty == True and slot2.Empty == False:
+                secInfo = [slot2.section, slot2.activity, slot2.locaion, slot2.prof]
+                inserter(slot2.slot, outDay, secInfo)
+
+            elif slot1.Empty == False and slot2.Empty == True:
+                secInfo = [slot1.section, slot1.activity, slot1.locaion, slot1.prof]
+                inserter(slot1.slot, outDay, secInfo)
                 
+    return output
+    
+def isMixable(tbl1, tbl2):
+    '''tells if the 2 tables can be mixed, returns True if they can and falses otherwise'''
+    for i in range(len(tbl1.Week)):
+        day1 = tbl1.Week[i]
+        day2 = tbl2.Week[i]
+        outDay = output.Week[i]
+        for j in day1:
+            slot1 = day1[j]
+            slot2 = day2[j]
+            if slot1.Empty == False and slot2.Empty == False:
+                return False
+    return True
+               
+#                
 #path = "D:\chromedriver.exe"
-#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2179&session=FS")
+##
+##
+##course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 #print("____________Finalllll  ________________")
-#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
-#course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS") #circuit theory
+#course1 = Course(path, "http://127.0.0.1:8000/html/ELG2138.html")
+#
 #print(len(course1.tables))
 #for i in course1.tables:
 #    for j  in i:
 #        j.print()
-
-
+#        
 
 ####################My approch to the problem -----------------------------------------------------------------------------------------------------------------
 '''
@@ -557,41 +520,6 @@ Eg: "9:00, ITI110 Z00" or "8:30, Empty".
 -I used the 24 hour format rather than AM and PM, at last for the sake of coding.
 '''
 ##################-------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-###Testing lists to test the class without the need for internet
-
-Section1 = ['ELG2138 A00', 'ELG2138 A00', 'ELG2138 A03', 'ELG2138 A04', 'ELG2138 A01', 'ELG2138 A02', 'ELG2138 B00', 'ELG2138 B00', 'ELG2138 B03', 'ELG2138 B04', 'ELG2138 B01', 'ELG2138 B02']
-Activity1=['LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB', 'LEC', 'LEC', 'DGD', 'DGD', 'LAB', 'LAB']
-Time1=['11:30,13:00', '13:00,14:30', '14:30,16:00', '14:30,16:00', '14:30,17:30', '19:00,22:00', '10:00,11:30', '8:30,10:00', '16:00,17:30', '16:00,17:30', '16:00,19:00', '10:00,13:00']
-Location1=['LPR 155', 'LPR 155', 'MRT 221', 'MNO C211', 'DEP DEPT', 'DEP DEPT', 'HGN 302', 'STE H0104', 'MRT 221', 'LMX 390', 'DEP DEPT', 'DEP DEPT']
-Day1=['Wednesday', 'Monday', 'Thursday', 'Thursday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Wednesday', 'Wednesday', 'Friday', 'Tuesday']
-#--------------#-----------------------------------------------------
-Section2=['MCG1100 A00', 'MCG1100 A01', 'MCG1100 A01', 'MCG1100 B00', 'MCG1100 B01', 'MCG1100 B01', 'MCG1100 C00', 'MCG1100 C01', 'MCG1100 C01', 'MCG1100 D00', 'MCG1100 D01', 'MCG1100 D01']
-Activity2=['LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB', 'LEC', 'LAB', 'LAB']
-Time2=['11:30,13:00', '8:00,10:00', '14:30,17:30', '17:30,19:00', '12:00,14:00', '19:00,22:00', '14:30,16:00', '18:30,20:30', '13:00,16:00', '17:30,19:00', '8:00,10:00', '19:00,22:00']
-Location2=['STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT', 'STE C0136', 'DEP DEPT', 'DEP DEPT']
-Day2=['Thursday', 'Friday', 'Friday', 'Thursday', 'Monday', 'Tuesday', 'Wednesday', 'Tuesday', 'Thursday', 'Monday', 'Thursday', 'Monday']
-#_________________________________________________________________
-Section3=['ITI1121 Z00', 'ITI1121 Z00', 'ITI1121 Z01', 'ITI1121 Z02', 'ITI1121 Z03']
-Activity3=['LEC', 'LEC', 'LAB', 'LAB', 'LAB']
-Time3=['11:30,13:00', '13:00,14:30', '11:30,14:30', '8:30,11:30', '8:30,11:30']
-Location3=['MRT 218', 'MRT 218', 'STE 2060', 'STE 2060', 'STE 2060']
-Day3=['Wednesday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
-##_________________________________________________________________
-
-
-
-
-        
-    
-                    
-            
-
-
-            
-            
-
 
 
                         
