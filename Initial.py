@@ -34,7 +34,7 @@ class Time:
         
         
     def __repr__(self):
-        return str(self.slot)+" "+str(self.section)
+        return str(self.slot)
         
     def __str__(self):
         e = str(self.isEmpty())
@@ -49,7 +49,8 @@ class Time:
     
 def insert(time, day, secInfo):
     '''Inserts the given time in the given day, if there is a conflict will return False, other wise will return True
-    sec info is section, activity, location, prof in a list in that order'''
+    sec info is section, activity, location, prof in a list in that order
+    can either take a float time slot or a string of a starttime and endtime'''
     if type(time)==float:
         if time/int(time) == 1:
             index = int(2*time -16)
@@ -247,9 +248,9 @@ class Course:
         Prof=self.Prof
         Time=self.Time
         tmp=[]
-        #browser = webdriver.PhantomJS(path)
+        browser = webdriver.PhantomJS(path)
 
-        browser = webdriver.Chrome(path)
+        #browser = webdriver.Chrome(path)
         browser.get(url)
         #table = browser.find_element_by_xpath("""//*[@id="1"]""") 
         tables = browser.find_elements_by_id("schedule") 
