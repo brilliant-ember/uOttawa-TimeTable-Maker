@@ -2,7 +2,9 @@ import Initial as I
 import itertools
 import plotly as py
 import plotly.figure_factory as ff
-
+import pandas as pd
+import webbrowser
+import os
 
 #Notes
 # -if u will add the feature of getting course info by giving the course code rather than url, make sure to throw an error if the corses are in diffrent semsters
@@ -54,7 +56,7 @@ def PossibleTables(one, two):
 def formater(tableObj):
     '''takes a table object and creates a list in the format needed to export a Table via plotly'''
     t = tableObj
-    w= ['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
+    w= ['Saterday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday']
     times = ['8.0', '8.3', '9.0', '9.3', '10.0', '10.3', '11.0', '11.3', '12.0', '12.3', '13.0', '13.3', '14.0', '14.3', '15.0', '15.3', '16.0', '16.3', '17.0', '17.3', '18.0', '18.3', '19.0', '19.3', '20.0', '20.3', '21.0', '21.3', '22.0']
     
     dataMatrix = [("Days", w)
@@ -94,27 +96,33 @@ def pandasFormater(t):
     return out
 
 
-def tableExport(L,fileName):
+def tableExportPlotly(L,fileName):
     '''takes a formated list L and makes a table with plotly. and takes a string as a name '''
-    table = ff.create_table(L)
+    table = ff.create_table(L, height_constant=50)
     py.offline.plot(table, filename=fileName )
     
-    
-        
-            
-            
+
+
+
     
 
+
+    
 
 ooo = PossibleTables(course1, course2)
 a = ooo[0]
-b = formater(a)
-
-print(b)
 
 
-print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLl\n")
-tableExport(b, "Z")
+
+b = pandasFormater(a)
+df = pd.DataFrame.from_items(b)
+tableName = "filename.html"
+
+df.to_html(tableName)
+url = os.path.abspath(tableName)
+webbrowser.open(url)
+
+
 
 #for i in range(len(ooo)):
 #    table = ooo[i]
