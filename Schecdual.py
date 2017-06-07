@@ -5,6 +5,7 @@ import plotly.figure_factory as ff
 import pandas as pd
 import webbrowser
 import os
+import tableHtml
 
 #Notes
 # -if u will add the feature of getting course info by giving the course code rather than url, make sure to throw an error if the corses are in diffrent semsters
@@ -33,8 +34,7 @@ def PossibleTables(one, two):
     grouped_secs = [[x,y]for x in tables_of_1 for y in tables_of_2] #Groups secs based on cartisan product, eg: let course1 hv 2 sections and each section has 2 possible tbls, 
                                                                     #and course2 has 2 sections as well with each having 3 possible tbls. what will this do is create this list
                                                                     #[[[all C1 SecA Tbls], [all C2 SecA tbls]], [[all C1 SecA Tbls], [all C2 SecB tbls]]
-#    print("\nthis is grouped secs")
-#    print(grouped_secs)
+
             
     #grouped_tables refer to https://stackoverflow.com/questions/3034014/how-to-apply-itertools-product-to-elements-of-a-list-of-lists
     
@@ -120,7 +120,9 @@ tableName = "filename.html"
 
 df.to_html(tableName)
 url = os.path.abspath(tableName)
-webbrowser.open(url)
+tableHtml.htmlChanger(url)
+
+#webbrowser.open(url)
 
 
 
