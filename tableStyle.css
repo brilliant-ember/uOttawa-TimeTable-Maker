@@ -1,0 +1,50 @@
+table{
+    background-color: snow;
+    width: auto;
+    
+}
+
+#day{
+    background-color: #f4f1d1;
+    border-bottom: 10px double snow;
+    
+}
+
+
+.tile{
+    width:auto;
+    margin:  15px;
+ 
+    border: 3px solid rgba(255, 255, 34, 0.69);
+    border-bottom:3px double grey
+}
+
+#odd{
+    text-align: center;
+    width: 100px;
+    border: 3px double #f0e87f;
+    padding: 4px;
+    background-color: #ebeddc;
+    display: ;
+    box-sizing: border-box;
+}
+
+#even{
+    text-align: center;
+    width: 100px;
+    border: 3px double #f5eb67;
+    margin: 2px;
+    padding: 4px;
+    background-color: #f4e9e9;
+    
+}
+.time{
+     background-color: lightgoldenrodyellow;
+     border-right: 10px double snow;
+     
+    
+}
+    
+
+
+
