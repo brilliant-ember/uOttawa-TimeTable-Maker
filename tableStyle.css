@@ -1,6 +1,6 @@
 table{
     background-color: snow;
-    width: auto;
+    width: 1000;
     
 }
 
@@ -12,26 +12,18 @@ table{
 
 
 .tile{
-    width:auto;
+    width:1000;
     margin:  15px;
  
     border: 3px solid rgba(255, 255, 34, 0.69);
     border-bottom:3px double grey
 }
 
-#odd{
-    text-align: center;
-    width: 100px;
-    border: 3px double #f0e87f;
-    padding: 4px;
-    background-color: #ebeddc;
-    display: ;
-    box-sizing: border-box;
-}
 
-#even{
+
+td{
     text-align: center;
-    width: 100px;
+    width: 150px;
     border: 3px double #f5eb67;
     margin: 2px;
     padding: 4px;
@@ -39,10 +31,22 @@ table{
     
 }
 .time{
-     background-color: lightgoldenrodyellow;
+     background-color: #effad2;
      border-right: 10px double snow;
+     width: 15px;
      
     
+}
+#sat{
+    width:10px;
+    background-color: #ad9981;
+    width: 10px;
+    
+}
+#sun{
+    width:10px;
+        background-color: #ad9981;
+
 }
     
 
