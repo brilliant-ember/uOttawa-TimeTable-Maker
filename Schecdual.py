@@ -61,17 +61,15 @@ def formater(tableObj):
     
     return dataMatrix
 
-
-
-    
-
+#    
+#
 ooo = PossibleTables(course1, course2)
 for i in range(len(ooo)):
     x = ooo[i]
     a = formater(x)
     T.UseThis(a, str(i))
-
-
+#
+#
 
 
 

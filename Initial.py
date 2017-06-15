@@ -34,7 +34,7 @@ class Time:
         
         
     def __repr__(self):
-        return str(self.slot)
+        return str(self.activity)
         
     def __str__(self):
         e = str(self.isEmpty())
@@ -439,6 +439,7 @@ class Course:
                         sessionProf = self.secProfs[i][j][x]
                         secInfo= [session, sessionAct, sessionLoc, sessionProf]
                         
+                        
                         T.inserter(sessionTime, sessionDay, secInfo)
                     self.tables[i].append(T)
 
@@ -456,7 +457,11 @@ class Course:
                         sessionAct = self.secActs[i][j][x]
                         sessionLoc = self.secLocs[i][j][x]
                         sessionProf = self.secProfs[i][j][x]
-                        
+                        secInfo= [session, sessionAct, sessionLoc, sessionProf]
+#                        print(self.secActs)
+#                        print([i,j,x])
+#                        print(sessionAct)
+#                        
                         tblCopyList = copy.deepcopy(self.tables[i])
                         
                         for N in range(len(self.tables[i])):
@@ -511,17 +516,22 @@ def isMixable(tbl1, tbl2):
                
 #                
 #path = "D:\chromedriver.exe"
+
 ##
 ##
 ##course1 = Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=011209&term=2179&session=FS")
 #print("____________Finalllll  ________________")
+#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 #course1 = Course(path, "http://127.0.0.1:8000/html/ELG2138.html")
 #
 #print(len(course1.tables))
 #for i in course1.tables:
-#    for j  in i:
-#        j.print()
+#    for tbl  in i:
+#        for day in tbl.Week:
+#            print(day)
 #        
+#        
+        
 
 ####################My approch to the problem -----------------------------------------------------------------------------------------------------------------
 '''
