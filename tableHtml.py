@@ -6,9 +6,6 @@ schemeBlue=["snow","#859ddd","","#859ddd"]
 schemeBlack=[]
 schemePink=[]
 
-
-if True:
-	selected = scheme1
 def HTML_lister(tbl):
 	'''Exports a list oflists with all the divs and css data is this format:[[][divTagStr, dayOfTheWeek, startTime, numberOfSlots, Css class key made of 'session CourseCode DayandTimeOfsession' ][]]'''
 	divList = []
@@ -52,188 +49,187 @@ def coordinate(day, StartTime, number_of_slots):
 	h = 0.3+(0.6*h)
 	return [str(x), str(y), str(h)]
 
-htmlCss = '''
-<html>
-    <head>
-        <style>
-table{
-    background-color: '''+selected[0]+''';
-    width: 1000;    
-}
-#day{
-    background-color: '''+ selected[1]+''';
-    border-bottom: 10px double '''+selected[2]+''';   
-}
-.tile{
-    width:1000;
-    margin:  15px;
- 
-    border: 3px solid #cfd0cc;
-    border-bottom:3px double '''+ selected[3]+'''
-}
-td{
-    border-radius: 3px;    
-    text-align: center;
-    width: 150px;
-    border: 3px solid '''+ selected[4]+''';
-    margin: 2px;
-    padding: 4px;
-    background-color: ''' +selected[5]+''';
-    
-}
-.time{
-     background-color: '''+ selected[6]+''';
-     border-right: 10px double '''+ selected[7]+''';
-     width: 15px;
-     
-    
-}
-#sat{
-    width:10px;
-    background-color: #ad9981;
-    width: 10px;
-    
-}
-#sun{
-    width:10px;
-        background-color: #ad9981;
+if True:
+	selected = scheme1
+def UseThis(tbl):
+	htmlCss = '''
+	<html>
+	    <head>
+	        <style>
+	table{
+	    background-color: '''+selected[0]+''';
+	    width: 1000;    
+	}
+	#day{
+	    background-color: '''+ selected[1]+''';
+	    border-bottom: 10px double '''+selected[2]+''';   
+	}
+	.tile{
+	    width:1000;
+	    margin:  15px;
+	 
+	    border: 3px solid #cfd0cc;
+	    border-bottom:3px double '''+ selected[3]+'''
+	}
+	td{
+	    border-radius: 3px;    
+	    text-align: center;
+	    width: 150px;
+	    border: 3px solid '''+ selected[4]+''';
+	    margin: 2px;
+	    padding: 4px;
+	    background-color: ''' +selected[5]+''';
+	    
+	}
+	.time{
+	     background-color: '''+ selected[6]+''';
+	     border-right: 10px double '''+ selected[7]+''';
+	     width: 15px;
+	     
+	    
+	}
+	#sat{
+	    width:10px;
+	    background-color: #ad9981;
+	    width: 10px;
+	    
+	}
+	#sun{
+	    width:10px;
+	        background-color: #ad9981;
 
-}
-.session{
-    
-    border-radius: 10px;    
-    width: 144;
-    position: absolute;
-    border: 5px solid green;
-    font-family: Century Gothic, sans-serif;
-    text-align: center;
-}'''
-
-
-htmlTbl=	'''	</style>
-    
-        <title>
-            I'm a cute table <3
-        </title>
-    </head>
-        
-    <body>
-        <div class="tile">
-        <table>
-            <thead>
-                <tr>
-                      <th class="time">Times</th>
-                        <th id="day">Monday</th>
-                        <th id="day">Tuesday</th>
-                        <th id="day">Wednessday</th>
-                        <th id="day">Thursday</th>
-                        <th id="day">Friday</th>
-                        <th id="day">Saterday</th>
-                        <th id="day">Sunday</th>
-                </tr>
-            </thead>
-        <tbody>
-            <tr>
-                
-                <td class= "time">8:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-                
-            </tr>
-            <tr>
-                
-                <td class= "time">8:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-                
-            </tr>
-            
-            <tr>
-    <td class= "time">9:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">9:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">10:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">10:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">11:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">11:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">12:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">12:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">13:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">13:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">14:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">14:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">15:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">15:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">16:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">16:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">17:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">17:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">18:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">18:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">19:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">19:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">20:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">20:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">21:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">21:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-	<tr>
-	    <td class= "time">22:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
-	</tr>
-
-	      
-'''
-
-htmlEnd = "</html>"
+	}
+	.session{
+	    
+	    border-radius: 10px;    
+	    width: 144;
+	    position: absolute;
+	    border: 5px solid green;
+	    font-family: Century Gothic, sans-serif;
+	    text-align: center;
+	}'''
 
 
-def main(tbl, selected = selected):
-	
+	htmlTbl=	'''	</style>
+	    
+	        <title>
+	            I'm a cute table <3
+	        </title>
+	    </head>
+	        
+	    <body>
+	        <div class="tile">
+	        <table>
+	            <thead>
+	                <tr>
+	                      <th class="time">Times</th>
+	                        <th id="day">Monday</th>
+	                        <th id="day">Tuesday</th>
+	                        <th id="day">Wednessday</th>
+	                        <th id="day">Thursday</th>
+	                        <th id="day">Friday</th>
+	                        <th id="day">Saterday</th>
+	                        <th id="day">Sunday</th>
+	                </tr>
+	            </thead>
+	        <tbody>
+	            <tr>
+	                
+	                <td class= "time">8:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+	                
+	            </tr>
+	            <tr>
+	                
+	                <td class= "time">8:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+	                
+	            </tr>
+	            
+	            <tr>
+	    <td class= "time">9:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">9:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">10:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">10:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">11:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">11:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">12:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">12:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">13:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">13:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">14:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">14:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">15:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">15:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">16:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">16:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">17:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">17:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">18:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">18:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">19:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">19:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">20:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">20:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">21:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">21:30</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+		<tr>
+		    <td class= "time">22:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
+		</tr>
+
+		      
+	'''
+
+	htmlEnd = "</html>"
 
 	divList = HTML_lister(tbl)
 
@@ -257,10 +253,12 @@ def main(tbl, selected = selected):
 
 	html = htmlCss + htmlTbl + htmlEnd
 
-	f = open("Hello", "w")
+	f = open("Hello.html", "w")
 	f.write(html)
 
 
 
 tbl=[['Mon', None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Tue', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Wed', None, None, None, None, None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None], ['Thu', None, None, None, None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None], ['Fri', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]]
-main(tbl)
+UseThis(tbl)
+
+
