@@ -78,7 +78,13 @@ def coordinate(day, StartTime, number_of_slots):
 
 if True:
 	selected = scheme1
-def UseThis(tbl):
+
+def choose_color(anumber):
+	'''to be filled with all the schemes'''
+	if anumber ==1:
+		selected  = scheme1
+def UseThis(tbl, name):
+	'''takes a table and a name for it then makes an html table'''
 	htmlCss = '''
 	<html>
 	    <head>
@@ -277,12 +283,12 @@ def UseThis(tbl):
 
 	html = htmlCss + htmlTbl + htmlEnd
 
-	f = open("Hello.html", "w")
+	f = open(name+".html", "w")
 	f.write(html)
 
 
 
-tbl=[['Mon', None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Tue', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Wed', None, None, None, None, None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None], ['Thu', None, None, None, None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None], ['Fri', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]]
-UseThis(tbl)
+#tbl=[['Mon', None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Tue', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], ['Wed', None, None, None, None, None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None], ['Thu', None, None, None, None, None, None, None, None, None, None, 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC MRT 218 MAT2322 B00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', 'LEC LPR 155 ELG2138 A00', None, None, None, None, None, None, None, None, None, None, None, None, None], ['Fri', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]]
+
 
 

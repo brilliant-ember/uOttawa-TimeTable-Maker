@@ -138,11 +138,6 @@ def DayMaker():
     Day.append(s)
     return Day
 
-
-
-
-
-
 Day = DayMaker()
 class Table:
     def __init__(self):                                                                                  

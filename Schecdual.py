@@ -1,11 +1,7 @@
 import Initial as I
 import itertools
-import plotly as py
-import plotly.figure_factory as ff
-import pandas as pd
-import webbrowser
 import os
-import tableHtml
+import tableHtml as T
 
 #Notes
 # -if u will add the feature of getting course info by giving the course code rather than url, make sure to throw an error if the corses are in diffrent semsters
@@ -17,12 +13,7 @@ course1 = I.Course(path, "http://127.0.0.1:8000/html/ELG2138.html") #circuit the
 course2 = I.Course(path, "http://127.0.0.1:8000/html/MAT2322.html")#Calc 3
 #course3 = I.Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=015025&term=2179&session=FS")#engineering mech
 #course4 = I.Course(path, "")
-
-#print(len(course1.tables))
-#for i in course1.tables:
-#    for j  in i:
-#        j.print()
-#        
+     
         
 def PossibleTables(one, two):
     '''takes 2 course objs then makes and outputs all possible tables with it, Cartisian product of the tables
@@ -54,86 +45,36 @@ def PossibleTables(one, two):
 
 
 def formater(tableObj):
-    '''takes a table object and creates a list in the format needed to export a Table via plotly'''
+    '''takes a table object and creates a list in the format needed to export a Table'''
     t = tableObj
-    w= ['Saterday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday']
-    times = ['8.0', '8.3', '9.0', '9.3', '10.0', '10.3', '11.0', '11.3', '12.0', '12.3', '13.0', '13.3', '14.0', '14.3', '15.0', '15.3', '16.0', '16.3', '17.0', '17.3', '18.0', '18.3', '19.0', '19.3', '20.0', '20.3', '21.0', '21.3', '22.0']
-    
-    dataMatrix = [("Days", w)
-                  
-                  
-                 ]
-    for i in range(len(times)):
-        slotStr = times[i]
-        timeList = []
-        timeEntry = (slotStr,timeList)
-        for day in t.Week:
-            slot = day[i]
-            if slot.location == None:
-                timeList.append(" Free ")
-            else:
-                timeList.append(slot.activity+ '\n ' + slot.location+ '\n ' +slot.section)
-        dataMatrix.append(timeEntry)
-                
-    return dataMatrix
-
-
-def pandasFormater(t):
-    '''formates the tables to a list of tuples so pandas dataframe can use it'''
-    out = [("Times", ['8.0', '8.3', '9.0', '9.3', '10.0', '10.3', '11.0', '11.3', '12.0', '12.3', '13.0', '13.3', '14.0', '14.3', '15.0', '15.3', '16.0', '16.3', '17.0', '17.3', '18.0', '18.3', '19.0', '19.3', '20.0', '20.3', '21.0', '21.3', '22.0'])
-          ]
     w= ['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
-    for i in range(len(t.Week)):
+    dataMatrix = []
+    for i in range(len(w)):
         day = t.Week[i]
-        tmp = []
+        dayEntry = [w[i]]
         for slot in day:
             if slot.location != None:              
-                tmp.append(slot.activity+ ' ' + slot.location+ ' ' +slot.section)
+                dayEntry.append(slot.activity+ ' ' + slot.location+ ' ' +slot.section)
             else:
-                tmp.append("FreeTrack")
-        x = (w[i],tmp)
-        out.append(x)
-    return out
-
-
-def tableExportPlotly(L,fileName):
-    '''takes a formated list L and makes a table with plotly. and takes a string as a name '''
-    table = ff.create_table(L, height_constant=50)
-    py.offline.plot(table, filename=fileName )
+                dayEntry.append(None)
+        dataMatrix.append(dayEntry)
     
+    return dataMatrix
 
-
-
-    
 
 
     
 
 ooo = PossibleTables(course1, course2)
-a = ooo[0]
+for i in range(len(ooo)):
+    x = ooo[i]
+    a = formater(x)
+    T.UseThis(a, str(i))
 
 
 
-b = pandasFormater(a)
-df = pd.DataFrame.from_items(b)
-tableName = "filename.html"
-
-df.to_html(tableName)
-url = os.path.abspath(tableName)
-tableHtml.htmlChanger(url)
-
-#webbrowser.open(url)
 
 
-
-#for i in range(len(ooo)):
-#    table = ooo[i]
-#    a = formater(table)
-#    print (a)
-#   
-
-
-        
         
 
     
