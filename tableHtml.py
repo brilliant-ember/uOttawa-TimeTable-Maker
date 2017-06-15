@@ -72,8 +72,8 @@ def coordinate(day, StartTime, number_of_slots):
 	x = (x*163) + 66
 	y = time.index(StartTime)
 	y = yList[y]
-	h =  number_of_slots - 2
-	h = 0.3+(0.6*h)
+	h =  number_of_slots - 1
+	h = 0.5+(1.1*h)
 	return [str(x), str(y), str(h)]
 
 if True:
@@ -252,20 +252,17 @@ def UseThis(tbl):
 		<tr>
 		    <td class= "time">22:00</td><td></td><td></td><td></td><td></td><td></td><td id="sat"></td><td id="sun"></td>
 		</tr>
-
 		      
 	'''
 
 	htmlEnd = "</html>"
 
 	divList = HTML_lister(tbl)
-
 	color = []
 	for div in divList:
 		#[x, y, hight]
 		#[divTagStr, dayOfTheWeek, startTime, numberOfSlots, Css class key made of 'session CourseCode DayandTimeOfsession' ]
 		forTbl = "  " + div[0]
-		
 		postion = coordinate(div[1], div[2], div[3])
 		if len(color) == 0 or div[4][0:16] not in color:
 			color.append(div[4][0:16])
