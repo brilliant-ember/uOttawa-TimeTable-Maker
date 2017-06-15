@@ -10,13 +10,13 @@ def HTML_lister(tbl):
 	'''Exports a list oflists with all the divs and css data is this format:[[][divTagStr, dayOfTheWeek, startTime, numberOfSlots, Css class key made of 'session CourseCode DayandTimeOfsession' ][]]'''
 	divList = []
 	for day in tbl:
-		session = []#each day starts with a new sessiiom
+		session = []#each day starts with a new session
 		dayOftheWeek=day[0]
 		for i in range(1, len(day)):
 			slot = day[i]
 
 			if slot != None:
-				if len(session)==0:
+				if len(session) == 0:
 					slotStr = time[i-1]
 					session.append(slotStr)
 					sessionName = slot[-11:]
@@ -32,8 +32,35 @@ def HTML_lister(tbl):
 	    			''', dayOftheWeek,session[0],session.count("30Min")," "+"."+dayOftheWeek+slotStr.replace(".","Z")]
 					divList.append(divEx)
 					session= []
+
+					slotStr = time[i-1]
+					session.append(slotStr)
+					sessionName = slot[-11:]
+					session.append(sessionName)
+					session.append(slot[:-11])
+					session.append("30Min")
 				else:
 					session.append("30Min")
+			elif slot == None and len(session) != 0:
+
+				divEx= ['''<div class="session  '''+ dayOftheWeek+slotStr.replace(".","Z")+''' " '''+'''
+	        		<h3>'''+
+	        		session[1]+" "+session[2]+ " "+session[0].replace(".",":")+"0"+'''
+	        		</h3>
+	    			</div>
+	    			''', dayOftheWeek,session[0],session.count("30Min")," "+"."+dayOftheWeek+slotStr.replace(".","Z")]
+				divList.append(divEx)
+				session = []
+
+		if len(session) != 0:
+			divEx= ['''<div class="session  '''+ dayOftheWeek+slotStr.replace(".","Z")+''' " '''+'''
+    		<h3>'''+
+    		session[1]+" "+session[2]+ " "+session[0].replace(".",":")+"0"+'''
+    		</h3>
+			</div>
+			''', dayOftheWeek,session[0],session.count("30Min")," "+"."+dayOftheWeek+slotStr.replace(".","Z")]
+			divList.append(divEx)
+			
 
 	return divList
 
