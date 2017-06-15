@@ -33,8 +33,8 @@ def HTML_lister(tbl):
 	        		</h3>
 	    			</div>
 	    			''', dayOftheWeek,session[0],session.count("30Min"),".session "+session[1][:-4]+" "+dayOftheWeek+slotStr]
-	    			divList.append(divEx)
-	    			session= []
+					divList.append(divEx)
+					session= []
 				else:
 					session.append("30Min")
 
@@ -50,7 +50,7 @@ def coordinate(day, StartTime, number_of_slots):
 	y = yList[y]
 	h = 2- number_of_slots
 	h = 0.3+(0.6*h)
-	return [str(x), str(y), str(z)]
+	return [str(x), str(y), str(h)]
 
 htmlCss = '''
 <html>
@@ -109,8 +109,8 @@ td{
     text-align: center;
 }'''
 
-htmlTbl =	'''
-	</style>
+
+htmlTbl=	'''	</style>
     
         <title>
             I'm a cute table <3
@@ -233,6 +233,7 @@ htmlEnd = "</html>"
 
 
 def main(tbl, selected = selected):
+	
 
 	divList = HTML_lister(tbl)
 
@@ -251,7 +252,7 @@ def main(tbl, selected = selected):
 					top: """ + postion[1] + """; 
 					margin-left: """ + postion[0] + """;"""
 
-		htmlTbl += forTbl 
+		htmlTbl = htmlTbl + forTbl 
 		htmlCss += forCss
 
 	html = htmlCss + htmlTbl + htmlEnd
