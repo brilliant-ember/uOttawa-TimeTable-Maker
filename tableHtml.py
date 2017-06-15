@@ -24,12 +24,12 @@ def HTML_lister(tbl):
 					session.append(slot[:-11])
 					session.append("30Min")
 				elif slot[-3:] != session[1][-3:]:#div creation here, then empty the session list
-					divEx= ['''<div class="session " '''+session[1]+'''
+					divEx= ['''<div class="session  '''+ dayOftheWeek+slotStr.replace(".","Z")+''' " '''+'''
 	        		<h3>'''+
 	        		session[1]+" "+session[2]+ " "+session[0].replace(".",":")+"0"+'''
 	        		</h3>
 	    			</div>
-	    			''', dayOftheWeek,session[0],session.count("30Min"),".session "+session[1][:-4]+" "+dayOftheWeek+slotStr]
+	    			''', dayOftheWeek,session[0],session.count("30Min")," "+"."+dayOftheWeek+slotStr.replace(".","Z")]
 					divList.append(divEx)
 					session= []
 				else:
@@ -42,10 +42,10 @@ def coordinate(day, StartTime, number_of_slots):
 	w = ['Mon','Tue','Wed','Thu','Fri','Say','Sun']
 	yList = [55, 90, 125, 160, 195, 230, 265, 300, 335, 370, 405, 440, 475, 510, 545, 580, 615, 650, 685, 720, 755, 790, 825, 860, 895, 930, 965, 1000, 1035]
 	x = w.index(day)
-	x = (x+1)*66
+	x = (x*163) + 66
 	y = time.index(StartTime)
 	y = yList[y]
-	h = 2- number_of_slots
+	h =  number_of_slots - 2
 	h = 0.3+(0.6*h)
 	return [str(x), str(y), str(h)]
 
@@ -246,7 +246,7 @@ def UseThis(tbl):
 		forCss = div[4]+"""{ """+ "line-height: """+postion[2]+"""; 
 					background-color: """ + course_color[color.index(div[4][0:16])] + """; 
 					top: """ + postion[1] + """; 
-					margin-left: """ + postion[0] + """;"""
+					margin-left: """ + postion[0] + """; } \n"""
 
 		htmlTbl = htmlTbl + forTbl 
 		htmlCss += forCss
