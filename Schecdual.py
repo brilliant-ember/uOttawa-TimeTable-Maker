@@ -64,9 +64,13 @@ def formater(tableObj):
 #    
 #
 ooo = PossibleTables(course1, course2)
-for i in range(len(ooo)):
+for i in range(1):
+#    print(i)
+#    print("\n \n \n")
+    #x.print()
     x = ooo[i]
     a = formater(x)
+    #print(a)
     T.UseThis(a, str(i))
 #
 #

@@ -23,7 +23,7 @@ def HTML_lister(tbl):
 					session.append(sessionName)
 					session.append(slot[:-11])
 					session.append("30Min")
-				elif slot[-3:] != session[1][-3:]:#div creation here, then empty the session list
+				if slot[-11:] != session[1][-11:]:#div creation here, then empty the session list
 					divEx= ['''<div class="session  '''+ dayOftheWeek+slotStr.replace(".","Z")+''' " '''+'''
 	        		<h3>'''+
 	        		session[1]+" "+session[2]+ " "+session[0].replace(".",":")+"0"+'''
