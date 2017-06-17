@@ -64,7 +64,7 @@ def formater(tableObj):
 #    
 #
 ooo = PossibleTables(course1, course2)
-for i in range(1):
+for i in range(len(ooo)):
 #    print(i)
 #    print("\n \n \n")
     #x.print()

@@ -9,9 +9,12 @@ schemePink=[]
 def HTML_lister(tbl):
 	'''Exports a list oflists with all the divs and css data is this format:[[][divTagStr, dayOfTheWeek, startTime, numberOfSlots, Css class key made of 'session CourseCode DayandTimeOfsession' ][]]'''
 	divList = []
+	tbl = iter(tbl)
+	next(tbl)
+	next(tbl)
 	for day in tbl:
 		session = []#each day starts with a new session
-		dayOftheWeek=day[0]
+		dayOftheWeek = day[0]
 		for i in range(1, len(day)):
 			slot = day[i]
 
@@ -23,7 +26,7 @@ def HTML_lister(tbl):
 					session.append(sessionName)
 					session.append(slot[:-11])
 					session.append("30Min")
-				if slot[-11:] != session[1][-11:]:#div creation here, then empty the session list
+				elif slot[-11:] != session[1][-11:]:#div creation here, then empty the session list
 					divEx= ['''<div class="session  '''+ dayOftheWeek+slotStr.replace(".","Z")+''' " '''+'''
 	        		<h3>'''+
 	        		session[1]+" "+session[2]+ " "+session[0].replace(".",":")+"0"+'''
