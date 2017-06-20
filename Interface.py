@@ -1,4 +1,5 @@
 from tkinter import *
+import webbrowser
 
 
 
@@ -57,7 +58,9 @@ class MainWindow:
 		Radiobutton(master, text = "Blue style", variable = self.v, value = 4).grid(row=10,column=1)
 
 		helpB = Button(master, text="help", command=self.helpF, width=15).grid(row=11,column=1 ,padx=5,pady=15)
-		submitB = Button(master, text="Submit!", fg="red", command=self.submit, width=15,  font = ("Vendera", 20, "bold italic")).grid(row=11 ,padx=5,pady=15)
+		Buy = Button(master, text="Buy the developer a coffee!", command=self.Coffee, fg="red",bg="white", font = ("Vendera", 20, "bold italic")).grid(row=12 ,padx=15,pady=15)
+
+		submitB = Button(master, text="Submit!", command=self.submit,  font = ("Vendera", 20, "bold italic")).grid(row=11 ,padx=5,pady=15)
 	def helpF(self):
 		pass
 		# L = [self.entry1]
@@ -65,21 +68,34 @@ class MainWindow:
 		# 	if len(L[i]) !=7:
 		# 		print('YAY')
 
-
-
 	def submit(self):
+		data = [self.semEntry.get(), self.entry1.get(), self.entry2.get(), self.entry3.get(), self.entry4.get(), self.entry5.get(), self.entry6.get(), self.entry7.get() ]
+		if len(data[0]) != 1:
+			self.popError("Make sure the semester entry is one charecter either F, W, or S")
+		for i in range(1, len(data)):
+			courseE = data[i]
+			if len(courseE) > 0  and len(courseE.replace(" ","")) != 7:
+				self.popError("Course "+str(i)+" input is not right")
+
+
+	def popError(self, msg):
+		popup = Toplevel()
+		popup.title("Tragic Error") 
+		label = Label(popup, text=msg+", click on the help button for a beautiful tutorial", font = ("Vendera", 10, "bold"))
+		label.pack(fill = "x", pady = 10, padx=7)
+		b = Button(popup, text="Destroy?", command = popup.destroy)
+		b.pack(side=BOTTOM, pady=7)
+		popup.lift()
+
+
+	def Coffee(self):
+		webbrowser.open_new("paypal.me/ThanksShukranMerci/5")
+
+	def style(self):
+		pass
 		# if self.v.get==1:
 		# 	selected = x
-		pass
 
-	def popError(self):
-		popup=Tk()
-		popup.title("Tragic Error") 
-		if True:
-			pass
-		label = Label(popup, text=msg, font = ("Vendera", 10))
-		label.pack(fill = "x", pady = 10)
-		popup.mainloop()
 
 
 root = Tk()
