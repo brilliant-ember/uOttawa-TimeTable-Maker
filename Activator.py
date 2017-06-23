@@ -1,21 +1,19 @@
 '''This module takes input from the GUI and starts the main program. It uses the data to extract urls then puts those in the main program'''
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from Schedule import MultiPossibleTables as multi
-
+from time import time
 
 urlList = []
 url = "https://web30.uottawa.ca/v3/SITS/timetable/Search.aspx"
-path = "D:\chromedriver.exe"
-#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+#path = "D:\chromedriver.exe"
+path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 def urlExtract(L, styleInt):
 	for j in range(1, len(L)):
 		'''takes a list made of [the semester, the rest of courses as strings]'''
-		#browser = webdriver.PhantomJS(path)
-		browser = webdriver.Chrome(path)
+		t = time()
+		browser = webdriver.PhantomJS(path)
+		#browser = webdriver.Chrome(path)
 		browser.get(url)
 		#select = Select(browser.find_element_by_xpath
 		menu = browser.find_element_by_tag_name("select")
@@ -48,8 +46,10 @@ def urlExtract(L, styleInt):
 			link = browser.find_element_by_class_name("CourseCode").find_element_by_tag_name("a").get_attribute('href')
 
 			urlList.append(link)
-		print(urlList)
-		#multi(urlList)
+	
+	print(urlList)
+	print("In "+str(time()-t))
+	#multi(urlList)
 
 ##Now the scedule function takes the links list and the style number
 
