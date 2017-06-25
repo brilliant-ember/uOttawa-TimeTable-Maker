@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from Schedule import MultiPossibleTables as multi
 from time import time
 from tkinter import *
-#import threading as T
+import threading as T
 import multiprocessing as M
 
 urlList = []
@@ -62,7 +62,6 @@ def urlExtract(L):
 				browser.get(url)
 	
 
-	print(urlList)
 
 	##Now toss to the Scedule method
 
@@ -77,31 +76,40 @@ def urlExtract(L):
 # t1.join()
 # t2.join()
 def mainMethod(list_of_courses, styleNo):
+
+
 	if len(list_of_courses) == 2:
 		urlExtract(list_of_courses)
-	else:
-		processesList = []
+
+	elif len(list_of_courses) ==3 : #when u have 2 courses
 		sem = list_of_courses[0]
-		list_of_courses = list_of_courses[1:]
+		c1 = list_of_courses[1:2]
+		c1.insert(0, sem)
+		c2 = list_of_courses[2:]
+		c2.insert(0, sem)
 
-
-	if __name__ == "__main__":
-		p = M.Pool(3)
-		a = p.map(urlExtract, list_of_courses)
-
-
-	print("In "+str(time()-t))
-
-	return urlList
-
-
-
-
+		if __name__ == "__main__":
+			m1 = M.Process(target= urlExtract, args=( c1, ))
+			m2 = M.Process(target= urlExtract, args=( c2, ))
+			m1.start()
+			m2.start()
+			m1.join()
+			m2.join()
 
 
 
 
-#print(mainMethod(["w","iti1100", "iti1121"], 5))
+
+
+
+
+
+
 t = time()
-urlExtract(["w","iti1100", "iti1121"], )
+co = ["w", "iti1121"]
+mainMethod(co, 5)
+
+
+
 print("In "+str(time()-t))
+print(urlList)
