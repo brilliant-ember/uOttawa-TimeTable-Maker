@@ -1,5 +1,7 @@
 from tkinter import *
 import webbrowser
+import Activator as Av
+from selenium.common.exceptions import TimeoutException
 
 
 
@@ -69,13 +71,29 @@ class MainWindow:
 		# 		print('YAY')
 
 	def submit(self):
-		data = [self.semEntry.get(), self.entry1.get(), self.entry2.get(), self.entry3.get(), self.entry4.get(), self.entry5.get(), self.entry6.get(), self.entry7.get() ]
+		Acti = True
+		data = [self.semEntry.get().lower(), self.entry1.get().replace(" ","").lower(), self.entry2.get().replace(" ","").lower(), self.entry3.get().replace(" ","").lower(), self.entry4.get().replace(" ","").lower(), self.entry5.get().replace(" ","").lower(), self.entry6.get().replace(" ","").lower(), self.entry7.get().replace(" ","").lower() ]
 		if len(data[0]) != 1:
 			self.popError("Make sure the semester entry is one charecter either F, W, or S")
+			Acti = False
 		for i in range(1, len(data)):
 			courseE = data[i]
-			if len(courseE) > 0  and len(courseE.replace(" ","")) != 7:
+			if len(courseE) > 0  and len(courseE) != 7:
 				self.popError("Course "+str(i)+" input is not right")
+				Acti = False
+		if Acti:
+			try:
+				Av.mainMethod(data, self.v.get())
+			except TimeoutException:
+				popup = Tk()
+				popup.title("Guess What?! i got an error ;) ") 
+				label =Label(popup, text="I couldn't find "+course+", I can't connect, check your internet connection ", font = ("Vendera", 10, "bold"))
+				label.pack(fill = "x", pady = 10, padx=7)
+				b = Button(popup, text="Destroy?", command = popup.destroy)
+				b.pack(side=BOTTOM, pady=7)
+
+				popup.mainloop()
+
 
 
 	def popError(self, msg):

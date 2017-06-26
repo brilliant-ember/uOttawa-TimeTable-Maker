@@ -7,7 +7,7 @@ from tkinter import *
 import threading as T
 import multiprocessing as M
 from Schedule import style
-from selenium.common.exceptions import TimeoutException
+
 
 url = "https://web30.uottawa.ca/v3/SITS/timetable/Search.aspx"
 path = "D:\chromedriver.exe"
@@ -78,7 +78,8 @@ def urlExtract(L, urlList):
 # t1.join()
 # t2.join()
 def mainMethod(list_of_courses, styleNo):
-
+	list_of_courses = list(filter(None, list_of_courses))
+	print("im at main"+ str(len(list_of_courses)))
 	style(styleNo)
 	if len(list_of_courses) == 2:
 		ZaList = []
@@ -86,6 +87,7 @@ def mainMethod(list_of_courses, styleNo):
 		multi(ZaList)
 
 	elif len(list_of_courses) ==3 : #when u have 2 courses
+		print("im at 2courses")
 		twoCourses(list_of_courses)
 
 	elif len(list_of_courses) == 4:#when u have 3
@@ -98,17 +100,21 @@ def mainMethod(list_of_courses, styleNo):
 		fiveCourses(list_of_courses)
 
 	elif len(list_of_courses) == 7 or len(list_of_courses) == 8:
+		print("im in 7")
 		sixNsevenCourses(list_of_courses)
 
 
 def twoCourses(list_of_courses):
+	print("I reachd tje methode")
 	sem = list_of_courses[0]
 	c1 = list_of_courses[1:2]
 	c1.insert(0, sem)
 	c2 = list_of_courses[2:]
 	c2.insert(0, sem)
+	print(str(__name__))
 
-	if __name__ == "__main__":
+	if __name__ == "Activator":
+		print("im in the if")
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
@@ -215,23 +221,23 @@ def sixNsevenCourses(list_of_courses):
 
 
 
-t = time()
-co = ["w", "iti1121","iti1100", "gng1106","MAT1300","ADM1100","iti1120"]
-try:
-	a = mainMethod(co, 1)
-#twoCourses(co)
-except TimeoutException:
-	popup = Tk()
-	popup.title("Guess What?! i got an error ;) ") 
-	label =Label(popup, text="I couldn't find "+course+", I can't connect, check your internet connection ", font = ("Vendera", 10, "bold"))
-	label.pack(fill = "x", pady = 10, padx=7)
-	b = Button(popup, text="Destroy?", command = popup.destroy)
-	b.pack(side=BOTTOM, pady=7)
+# t = time()
+# co = ["w", "iti1121","iti1100", "gng1106","MAT1300","ADM1100","iti1120"]
+# try:
+# 	mainMethod(co, 1)
+# #twoCourses(co)
+# except TimeoutException:
+# 	popup = Tk()
+# 	popup.title("Guess What?! i got an error ;) ") 
+# 	label =Label(popup, text="I couldn't find "+course+", I can't connect, check your internet connection ", font = ("Vendera", 10, "bold"))
+# 	label.pack(fill = "x", pady = 10, padx=7)
+# 	b = Button(popup, text="Destroy?", command = popup.destroy)
+# 	b.pack(side=BOTTOM, pady=7)
 
-	popup.mainloop()
-
-
+# 	popup.mainloop()
 
 
-print("In "+str(time()-t))
+
+
+# print("In "+str(time()-t))
 
