@@ -6,13 +6,15 @@ from time import time
 from tkinter import *
 import threading as T
 import multiprocessing as M
+from Schedule import style
+from selenium.common.exceptions import TimeoutException
 
-urlList = []
 url = "https://web30.uottawa.ca/v3/SITS/timetable/Search.aspx"
 path = "D:\chromedriver.exe"
 #path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
-def urlExtract(L):
+def urlExtract(L, urlList):
+	'''takes a course code and spits urls'''
 	browser = webdriver.Chrome(path)
 	browser.get(url)
 	for j in range(1, len(L)):
@@ -79,24 +81,32 @@ def mainMethod(list_of_courses, styleNo):
 
 
 	if len(list_of_courses) == 2:
-		urlExtract(list_of_courses)
+		ZaList = []
+		urlExtract(list_of_courses, ZaList)
+		multi(ZaList)
 
 	elif len(list_of_courses) ==3 : #when u have 2 courses
-		sem = list_of_courses[0]
-		c1 = list_of_courses[1:2]
-		c1.insert(0, sem)
-		c2 = list_of_courses[2:]
-		c2.insert(0, sem)
+		twoCourses(list_of_courses)
 
-		if __name__ == "__main__":
-			m1 = M.Process(target= urlExtract, args=( c1, ))
-			m2 = M.Process(target= urlExtract, args=( c2, ))
+
+
+def twoCourses(list_of_courses):
+	sem = list_of_courses[0]
+	c1 = list_of_courses[1:2]
+	c1.insert(0, sem)
+	c2 = list_of_courses[2:]
+	c2.insert(0, sem)
+
+	if __name__ == "__main__":
+		with M.Manager() as manager:
+			l = manager.list()
+			m1 = M.Process(target= urlExtract, args=( c1, l))
+			m2 = M.Process(target= urlExtract, args=( c2, l))
 			m1.start()
 			m2.start()
 			m1.join()
 			m2.join()
-
-
+			multi(l)
 
 
 
@@ -106,10 +116,22 @@ def mainMethod(list_of_courses, styleNo):
 
 
 t = time()
-co = ["w", "iti1121"]
-mainMethod(co, 5)
+co = ["w", "iti1121","iti1100"]
+try:
+	a = mainMethod(co, 1)
+#twoCourses(co)
+except TimeoutException:
+	popup = Tk()
+	popup.title("Guess What?! i got an error ;) ") 
+	label =Label(popup, text="I couldn't find "+course+", I can't connect, check your internet connection ", font = ("Vendera", 10, "bold"))
+	label.pack(fill = "x", pady = 10, padx=7)
+	b = Button(popup, text="Destroy?", command = popup.destroy)
+	b.pack(side=BOTTOM, pady=7)
+
+	popup.mainloop()
+
 
 
 
 print("In "+str(time()-t))
-print(urlList)
+
