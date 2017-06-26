@@ -91,6 +91,14 @@ def mainMethod(list_of_courses, styleNo):
 	elif len(list_of_courses) == 4:#when u have 3
 		threeCourses(list_of_courses)
 
+	elif len(list_of_courses) == 5:
+		fourCourses(list_of_courses)
+
+	elif len(list_of_courses) == 6:
+		fiveCourses(list_of_courses)
+
+	elif len(list_of_courses) == 7 or len(list_of_courses) == 8:
+		sixNsevenCourses(list_of_courses)
 
 
 def twoCourses(list_of_courses):
@@ -134,13 +142,81 @@ def threeCourses(list_of_courses):
 			m3.join()
 			multi(l)
 
+def fourCourses(list_of_courses):
+	sem = list_of_courses[0]
+	c1 = list_of_courses[1:2]
+	c1.insert(0, sem)
+	c2 = list_of_courses[2:3]
+	c2.insert(0, sem)
+	c3 = list_of_courses[3:]
+	c3.insert(0, sem)
+
+	if __name__ == "__main__":
+		with M.Manager() as manager:
+			l = manager.list()
+			m1 = M.Process(target= urlExtract, args=( c1, l))
+			m2 = M.Process(target= urlExtract, args=( c2, l))
+			m3 = M.Process(target= urlExtract, args=( c3, l))
+			m1.start()
+			m2.start()
+			m3.start()
+			m1.join()
+			m2.join()
+			m3.join()
+			multi(l)
+
+def fiveCourses(list_of_courses):
+	sem = list_of_courses[0]
+	c1 = list_of_courses[1:2]
+	c1.insert(0, sem)
+	c2 = list_of_courses[2:4]
+	c2.insert(0, sem)
+	c3 = list_of_courses[4:]
+	c3.insert(0, sem)
+
+	if __name__ == "__main__":
+		with M.Manager() as manager:
+			l = manager.list()
+			m1 = M.Process(target= urlExtract, args=( c1, l))
+			m2 = M.Process(target= urlExtract, args=( c2, l))
+			m3 = M.Process(target= urlExtract, args=( c3, l))
+			m1.start()
+			m2.start()
+			m3.start()
+			m1.join()
+			m2.join()
+			m3.join()
+			multi(l)
+
+def sixNsevenCourses(list_of_courses):
+	sem = list_of_courses[0]
+	c1 = list_of_courses[1:3]
+	c1.insert(0, sem)
+	c2 = list_of_courses[3:5]
+	c2.insert(0, sem)
+	c3 = list_of_courses[5:]
+	c3.insert(0, sem)
+
+	if __name__ == "__main__":
+		with M.Manager() as manager:
+			l = manager.list()
+			m1 = M.Process(target= urlExtract, args=( c1, l))
+			m2 = M.Process(target= urlExtract, args=( c2, l))
+			m3 = M.Process(target= urlExtract, args=( c3, l))
+			m1.start()
+			m2.start()
+			m3.start()
+			m1.join()
+			m2.join()
+			m3.join()
+			multi(l)
 
 
 
 
 
 t = time()
-co = ["w", "iti1121","iti1100", "gng1106"]
+co = ["w", "iti1121","iti1100", "gng1106","MAT1300","ADM1100","iti1120"]
 try:
 	a = mainMethod(co, 1)
 #twoCourses(co)
