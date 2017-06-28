@@ -3,6 +3,8 @@ import webbrowser
 import Activator as Av
 from selenium.common.exceptions import TimeoutException
 import multiprocessing as M
+from time import sleep
+import threading
 
 
 if __name__=="__main__":
@@ -72,35 +74,32 @@ if __name__=="__main__":
 			# 		print('YAY')
 
 		def submit(self):
-
+			
 			Acti = True
-			def AF():
-				Acti = False
+			msgi = False
+
+
 			data = [self.semEntry.get().lower(), self.entry1.get().replace(" ","").lower(), self.entry2.get().replace(" ","").lower(), self.entry3.get().replace(" ","").lower(), self.entry4.get().replace(" ","").lower(), self.entry5.get().replace(" ","").lower(), self.entry6.get().replace(" ","").lower(), self.entry7.get().replace(" ","").lower() ]
-			if len(data[0]) != 1:
-				self.popError("Make sure the semester entry is one charecter either F, W, or S")
+			if data[0] not in ["w","s","f"]:
+				self.popError("Make sure the semester entry is one charecter either F, W, or S, click on the help button for a beautiful tutorial")
 				Acti = False
 			for i in range(1, len(data)):
 				courseE = data[i]
 				if len(courseE) > 0  and len(courseE) != 7:
-					self.popError("Course "+str(i)+" input is not right")
+					self.popError("Course "+str(i)+" input is not right, click on the help button for a beautiful tutorial")
 					Acti = False
-			while Acti:
-				try:
-					popup = Toplevel()
-					popup.title("Message")
-					popup.lift() 
-					label = Label(popup, text="In progress, please wait. the time is takes could vary depending the internet speed. Avarge time is 1 minute per course", font = ("Vendera", 10, "bold"))
-					label.pack(fill = "x", pady = 10, padx=7)
-					bb = Button(popup, text="Stop?", command = AF)
-					bb.pack(side=BOTTOM, pady=7)
-					
 
+			if Acti:
+
+				try:
 					if __name__=="__main__":
+
+
 						m1 = M.Process(target=Av.mainMethod, args=(data, self.v.get()))
 						m1.start()
 						m1.join()
 						Acti = False
+						msgi = True
 
 					#Av.mainMethod(data, self.v.get())
 				except TimeoutException:
@@ -113,13 +112,18 @@ if __name__=="__main__":
 
 					popup.mainloop()
 					Acti = False
+				popup2 = Toplevel()
+				popup2.title("Done!") 
+				label2 =Label(popup2, text="You can go see your tables in the same folder I'm at ", font = ("Vendera", 10, "bold"))
+				label2.pack(fill = "x", pady = 10, padx=7)
+				b = Button(popup2, text="close ?", command = popup2.destroy)
+				b.pack()
 
-
-
+ 
 		def popError(self, msg):
 			popup = Toplevel()
 			popup.title("Tragic Error") 
-			label = Label(popup, text=msg+", click on the help button for a beautiful tutorial", font = ("Vendera", 10, "bold"))
+			label = Label(popup, text=msg, font = ("Vendera", 10, "bold"))
 			label.pack(fill = "x", pady = 10, padx=7)
 			b = Button(popup, text="Destroy?", command = popup.destroy)
 			b.pack(side=BOTTOM, pady=7)

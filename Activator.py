@@ -10,17 +10,18 @@ from Schedule import style
 
 
 url = "https://web30.uottawa.ca/v3/SITS/timetable/Search.aspx"
-path = "D:\chromedriver.exe"
-#path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+#path = "D:\chromedriver.exe"
+path = r"D:\Programs\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
 def urlExtract(L, urlList):
 	'''takes a course code and spits urls'''
-	browser = webdriver.Chrome(path)
+	#browser = webdriver.Chrome(path)
+	browser = webdriver.PhantomJS(path)
 	browser.get(url)
 	for j in range(1, len(L)):
 		'''takes a list made of [the semester, the rest of courses as strings]'''
 
-		#browser = webdriver.PhantomJS(path)
+		
 		#select = Select(browser.find_element_by_xpath
 		menu = browser.find_element_by_tag_name("select")
 		option = menu.find_elements_by_tag_name("option")
@@ -79,7 +80,7 @@ def urlExtract(L, urlList):
 # t2.join()
 def mainMethod(list_of_courses, styleNo):
 	list_of_courses = list(filter(None, list_of_courses))
-	print("im at main"+ str(len(list_of_courses)))
+	# print("im at main"+ str(len(list_of_courses)))
 	style(styleNo)
 	if len(list_of_courses) == 2:
 		ZaList = []
@@ -87,7 +88,7 @@ def mainMethod(list_of_courses, styleNo):
 		multi(ZaList)
 
 	elif len(list_of_courses) ==3 : #when u have 2 courses
-		print("im at 2courses")
+		# print("im at 2courses")
 		twoCourses(list_of_courses)
 
 	elif len(list_of_courses) == 4:#when u have 3
@@ -100,21 +101,21 @@ def mainMethod(list_of_courses, styleNo):
 		fiveCourses(list_of_courses)
 
 	elif len(list_of_courses) == 7 or len(list_of_courses) == 8:
-		print("im in 7")
+		#print("im in 7")
 		sixNsevenCourses(list_of_courses)
 
 
 def twoCourses(list_of_courses):
-	print("I reachd tje methode")
+	# print("I reachd tje methode")
 	sem = list_of_courses[0]
 	c1 = list_of_courses[1:2]
 	c1.insert(0, sem)
 	c2 = list_of_courses[2:]
 	c2.insert(0, sem)
-	print(str(__name__))
+	#print(str(__name__))
 
 	if __name__ == "Activator":
-		print("im in the if")
+		#print("im in the if")
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
