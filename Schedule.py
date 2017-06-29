@@ -113,7 +113,7 @@ def MultiPossibleTables(tbls):
             for Atuple in grouped_tables:
                 bool1 = I.isMixable(Atuple[0],Atuple[1])
                 bool2=I.isMixable(Atuple[0],Atuple[2])
-                bool2=I.isMixable(Atuple[1],Atuple[2])
+                bool3=I.isMixable(Atuple[1],Atuple[2])
                 
                 if bool1 and bool2 and bool3:
                     tbl1 = I.tableMixer(Atuple[0], Atuple[1])
@@ -143,10 +143,10 @@ def htmlMaker(Tlist):
         
 course1 = I.Course(path, "http://127.0.0.1:8000/html/ELG2138.html").tables #circuit theory
 course2 = I.Course(path, "http://127.0.0.1:8000/html/MAT2322.html").tables#Calc 3
-#course3 = I.Course(path, "https://web30.uottawa.ca/v3/SITS/timetable/Course.aspx?id=018041&term=2181&session=FS")#iti1121
+course3 = I.Course(path, "http://127.0.0.1:8000/html/ITI1121.html").tables#iti1121
 #course4 = I.Course(path, "")
        
-MultiPossibleTables([course1, course2])
+MultiPossibleTables([course1, course2,course3])
 
 
                      
