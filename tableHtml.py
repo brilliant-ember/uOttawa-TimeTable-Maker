@@ -273,11 +273,16 @@ def UseThis(tbl, name):
 		#[divTagStr, dayOfTheWeek, startTime, numberOfSlots, Css class key made of 'session CourseCode DayandTimeOfsession' ]
 		forTbl = "  " + div[0]
 		postion = coordinate(div[1], div[2], div[3])
-		if len(color) == 0 or div[4][0:16] not in color:
-			color.append(div[4][0:16])
+		ccode = div[0][46:54].strip(" ").strip(">")
+		if len(color) == 0 or ccode not in color:
+
+			
+
+
+			color.append(ccode)
 
 		forCss = div[4]+"""{ """+ "line-height: """+postion[2]+"""; 
-					background-color: """ + course_color[color.index(div[4][0:16])] + """; 
+					background-color: """ + course_color[color.index(ccode)] + """; 
 					top: """ + postion[1] + """; 
 					margin-left: """ + postion[0] + """; } \n"""
 
