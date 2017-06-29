@@ -67,7 +67,22 @@ def two_possible_tables(tables_of_1, tables_of_2):
                 
     return output
 
+def ThreeTbls(t1, t2, t3):
+    Out=[]
+    grouped_secs = list([x,y,z]for x in t1 for y in t2 for z in t3)
+    for i in range(len(grouped_secs)):
+        grouped_tables = list(itertools.product(*grouped_secs[i]))
+        for Atuple in grouped_tables:
+            bool1 = I.isMixable(Atuple[0],Atuple[1])
+            bool2=I.isMixable(Atuple[0],Atuple[2])
+            bool3=I.isMixable(Atuple[1],Atuple[2])
 
+            if bool1 and bool2 and bool3:
+                tbl1 = I.tableMixer(Atuple[0], Atuple[1])
+                oneP = I.tableMixer(tbl1, Atuple[2])
+                Out.append(oneP)
+    return Out
+        
 def table_singular(L):
     '''takes the double list from I.course.tables and makes that into a single list '''
     out = []
@@ -107,19 +122,17 @@ def MultiPossibleTables(tbls):
         Out.extend(two_possible_tables(tbls[0], tbls[1]))
         
     elif len(tbls) == 3:
-        grouped_secs = list([x,y,z]for x in tbls[0] for y in tbls[1] for z in tbls[2])
-        for i in range(len(grouped_secs)):
-            grouped_tables = list(itertools.product(*grouped_secs[i]))
-            for Atuple in grouped_tables:
-                bool1 = I.isMixable(Atuple[0],Atuple[1])
-                bool2=I.isMixable(Atuple[0],Atuple[2])
-                bool3=I.isMixable(Atuple[1],Atuple[2])
-                
-                if bool1 and bool2 and bool3:
-                    tbl1 = I.tableMixer(Atuple[0], Atuple[1])
-                    oneP = I.tableMixer(tbl1, Atuple[2])
-                    Out.append(oneP)
+        Out.extend(ThreeTbls(tbls[0], tbls[1], tbls[2]))
         
+    elif len(tbls) == 4:
+        t1 = two_possible_tables(tbls[0], tbls[1])
+        t2 = two_possible_tables(tbls[2], tbls[3])
+        grouped_tables = [(x,y) for x in t1 for y in t2]
+        for tblTuple in grouped_tables:
+            if I.isMixable(tblTuple[0], tblTuple[1]) == True:
+                Onepossibleity =  I.tableMixer(tblTuple[0], tblTuple[1])
+                Out.append(Onepossibleity)
+
     htmlMaker(Out)
             
                 
