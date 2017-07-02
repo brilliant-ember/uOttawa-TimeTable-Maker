@@ -198,7 +198,7 @@ class Table:
         insert(time, day, secInfo)
         
     def __str__(self):
-        pass
+        return "a"
 
                     
 
@@ -373,6 +373,7 @@ class Course:
             Act.append(act_persec)
             
         self.seprateSections = Out[:]
+#        print(Out[:])
         self.secDays=DaysL[:]
         
         self.secProfs = ProfL[:]
@@ -419,10 +420,24 @@ class Course:
             days = self.secDays
             #print("\nLoop Number "+str(i))
             self.tables.append([])
-            
             for j in range(len(secs)):
-                act_set = secs[j]
                 
+                act_set = secs[j]
+                #############Cheat
+                aaaa=[]
+                for adq in range(len(act_set)):
+                    if act_set[adq]==[]:
+                        aaaa.append(adq)
+                for bb in aaaa:
+                    del(act_set[bb])
+                    
+                    
+                if act_set == []:
+                    del(act_set)
+                    break
+                 
+            ########################    
+                    
                 tmpcode = act_set[0][-3:]
                 if len(act_set) == 1:
                     codeChecker = False

@@ -2,11 +2,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from Schedule import MultiPossibleTables as multi
-from time import time
 from tkinter import *
-import threading as T
 import multiprocessing as M
 from Schedule import style
+import Initial as I
 
 
 url = "https://web30.uottawa.ca/v3/SITS/timetable/Search.aspx"
@@ -65,12 +64,6 @@ def urlExtract(L, urlList):
 				browser.get(url)
 	
 
-
-	##Now toss to the Scedule method
-
-	
-
-
 # t1 = T.Thread(target = urlExtract, args=(["w","iti1100"], 5) )
 # t2 = T.Thread(target = urlExtract, args=(["w","iti1121"], 5) )
 # t1.start()
@@ -85,7 +78,11 @@ def mainMethod(list_of_courses, styleNo):
 	if len(list_of_courses) == 2:
 		ZaList = []
 		urlExtract(list_of_courses, ZaList)
-		multi(ZaList)
+		coursesTbls = []
+		for i in ZaList:
+			coursesTbls.append(I.Course(path, i).tables)
+		multi(coursesTbls)
+
 
 	elif len(list_of_courses) ==3 : #when u have 2 courses
 		# print("im at 2courses")
@@ -115,6 +112,7 @@ def twoCourses(list_of_courses):
 	#print(str(__name__))
 
 	if __name__ == "Activator":
+		M.freeze_support()
 		#print("im in the if")
 		with M.Manager() as manager:
 			l = manager.list()
@@ -124,9 +122,14 @@ def twoCourses(list_of_courses):
 			m2.start()
 			m1.join()
 			m2.join()
-			multi(l)
+			coursesTbls = []
+			for i in l:
+				coursesTbls.append(I.Course(path, i).tables)
+			multi(coursesTbls)
+
 
 def threeCourses(list_of_courses):
+
 	sem = list_of_courses[0]
 	c1 = list_of_courses[1:2]
 	c1.insert(0, sem)
@@ -135,7 +138,8 @@ def threeCourses(list_of_courses):
 	c3 = list_of_courses[3:]
 	c3.insert(0, sem)
 
-	if __name__ == "__main__":
+	if __name__ == "Activator":
+		M.freeze_support()
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
@@ -147,7 +151,11 @@ def threeCourses(list_of_courses):
 			m1.join()
 			m2.join()
 			m3.join()
-			multi(l)
+
+			coursesTbls = []
+			for i in l:
+				coursesTbls.append(I.Course(path, i).tables)
+			multi(coursesTbls)
 
 def fourCourses(list_of_courses):
 	sem = list_of_courses[0]
@@ -158,7 +166,8 @@ def fourCourses(list_of_courses):
 	c3 = list_of_courses[3:]
 	c3.insert(0, sem)
 
-	if __name__ == "__main__":
+	if __name__ == "Activator":
+		M.freeze_support()
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
@@ -170,9 +179,14 @@ def fourCourses(list_of_courses):
 			m1.join()
 			m2.join()
 			m3.join()
-			multi(l)
+
+			coursesTbls = []
+			for i in l:
+				coursesTbls.append(I.Course(path, i).tables)
+			multi(coursesTbls)
 
 def fiveCourses(list_of_courses):
+	M.freeze_support()
 	sem = list_of_courses[0]
 	c1 = list_of_courses[1:2]
 	c1.insert(0, sem)
@@ -181,7 +195,7 @@ def fiveCourses(list_of_courses):
 	c3 = list_of_courses[4:]
 	c3.insert(0, sem)
 
-	if __name__ == "__main__":
+	if __name__ == "Activator":
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
@@ -193,9 +207,13 @@ def fiveCourses(list_of_courses):
 			m1.join()
 			m2.join()
 			m3.join()
-			multi(l)
+			coursesTbls = []
+			for i in l:
+				coursesTbls.append(I.Course(path, i).tables)
+			multi(coursesTbls)
 
 def sixNsevenCourses(list_of_courses):
+
 	sem = list_of_courses[0]
 	c1 = list_of_courses[1:3]
 	c1.insert(0, sem)
@@ -204,7 +222,8 @@ def sixNsevenCourses(list_of_courses):
 	c3 = list_of_courses[5:]
 	c3.insert(0, sem)
 
-	if __name__ == "__main__":
+	if __name__ == "Activator":
+		M.freeze_support()
 		with M.Manager() as manager:
 			l = manager.list()
 			m1 = M.Process(target= urlExtract, args=( c1, l))
@@ -216,7 +235,10 @@ def sixNsevenCourses(list_of_courses):
 			m1.join()
 			m2.join()
 			m3.join()
-			multi(l)
+			coursesTbls = []
+			for i in l:
+				coursesTbls.append(I.Course(path, i).tables)
+			multi(coursesTbls)
 
 
 

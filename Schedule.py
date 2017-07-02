@@ -1,6 +1,5 @@
 import Initial as I
 import itertools
-import os
 import tableHtml as T
 
 #Notes
@@ -118,7 +117,7 @@ def MultiPossibleTables(tbls):
     if len(tbls) == 1:
         Out.extend(table_singular(tbls[0]))
         
-    elif len(tbls) ==2 :#we have an even number of tables
+    elif len(tbls) ==2 : #when we have 2 tables
         Out.extend(two_possible_tables(tbls[0], tbls[1]))
         
     elif len(tbls) == 3:
@@ -132,7 +131,45 @@ def MultiPossibleTables(tbls):
             if I.isMixable(tblTuple[0], tblTuple[1]) == True:
                 Onepossibleity =  I.tableMixer(tblTuple[0], tblTuple[1])
                 Out.append(Onepossibleity)
-
+                
+    elif len(tbls) == 5:
+        #print("I got 5 courses")
+        t1 = ThreeTbls(tbls[0], tbls[1], tbls[2])
+        t2 = two_possible_tables(tbls[3], tbls[4])
+        
+        grouped_tables = [(x,y) for x in t1 for y in t2]
+        for tblTuple in grouped_tables:
+            if I.isMixable(tblTuple[0], tblTuple[1]) == True:
+                Onepossibleity =  I.tableMixer(tblTuple[0], tblTuple[1])
+                Out.append(Onepossibleity)
+        
+    elif len(tbls)==6:
+        #print("I got 6 courses")
+        t1 = ThreeTbls(tbls[0], tbls[1], tbls[2])
+        t2 = ThreeTbls(tbls[3], tbls[4], tbls[5])
+        grouped_tables = [(x,y) for x in t1 for y in t2]
+        for tblTuple in grouped_tables:
+            if I.isMixable(tblTuple[0], tblTuple[1]) == True:
+                Onepossibleity =  I.tableMixer(tblTuple[0], tblTuple[1])
+                Out.append(Onepossibleity)
+        
+    elif len(tbls)==7:
+        #print("I got 7")
+        t1 = ThreeTbls(tbls[0], tbls[1], tbls[2])
+        t2 = two_possible_tables(tbls[3], tbls[4])
+        t3 = two_possible_tables(tbls[5], tbls[6])
+        grouped_tables = [(x,y,z) for x in t1 for y in t2 for z in t3]
+        for Atuple in grouped_tables:
+            bool1 = I.isMixable(Atuple[0],Atuple[1])
+            bool2=I.isMixable(Atuple[0],Atuple[2])
+            bool3=I.isMixable(Atuple[1],Atuple[2])
+            
+        if bool1 and bool2 and bool3:
+            
+            tbl1 = I.tableMixer(Atuple[0], Atuple[1])
+            oneP = I.tableMixer(tbl1, Atuple[2])
+            Out.append(oneP)
+        
     htmlMaker(Out)
             
                 
@@ -154,12 +191,14 @@ def htmlMaker(Tlist):
 #      
                 
         
-course1 = I.Course(path, "http://127.0.0.1:8000/html/ELG2138.html").tables #circuit theory
-course2 = I.Course(path, "http://127.0.0.1:8000/html/MAT2322.html").tables#Calc 3
-course3 = I.Course(path, "http://127.0.0.1:8000/html/ITI1121.html").tables#iti1121
-#course4 = I.Course(path, "")
-       
-MultiPossibleTables([course1, course2,course3])
+#course1 = I.Course(path, "http://127.0.0.1:8000/html/ELG2138.html").tables #circuit theory
+#course2 = I.Course(path, "http://127.0.0.1:8000/html/MAT2322.html").tables#Calc 3
+#course3 = I.Course(path, "http://127.0.0.1:8000/html/ITI1121.html").tables#iti1121
+#course4 = I.Course(path, "http://127.0.0.1:8000/html/CSI2911.html").tables
+#course5 = I.Course(path, "http://127.0.0.1:8000/html/CEG3185.html").tables
+#course6 = I.Course(path, "http://127.0.0.1:8000/html/iti1100.html").tables
+#course7 = I.Course(path, "http://127.0.0.1:8000/html/GNG1105.html").tables      
+#MultiPossibleTables([course3,course4,course2,course1,course5,course6,course7])
 
 
                      

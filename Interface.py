@@ -2,9 +2,6 @@ from tkinter import *
 import webbrowser
 import Activator as Av
 from selenium.common.exceptions import TimeoutException
-import multiprocessing as M
-from time import sleep
-import threading
 
 
 if __name__=="__main__":
@@ -89,17 +86,19 @@ if __name__=="__main__":
 					self.popError("Course "+str(i)+" input is not right, click on the help button for a beautiful tutorial")
 					Acti = False
 
-			if Acti:
+			while Acti:
 
 				try:
-					if __name__=="__main__":
+					Av.mainMethod(data, self.v.get())
 
-
-						m1 = M.Process(target=Av.mainMethod, args=(data, self.v.get()))
-						m1.start()
-						m1.join()
-						Acti = False
-						msgi = True
+					Acti = False
+					
+					popup2 = Toplevel()
+					popup2.title("Done!") 
+					label2 =Label(popup2, text="You can go see your tables in the same folder I'm at ", font = ("Vendera", 10, "bold"))
+					label2.pack(fill = "x", pady = 10, padx=7)
+					b = Button(popup2, text="close ?", command = popup2.destroy)
+					b.pack()
 
 					#Av.mainMethod(data, self.v.get())
 				except TimeoutException:
@@ -109,15 +108,10 @@ if __name__=="__main__":
 					label.pack(fill = "x", pady = 10, padx=7)
 					b = Button(popup, text="Destroy?", command = popup.destroy)
 					b.pack(side=BOTTOM, pady=7)
-
 					popup.mainloop()
 					Acti = False
-				popup2 = Toplevel()
-				popup2.title("Done!") 
-				label2 =Label(popup2, text="You can go see your tables in the same folder I'm at ", font = ("Vendera", 10, "bold"))
-				label2.pack(fill = "x", pady = 10, padx=7)
-				b = Button(popup2, text="close ?", command = popup2.destroy)
-				b.pack()
+					break
+
 
  
 		def popError(self, msg):
